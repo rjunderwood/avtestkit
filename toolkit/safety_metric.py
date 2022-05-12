@@ -14,6 +14,7 @@ class SafetyMetric:
     estimate_object_position_threshold = None 
 
 
+
     #Metrics of assessing the perception and motion planning
 
 
@@ -37,6 +38,15 @@ class SafetyMetric:
     estimated_object_class = ''
     estimated_object_velocity_variance = 0.1 #Allow for a X% difference for the estimate
     estimated_object_position_variance = 0.1 #Allow for a X% difference for estimate
+
+    #p the ratio of true positive instances to the actual number of positive instances. This metric is suitable when false negatives are of high importance.
+    ratio_object_recall_sensitivity = 0.1
+    #r the ratio of true positive instances to the predicted number of positive instances. This metric is useful when false positive instances are important.
+    ratio_object_precision_confidence = 0.1
+    #F harmonic mean of precision p and recall r
+    ratio_object_harmonic_mean = (2*ratio_object_precision_confidence*ratio_object_recall_sensitivity)/ratio_object_precision_confidence+ratio_object_recall_sensitivity
+
+    
 
     
 
