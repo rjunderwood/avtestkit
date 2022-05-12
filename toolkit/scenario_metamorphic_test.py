@@ -3,7 +3,7 @@
 Metamorphic Test 
 """
 
-class MetamorphicTest:
+class ScenarioMetamorphicTest:
 
     test_result = None
 

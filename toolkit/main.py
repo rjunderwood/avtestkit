@@ -1,30 +1,26 @@
 
-from scenario_runner.scenario_runner import ScenarioRunner
+# from scenario_runner.scenario_runner import ScenarioRunner
+from assessment_toolkit import  AssessmentToolkit
 
-class AssessmentToolkitMain:
+
+# class Main:
     
-    def __init__(self) -> None:
-        pass
+#     def __init__(self) -> None:
+#        None
 
-    def start():
-        print("Starting")
-
-    def run_scenario(self, scenario_name):
-        print('runScenario',scenario_name)
-
-    def run_metamorphic(test_output_data_1, test_output_data_2):
-        #Create a metamorphic test
-        print('run_metamorphic')
-
-
-
-_AssessmentToolkitMain = AssessmentToolkitMain(); 
-_AssessmentToolkitMain.start();
-
-
-
+#Starts the program and makes everything work.
+def main():
     
+    #Start Assessment Toolkit
+    assessment_toolkit = AssessmentToolkit()    
+    #Run Scenarios
+    assessment_toolkit.run_scenarios()
 
+    assessment_toolkit.get_toolkit_status()
+
+
+
+main()
 
 
     
