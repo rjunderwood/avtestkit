@@ -10,8 +10,7 @@ class SafetyMetric:
     ego_position = None
     ego_velocity = None
     ego_acceleration = None
-    estimate_object_velocity_threshold = None
-    estimate_object_position_threshold = None 
+ 
 
 
 
@@ -45,7 +44,69 @@ class SafetyMetric:
     ratio_object_precision_confidence = 0.1
     #F harmonic mean of precision p and recall r
     ratio_object_harmonic_mean = (2*ratio_object_precision_confidence*ratio_object_recall_sensitivity)/ratio_object_precision_confidence+ratio_object_recall_sensitivity
+    #Jaccard Distance
+    ratio_object_jaccard_distance = 0.1
+    #Multiple Object Detection Accuracy
+    object_intersection_over_union = 0.1
+    #Multiple-Object-Tracking Accuracy
+    object_mota = 0.1
+    #Multiple Object-Tracking Precision
+    object_motp = 0.1
 
+
+    #Lane Offset 
+    ego_lane_offset_variance = 0.1
+
+
+
+
+
+
+    ##########
+    #Higher Order Tracking Accuracy
+    ###########
+
+    #Association Score
+    object_association_score = 0.1
+    #Detection accuracy 
+    object_detection_score = 0.1
+    #Association accuracy
+    object_detection_accuracy = 0.1
+    #Higher Order Tracking Accuracy score
+    object_higher_order_accuracy_score = 0.1
+    
+
+
+
+    #######
+    #Motion Planning Metrics 
+    ######
+
+    #TTC Time to Collision how
+    #don't let below X time for safety
+    object_time_to_collision = 10
+    object_exposed_time_to_collision = 1
+    object_post_encroachment_time = 1
+
+    #total near collision 
+    total_near_collisions = 10 
+    #Space required to stop this is more of a ratio as the safe long distance is dynamically changing based on velocity between ego and object
+    #Towards eachother and not towards eachother longitudinal distance
+    safe_longitudinal_distance = 0.5
+    safe_lateral_distance = 10
+    total_longitudinal_distance_violations = 1
+    total_lateral_distance_violations = 1
+    #Time that longitudinal distance is not met is the longitudinal threshold 
+
+
+
+
+
+
+
+
+
+    
     
 
     

@@ -31,6 +31,12 @@ class ScenarioResult:
         except:
             return None
 
+    
+
+    
+
+
+
     def write_data_to_file():
         #Writes the output to the file in order to preserve memory.
 
