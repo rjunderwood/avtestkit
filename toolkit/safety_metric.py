@@ -52,15 +52,8 @@ class SafetyMetric:
     object_mota = 0.1
     #Multiple Object-Tracking Precision
     object_motp = 0.1
-
-
     #Lane Offset 
     ego_lane_offset_variance = 0.1
-
-
-
-
-
 
     ##########
     #Higher Order Tracking Accuracy
@@ -75,8 +68,6 @@ class SafetyMetric:
     #Higher Order Tracking Accuracy score
     object_higher_order_accuracy_score = 0.1
     
-
-
 
     #######
     #Motion Planning Metrics 
