@@ -10,9 +10,6 @@ class SafetyMetric:
     ego_position = None
     ego_velocity = None
     ego_acceleration = None
- 
-
-
 
     #Metrics of assessing the perception and motion planning
 

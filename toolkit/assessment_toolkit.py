@@ -25,5 +25,5 @@ class AssessmentToolkit:
 
     def apply_safety_metric(self):
         print('apply_safety_metric');
-        
-
+    
+    
