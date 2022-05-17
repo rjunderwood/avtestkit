@@ -15,7 +15,12 @@ class CalcMotionPlanning:
     def calc_total_near_collisions():
         return None
     
-    def calc_safe_logitudinal_distance():
+    def calc_safe_longitudinal_distance_opposite_direction():
+
+        return None
+    
+    def calc_safe_longitudinal_distance_same_direction():
+        
         return None
     
     def calc_safe_lateral_distance():

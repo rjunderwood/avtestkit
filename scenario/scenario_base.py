@@ -20,7 +20,6 @@ class ScenarioBase:
         except: 
             pass
 
-
     def __init__(self, scenario):
 
         if(scenario == "follow_vehicle"):
