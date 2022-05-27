@@ -1,23 +1,39 @@
 
 import os
-import sched, time
-s = sched.scheduler(time.time, time.sleep)
+import threading
+import json
 
 def start():
 
     #Def
+    #Opens windows
+    
     os.system("start ./html/home.html")
-    os.system("man./html/results.html")
+    #Opens mac/linux
+    os.system("open ./html/home.html")
 
 
-def await_the_testing_settings(sc):
+    await_the_testing_settings()
 
-    try:
-        #Open the toolkit_settings.json
-        print("open")
 
-    except:
-        sc.enter(60, 1, await_the_testing_settings, (sc,))
-
+def await_the_testing_settings():
+   
+    settings_not_found = True 
+    while settings_not_found:
+        print("settings_not_found")
+     
+        try:
+           
+  
+            # Opening JSON file
+            f = open('./json-outputs/output.json')
+            data = json.load(f)
+            print(data)
+            settings_not_found = False
+  
+        except: 
+           
+            pass
+  
     
 start()

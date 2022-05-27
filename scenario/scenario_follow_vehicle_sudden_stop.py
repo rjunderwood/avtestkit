@@ -10,7 +10,7 @@ import math
 
 
 
-class ScenarioFollowVehicle:
+class ScenarioFollowVehicleSuddenStop:
 
     #Carla World
     world = None
@@ -82,16 +82,12 @@ class ScenarioFollowVehicle:
         #Select a blueprint for our lead vehicle
         lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.LEAD_VEHICLE_MODEL)
         lead_vehicle_bp.set_attribute('role_name', self.LEAD_VEHICLE_ROLENAME)
-        
-        
-        
-        
         #Spawn Vehicle
         vehicle = self.world.spawn_actor(lead_vehicle_bp, lead_transform)
        
        
        
-        #  #Vehicle properties setup
+         #Vehicle properties setup
         physics_control = vehicle.get_physics_control()
         max_steer = physics_control.wheels[0].max_steer_angle
         rear_axle_center = (physics_control.wheels[2].position + physics_control.wheels[3].position)/200
@@ -99,26 +95,10 @@ class ScenarioFollowVehicle:
         wheelbase = np.linalg.norm([offset.x, offset.y, offset.z])
         vehicle.set_simulate_physics(True)
         self.lead_vehicle = vehicle
-        spectator = self.world.get_spectator()
+    
 
-
-
-
-        vehicle.set_autopilot(True) 
-        # # self.lead_vehicle.set_autop
-        while True: 
-            vehicle.apply_control(carla.VehicleControl(throttle=0.1, steer=0))
-
+      
         
-
-
-        ego 
-
-        
-
-
-        #     spectator_transform = carla.Transform(carla.Location(vehicle.get_transform().location.x, vehicle.get_transform().location.y, self.SPEC_CAM_Z),carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL))
-        #     spectator.set_transform(spectator_transform)
     
     def setup_spectator(self):
       
@@ -128,7 +108,8 @@ class ScenarioFollowVehicle:
         self.spectator = spectator
 
 
-
+    
+        
 
     #Run the Scenario
     def run(self):
@@ -146,7 +127,7 @@ class ScenarioFollowVehicle:
         self.setup_lead_vehicle()
 
         #Self Vehicle Movements
-        #self.move_lead_vehicle()
+        self.move_lead_vehicle()
 
 
 
@@ -175,63 +156,22 @@ class ScenarioFollowVehicle:
 
 
     def move_lead_vehicle(self):
-        map = self.world.get_map()
-        waypoint_list = map.generate_waypoints(40)
-        print("Length: " + str(len(waypoint_list)))
-       
-        targetLane = -3
-        waypoints = self.single_lane(waypoint_list, targetLane)
 
-        #
-        curvy_waypoints = self.get_curvy_waypoints(waypoints)
-        x = [p.transform.location.x for p in curvy_waypoints]
-        y = [p.transform.location.y for p in curvy_waypoints]
-        plt.plot(x, y, marker = 'o')
-        plt.savefig("bezier.png")
+    
+      
+        while True: 
 
-        #Set spawning location as initial waypoint
-        waypoint = curvy_waypoints[0]
-        blueprint = self.world.get_blueprint_library().filter('vehicle.*model3*')[0]
-        location = waypoint.transform.location + carla.Vector3D(0, 0, 1.5)
-        rotation = waypoint.transform.rotation
         
-        print("location of initial waypoint :::" + waypoint.transform.location)
+            #Check if stop reached 
+            if(self.lead_vehicle.get_transform().location.x == 300):
+                #Stop the loop here 
+                return 0
+            #Move vehicle forwards. 
+            vehicle.apply_control(carla.VehicleControl(throttle=0.1, steer=0))
 
-        vehicle = self.world.spawn_actor(blueprint, carla.Transform(location, rotation))
-        print("SPAWNED!")
-
-        #Vehicle properties setup
-        physics_control = vehicle.get_physics_control()
-        max_steer = physics_control.wheels[0].max_steer_angle
-        rear_axle_center = (physics_control.wheels[2].position + physics_control.wheels[3].position)/200
-        offset = rear_axle_center - vehicle.get_location()
-        wheelbase = np.linalg.norm([offset.x, offset.y, offset.z])
-        vehicle.set_simulate_physics(True)
-
-
-        while True:
-
-            #Update the camera view
-            #spectator.set_transform(camera.get_transform())
-            #Get next waypoint
-            waypoint = self.get_next_waypoint(self.world, vehicle, curvy_waypoints)
-            self.world.debug.draw_point(waypoint.transform.location, life_time=5)
-
-            #Control vehicle's throttle and steering
-            throttle = 0.85
-            vehicle_transform = vehicle.get_transform()
-            vehicle_location = vehicle_transform.location
-            steer = self.control_pure_pursuit(vehicle_transform, waypoint.transform, max_steer, wheelbase)
-            control = carla.VehicleControl(throttle, steer)
-            vehicle.apply_control(control)
-
-            #Control vehicle's throttle and steering
-            throttle = 0.85
-            vehicle_transform = vehicle.get_transform()
-            vehicle_location = vehicle_transform.location
-            steer = self.control_pure_pursuit(vehicle_transform, waypoint.transform, max_steer, wheelbase)
-            control = carla.VehicleControl(throttle, steer)
-            vehicle.apply_control(control)
+    def move_ego_vehicle(self):
+        
+          
 
 
 

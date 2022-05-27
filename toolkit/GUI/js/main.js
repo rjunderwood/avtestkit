@@ -24,29 +24,16 @@ const testing_scenarios = {
    
 }
 
-// const scenario_settings = {
-//     "follow_leading_vehicle": true,
-    
-    
-//  }
-
-
-// function changeScenarioSettings(){
-    
-// }
  
 function run_test(){
     document.getElementById("running_button").innerHTML = "Processing";
     document.getElementById("running_button").style.backgroundColor = "white";
     document.getElementById("window").style.cursor = "wait";    
-
-
-    saveToolkitSettingsToJson();
-
+   
     //Wait 3 seconds 
     setTimeout(function () {
         navigate_to_results_page();
-    }, 3000);
+    }, 10000);
 
 }
 
@@ -91,34 +78,4 @@ function changeTestingScenarios(event){
     testing_scenarios[event.target.id] = !testing_scenarios[event.target.id];
     console.log(testing_scenarios)
 }
-
-
-
-
-function saveToolkitSettingsToJson(){
-
-    const settings = {
-        "metrics_environment_perception":metrics_environment_perception,
-        "metrics_motion_planning":metrics_motion_planning,
-        "testing_scenarios":testing_scenarios
-    }
-    var json = JSON.stringify(settings);
-    
-    // writeFile('../json/toolkit_settings.json', json, 'utf8', callback);
-
-    fs.writeFile('../json/toolkit_settings.json', json).then(function() {
-        // All done! File has been saved.
-      });
-
-}
-
-
-
-
-
-
-
-
-
-
 

@@ -82,41 +82,27 @@ class ScenarioFollowVehicle:
         #Select a blueprint for our lead vehicle
         lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.LEAD_VEHICLE_MODEL)
         lead_vehicle_bp.set_attribute('role_name', self.LEAD_VEHICLE_ROLENAME)
-        
-        
-        
-        
         #Spawn Vehicle
         vehicle = self.world.spawn_actor(lead_vehicle_bp, lead_transform)
        
        
        
         #  #Vehicle properties setup
-        physics_control = vehicle.get_physics_control()
-        max_steer = physics_control.wheels[0].max_steer_angle
-        rear_axle_center = (physics_control.wheels[2].position + physics_control.wheels[3].position)/200
-        offset = rear_axle_center - vehicle.get_location()
-        wheelbase = np.linalg.norm([offset.x, offset.y, offset.z])
-        vehicle.set_simulate_physics(True)
-        self.lead_vehicle = vehicle
-        spectator = self.world.get_spectator()
+        # physics_control = vehicle.get_physics_control()
+        # max_steer = physics_control.wheels[0].max_steer_angle
+        # rear_axle_center = (physics_control.wheels[2].position + physics_control.wheels[3].position)/200
+        # offset = rear_axle_center - vehicle.get_location()
+        # wheelbase = np.linalg.norm([offset.x, offset.y, offset.z])
+        # vehicle.set_simulate_physics(True)
+        # self.lead_vehicle = vehicle
+        # spectator = self.world.get_spectator()
 
+        # vehicle.set_autopilot(True) 
 
-
-
-        vehicle.set_autopilot(True) 
         # # self.lead_vehicle.set_autop
-        while True: 
-            vehicle.apply_control(carla.VehicleControl(throttle=0.1, steer=0))
 
-        
-
-
-        ego 
-
-        
-
-
+        # while True: 
+        #     #vehicle.apply_control(carla.VehicleControl(throttle=0.1, steer=0))
         #     spectator_transform = carla.Transform(carla.Location(vehicle.get_transform().location.x, vehicle.get_transform().location.y, self.SPEC_CAM_Z),carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL))
         #     spectator.set_transform(spectator_transform)
     
@@ -128,7 +114,8 @@ class ScenarioFollowVehicle:
         self.spectator = spectator
 
 
-
+    
+        
 
     #Run the Scenario
     def run(self):

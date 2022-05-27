@@ -16,6 +16,7 @@ class ScenarioBase:
     for actor in actor_list:
         try:
             if(actor.attributes['role_name'] == 'ego_vehicle'):
+            
                ego_vehicle = actor
         except: 
             pass
@@ -32,6 +33,7 @@ class ScenarioBase:
     def follow_vehicle(self):          
         scenario = ScenarioFollowVehicle(self.world, self.ego_vehicle)
         scenario.run()
+        
 
         
         
