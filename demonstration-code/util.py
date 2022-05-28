@@ -1,4 +1,5 @@
 
+from http import client
 from logging import exception
 import glob
 import os
@@ -227,4 +228,24 @@ def plot_stats(axs, data, start_index = None, end_index = None):
     axs[1, 0].plot(data[:,1], data[:,2])
     axs[1, 0].set_title('Vehicle Location: y-coord vs x-coord')
     axs[1, 0].set(xlabel = 'x-coord', ylabel = 'y-coord')
+
+def main(args):
+    try:
+        client = carla.Client('localhost', 2000) # create client to connect to simulator
+        client.set_timeout(2.0)
+
+        world = client.get_world() # retrieve carla world object
+
+        print('Successfully connected and retrieved CARLA world.')
+
+        if(args.get_actors):
+            retrieve_actors(world)
+        elif(args.track_actor_loc):
+            if(args.actor_id):
+                track_location(args, world)
+            else:
+                print("Please specify actor Id.")
+        elif(args.destory_actor):
+            destroy_actor(world, args.destory_actor)
+        elif
     
