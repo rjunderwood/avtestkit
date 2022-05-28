@@ -12,19 +12,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Get CARLA .egg file
-try:
-    sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')[0])
-except IndexError:
-    print("Error: carla-0.9.10-py3.7-linux-x86_64.egg file doesn't exsit.")
-    pass
-else:
-    try:
-        sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py2.7-linux-x86_64.egg')[0])
-    except IndexError:
-        print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exist.")
-        pass
-    else:
-        print("Error: .egg file doesn't exist.")
+# try:
+#     sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')[0])
+# except IndexError:
+#     print("Error: carla-0.9.10-py3.7-linux-x86_64.egg file doesn't exsit.")
+#     pass
+# else:
+#     try:
+#         sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py2.7-linux-x86_64.egg')[0])
+#     except IndexError:
+#         print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exist.")
+#         pass
+#     else:
+#         print("Error: .egg file doesn't exist.")
 
 import carla
 
@@ -264,3 +264,9 @@ def main(args):
             print('No functionality specified')
     finally:
         print('Finally')
+
+
+
+if __name__ == '__main__':
+    description = 'Carla-Autoware Manual Test Case - Stationary Vehicle' 
+    parser = argparse.ArgumentParser(description=description)

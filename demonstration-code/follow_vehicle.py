@@ -7,6 +7,7 @@ import argparse
 import math
 
 
+
 import carla
 
 import util #import utility file
@@ -18,7 +19,7 @@ Y = 240
 Z = 0.2
 
 PITCH = 0
-YAW = 90
+YAW = 270
 ROLL = 0 
 
 EGO_VEHICLE_NAME = 'ego_vehicle'
@@ -28,8 +29,8 @@ VEHICLE_MODEL = 'vehicle.toyota.prius'
 
 #Setup the spectator camera
 
-SPEC_CAM_X = 25
-SPEC_CAM_Y = 120 
+SPEC_CAM_X = 340
+SPEC_CAM_Y = 240
 SPEC_CAM_Z = 120
 SPEC_CAM_PITCH = -90
 SPEC_CAM_YAW = 0
