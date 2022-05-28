@@ -115,7 +115,8 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
 
     #setup collision sensor
     collision_flag = []
-    collision_sensor = world.get_blueprint_library().find('sensor.other.collision')
+    collision_bp = world.get_blueprint_library().find('sensor.other.collision')
+    collision_sensor = world.spawn_actor(collision_bp, carla.Transform(), attach_to=actor_to_track)
     collision_sensor.listen(lambda event: on_collision(collision_flag, event))
 
     lane_inv_flag = []

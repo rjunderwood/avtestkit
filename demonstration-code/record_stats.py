@@ -115,7 +115,8 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
 
     #setup collision sensor
     collision_flag = []
-    collision_sensor = world.get_blueprint_library().find('sensor.other.collision')
+    collision_bp = world.get_blueprint_library().find('sensor.other.collision')
+    collision_sensor = world.spawn_actor(collision_bp, carla.Transform(), attach_to=actor_to_track)
     collision_sensor.listen(lambda event: on_collision(collision_flag, event))
 
     lane_inv_flag = []
@@ -211,7 +212,7 @@ def track_location(args, world):
             
             return
 
-def plot_stats(axs, data, start_index = None, end_index = None):
+def plot_stats(axs, data, start_index=None, end_index=None):
 
     #axs[0, 0].plot(data[:,0], data[:,4], color = "blue")
     axs[0, 0].plot(data[:,0], data[:,4])
