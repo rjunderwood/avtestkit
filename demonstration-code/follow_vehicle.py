@@ -11,8 +11,10 @@ import carla
 
 import util #import utility file
 
-X = -2.1
-Y = 120
+# X = -2.1
+# Y = 120
+X = 340
+Y = 240
 Z = 0.2
 
 PITCH = 0

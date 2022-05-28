@@ -21,10 +21,10 @@ else:
     try:
         sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py2.7-linux-x86_64.egg')[0])
     except IndexError:
-        print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exsit.")
+        print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exist.")
         pass
     else:
-        print("Error: .egg file doesn't exsit.")
+        print("Error: .egg file doesn't exist.")
 
 import carla
 
@@ -96,10 +96,10 @@ def destroy_actor(world, actor_id):
     return
 
 
-def on_conllision(flag,event):
+def on_collision(flag,event):
     flag.append(event.normal_impulse)
 
-def on_laneinvasion(flag,event):
+def on_lane_invasion(flag,event):
     flag.append(True)
 
 
@@ -116,12 +116,12 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
     #setup collision sensor
     collision_flag = []
     collision_sensor = world.get_blueprint_library().find('sensor.other.collision')
-    collision_sensor.listen(lambda event: on_conllision(collision_flag, event))
+    collision_sensor.listen(lambda event: on_collision(collision_flag, event))
 
     lane_inv_flag = []
     lane_inv_bp = world.get_blueprint_library().find('sensor.other.lane_invasion')
     lane_inv_sensor = world.spawn_actor(lane_inv_bp, carla.Transform(), attach_to=actor_to_track)
-    lane_inv_sensor.listen(lambda event: on_laneinvasion(lane_inv_flag, event)) 
+    lane_inv_sensor.listen(lambda event: on_lane_invasion(lane_inv_flag, event)) 
 
     if(filename):
         f = open(filename,"w")
@@ -139,7 +139,7 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
             #retrieve distance to other actor data 
             dist_to_actor = -10
             accessory_actor = find_actor_by_rolename(world, accessory_rolename)
-            if(accessory_actor != None):
+            if(accessory_actor != None):#lane_invasion
                 dist_to_actor = calc_dist(actor_to_track, accessory_actor)
             
             #retrieve collision data
@@ -149,17 +149,17 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
                 collision_flag = [] # reset collision flag 
             
             #retrieve lane invasion data 
-            laneinvasion = 0 # 0 means no lane invasions detected 
+            lane_invasion = 0 # 0 means no lane invasions detected 
             if(len(lane_inv_flag)>0):
-                laneinvation = 1 #lane invasion has occurred 
+                lane_invasion = 1 #lane invasion has occurred 
                 lane_inv_flag = [] #reset collision flag
 
             #print data to screen
-            print("Time: %0.2f | Loc: %0.2f,%0.2f,%0.2f | Vel: %0.2f | Acc: %0.2f | Collision: %s | Lane Invasion: %s | Dist to Other Actor: %0.2f" %(t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,laneinvasion,dist_to_actor))
+            print("Time: %0.2f | Loc: %0.2f,%0.2f,%0.2f | Vel: %0.2f | Acc: %0.2f | Collision: %s | Lane Invasion: %s | Dist to Other Actor: %0.2f" %(t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,lane_invasion,dist_to_actor))
 
             #write data to file
             if(filename):
-                f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,laneinvasion,dist_to_actor))
+                f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,lane_invasion,dist_to_actor))
 
             #Check the actor we are tracking still exists
             actor_to_track = find_actor_by_rolename(world, role_name_to_track) #check actor still exists
@@ -245,14 +245,17 @@ def main(args):
                 track_location(args, world)
             else:
                 print("Please specify actor Id.")
-        elif(args.destory_actor):
-            destroy_actor(world, args.destory_actor)
+        elif(args.destroy_actor):
+            destroy_actor(world, args.destroy_actor)
         elif(args.follow_actor):
-            follow_actor(world, args.follow_actor)
+            #follow_actor(world, args.follow_actor)
+            pass
         elif(args.change_town): 
-            change_town(client, args.change_town)
-        elif(args.visualise_stats):
-            visualise_stats(args.out_file)
+            #change_town(client, args.change_town)
+            pass
+        elif(args.visualize_stats):
+            #visualize_stats(args.out_file)
+            pass
         elif(args.record_stats):
             if(args.accessory_rolename):
                 print(args.accessory_rolename)
