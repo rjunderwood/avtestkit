@@ -160,7 +160,7 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
 
             #write data to file
             if(filename):
-                f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,lane_invasion,dist_to_actor))
+                f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,mag(vel),mag(acc),collision,lane_invasion,dist_to_actor))
 
             #Check the actor we are tracking still exists
             actor_to_track = find_actor_by_rolename(world, role_name_to_track) #check actor still exists
