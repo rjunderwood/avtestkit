@@ -1,4 +1,5 @@
 
+from logging import exception
 import os
 import sys
 import random 
@@ -7,6 +8,21 @@ import argparse
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+
+# Get CARLA .egg file
+try:
+    sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')[0])
+except IndexError:
+    print("Error: carla-0.9.10-py3.7-linux-x86_64.egg file doesn't exsit.")
+    pass
+else:
+    try:
+        sys.path.append(glob.glob('/home/luuquanghung/CARLA_AUTOWARE/PythonAPI/carla/dist/carla-0.9.10-py2.7-linux-x86_64.egg')[0])
+    except IndexError:
+        print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exsit.")
+        pass
+    else:
+        print("Error: .egg file doesn't exsit.")
 
 import carla
 
