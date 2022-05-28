@@ -23,8 +23,6 @@ def await_the_testing_settings():
         print("settings_not_found")
      
         try:
-           
-  
             # Opening JSON file
             f = open('./json-outputs/output.json')
             data = json.load(f)
