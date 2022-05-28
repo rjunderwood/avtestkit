@@ -1,5 +1,6 @@
 
 from logging import exception
+import glob
 import os
 import sys
 import random 
@@ -26,6 +27,7 @@ else:
 
 import carla
 
+# euclidean distance
 def calc_dist(actor_a, actor_b):
     loc_a = actor_a.get_location()
     loc_b = actor_b.get_location()
@@ -177,5 +179,52 @@ def record_stats(world, role_name_to_track, accessory_rolename=None, filename=No
     
     return 
 
+def track_location(args, world):
+    actors = world.get_actors()
+    actors = actors.filter('vehicle.*') # filter out just the vehicle actors
 
+    actor_to_track = ret_actor(args.actor_id)
+
+    if(args.out_file):
+        f = open(args.out_file, "w")
+
+    previous_loc = carla.Location(0,0,0)
+
+    while True:
+        try:
+            current_loc = actor_to_track.get_location()
+
+            if(current_loc != previous_loc): # only record or print location if it has changed. i.e., car is not stationary.
+                print('Location: %0.2f, %0.2f, %0.2f\r' % (current_loc.x, current_loc.y, current_loc.z), end = "\r")
+
+                if(args.out_file):
+                    f.write('%0.2f, %0.2f, %0.2f\r' % (current_loc.x, current_loc.y, current_loc.z)) 
+
+            previous_loc = current_loc
+
+        except KeyboardInterrupt:
+            print("")
+
+            if(args.out_file):
+                f.close()
+            
+            return
+
+def plot_stats(axs, data, start_index = None, end_index = None):
+
+    #axs[0, 0].plot(data[:,0], data[:,4], color = "blue")
+    axs[0, 0].plot(data[:,0], data[:,4])
+    axs[0, 0].set_title('Velocity vs Simulation Time')
+    axs[0, 0].set(xlabel = 'Simulation Time (s)', ylabel = 'Magnitude Velocity (m/s)')
+
+    #axs[0, 1].plot(data[:,0], data[:,5], color = "green")
+    axs[0, 1].plot(data[:,0], data[:,5])
+    axs[0, 1].set_title('Acceleration vs Simulation Time')
+    axs[0, 1].set(xlabel = 'Simulation Time (s)', ylabel = 'Magnitude Acceleration (m/s^2)')
+    axs[0, 1].set_ylim([0, 25])
+
+    #axs[1, 0].plot(data[:,1], data[:,2], color = "black")
+    axs[1, 0].plot(data[:,1], data[:,2])
+    axs[1, 0].set_title('Vehicle Location: y-coord vs x-coord')
+    axs[1, 0].set(xlabel = 'x-coord', ylabel = 'y-coord')
     
