@@ -247,5 +247,17 @@ def main(args):
                 print("Please specify actor Id.")
         elif(args.destory_actor):
             destroy_actor(world, args.destory_actor)
-        elif
-    
+        elif(args.follow_actor):
+            follow_actor(world, args.follow_actor)
+        elif(args.change_town): 
+            change_town(client, args.change_town)
+        elif(args.visualise_stats):
+            visualise_stats(args.out_file)
+        elif(args.record_stats):
+            if(args.accessory_rolename):
+                print(args.accessory_rolename)
+                record_stats(world=world,role_name_to_track=args.record_stats, accessory_rolename=args.accessory_rolename, filename=args.out_file, param_value=float(args.param_value))
+        else:
+            print('No functionality specified')
+    finally:
+        print('Finally')
