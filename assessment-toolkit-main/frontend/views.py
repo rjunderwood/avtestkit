@@ -27,9 +27,9 @@ def view_setup():
         [sg.Text('Metrics:')],
         [sg.Text('Speed:'), sg.Input(key='metric_speed'), sg.Text('km/ph')],
         [sg.Text('Distance:'), sg.Spin([i for i in range(1, 4)],initial_value=1, k='metric_distance'), sg.Text('sec')],
-        [sg.Button('Start Test', size=(100, 2))],
-        [sg.Button('Start CARLA', size=(100, 2))],
-        [sg.Button('Start ROS', size=(100, 2))]
+        [sg.Button('1. Start CARLA', size=(100, 2))],
+        [sg.Button('2. Start ROS', size=(100, 2))],
+        [sg.Button('3. Start Test', size=(100, 2))]
     ]
     return layout
 
