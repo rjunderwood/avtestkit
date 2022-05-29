@@ -1,3 +1,4 @@
+import time
 import PySimpleGUI as sg
 #Import CarlaLaunch
 from backend.interface import carla_launch as claunch
