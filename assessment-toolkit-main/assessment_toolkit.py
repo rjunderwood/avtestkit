@@ -1,5 +1,3 @@
-
-from asyncio.windows_utils import Popen
 from subprocess import call
 import os
 import threading
@@ -21,14 +19,10 @@ class AssessmentToolkit:
 
 
     def __init__(self):
-        
         #Start GUI
         gui = FrontEndMain(self)
         #start the gui
         gui.start()
-        
-
-
 
     #Setup Scenario is called after the setup on the first GUI page has been entered and the 'start' button pressed
     #Creates a specified scenario 
@@ -65,6 +59,7 @@ class AssessmentToolkit:
         self.gui.change_view("view_result")
 
         #TODO some sort of data input to the view_result GUI with the processed data
+        
 
 
 

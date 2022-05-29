@@ -3,6 +3,7 @@
 from cProfile import label
 import PySimpleGUI as sg
 import pathlib
+import os
 
 
 
@@ -33,24 +34,42 @@ def view_setup():
 
 def view_set_2d_nav():
 
-    
-    layout = [
-        [sg.Text('Set 2D Nav', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)], 
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_nav.png')]
-    ]
+    layout = []
+    if os.name == 'nt':
+        layout = [
+            [sg.Text('Set 2D Nav', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)], 
+            [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_nav.png')]
+        ]
+    else:
+        layout = [
+            [sg.Text('Set 2D Nav', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)], 
+            [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/follow_vehicle/2d_nav.png')]
+        ]
+
+
     return layout
 
 
 def view_set_2d_pose_estimation():
-    layout = [
+
+    layout = []
+    if os.name == 'nt':
+        layout = [
         
         [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-
         #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
-        
         [sg.Button('Next', size=(100, 2))]
-    ]
+        ]
+    else:
+        layout = [
+        
+        [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/follow_vehicle/2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
+        [sg.Button('Next', size=(100, 2))]
+        ]
+
     return layout
 
 
