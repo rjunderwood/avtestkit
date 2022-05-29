@@ -69,9 +69,9 @@ class ScenarioFollowVehicle:
 
             spawn_loc = carla.Location(self.X,self.Y,self.Z)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
-            transform = carla.Transform(self.spawn_loc, self.rotation)
+            transform = carla.Transform(spawn_loc, rotation)
 
-            lead_vehicle = world.spawn_actor(self.lead_vehicle_bp, self.transform)
+            lead_vehicle = world.spawn_actor(self.lead_vehicle_bp, transform)
 
             lead_vehicle.set_light_state(carla.VehicleLightState.All)
 
