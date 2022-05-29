@@ -42,10 +42,7 @@ class FrontEndMain():
 
 
         # This is an Event Loop 
-        while True:
-
-
-       
+        while True:       
 
             event = parse_event(self.window)
             if(event["event_name"] =="close_window"):
@@ -70,10 +67,7 @@ class FrontEndMain():
                 #Run the ready scenario
                 self.assessment_toolkit.run_scenario()
                 self.run_scenario_change = 0
-
-
-  
-
+        # End while
                 
 
         window.close()
