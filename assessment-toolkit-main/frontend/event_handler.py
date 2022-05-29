@@ -18,17 +18,18 @@ def parse_event(window):
         print("[LOG] Clicked Exit!")
         return {"event_name":"close_window"}
 
-    elif event == 'Start':
+    elif event == 'Start Test':
         #Add Data
         form_data = {}
         for key in values:
             print(key, ' = ',values[key])
             form_data[key] = values[key]
 
+        return {"event_name":"start_scenario_setup", "data":form_data}
+
+    elif event == '2D Pose Estimation Has Been Set':
+        return {"event_name":"start_scenario_run"}
         
-        return {"event_name":"start", "data":form_data}
-    
- 
 
 
 

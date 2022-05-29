@@ -21,8 +21,12 @@ class AssessmentToolkit:
     def __init__(self):
         #Start GUI
         gui = FrontEndMain(self)
+        #Save GUI
+        self.gui = gui
         #start the gui
-        gui.start()
+        self.gui.start()
+
+       
 
     #Setup Scenario is called after the setup on the first GUI page has been entered and the 'start' button pressed
     #Creates a specified scenario 
@@ -41,6 +45,7 @@ class AssessmentToolkit:
 
         finally:
             print("Scenario Ready") 
+            self.gui.change_view("view_set_2d_pose_estimation")
     
 
 
@@ -59,7 +64,7 @@ class AssessmentToolkit:
         self.gui.change_view("view_result")
 
         #TODO some sort of data input to the view_result GUI with the processed data
-        
+
 
 
 

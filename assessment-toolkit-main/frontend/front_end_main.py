@@ -49,7 +49,7 @@ class FrontEndMain():
             if(event["event_name"] =="close_window"):
                 #Window Close Event if event_handler.run(window,event,values) RETURNS "close_window"
                 break
-            elif(event["event_name"] == "start"):
+            elif(event["event_name"] == "start_scenario_setup"):
                 print(event)
                 #Setup the scenario with the inputs
                 self.assessment_toolkit.setup_scenario(event["data"])
@@ -57,7 +57,7 @@ class FrontEndMain():
                 self.change_view("view_set_2d_pose_estimation")
 
             #User is saying that they have finished the 2D pose estimate
-            elif(event["event_name"] == "next"):
+            elif(event["event_name"] == "start_scenario_run"):
                 #Run the ready scenario
                 self.assessment_toolkit.run_scenario()
                 #Show the next view ( Now simulation is running the user needs to start the ego movement with 2d nav goal RVIS)

@@ -27,7 +27,7 @@ def view_setup():
         [sg.Text('Metrics:')],
         [sg.Text('Speed:'), sg.Input(key='metric_speed'), sg.Text('km/ph')],
         [sg.Text('Distance:'), sg.Spin([i for i in range(1, 4)],initial_value=1, k='metric_distance'), sg.Text('sec')],
-        [sg.Button('Start', size=(100, 2))]
+        [sg.Button('Start Test', size=(100, 2))]
     ]
     return layout
 
@@ -59,7 +59,7 @@ def view_set_2d_pose_estimation():
         [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
-        [sg.Button('Next', size=(100, 2))]
+        [sg.Button('2D Pose Estimation Has Been Set', size=(100, 2))]
         ]
     else:
         layout = [
@@ -67,7 +67,7 @@ def view_set_2d_pose_estimation():
         [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/follow_vehicle/2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
-        [sg.Button('Next', size=(100, 2))]
+        [sg.Button('2D Pose Estimation Has Been Set', size=(100, 2))]
         ]
 
     return layout
