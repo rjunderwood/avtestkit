@@ -27,13 +27,13 @@ def parse_event(window):
     elif event == 'Start CARLA':
         ## Launch CARLA & Sleep for 5 seconds.
         claunch.CarlaLaunch()
-        time.sleep(10)
+        time.sleep(1)
 
     ## If Start ROS Button Clicked
     elif event == 'Start ROS':
         ## Launch CARLA & Sleep for 5 seconds.
         rlaunch.ROSLaunch()
-        time.sleep(10)
+        time.sleep(1)
 
     elif event == 'Start Test':
         #Add Data
