@@ -1,4 +1,5 @@
 #from subprocess import call
+
 import os
 import threading
 import json
@@ -9,6 +10,8 @@ import multiprocessing
 ## Backend
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
+#Import the process data
+from backend.util.results.process_results import ProcessResult
 
 ## Frontend
 #Import the front end
@@ -69,7 +72,28 @@ class AssessmentToolkit:
         # #Change the gui view to results
         self.gui.change_view("view_result")
 
-        #TODO some sort of data input to the view_result GUI with the processed data
+      
+
+
+        #When the program has finished running, 
+        #the result data needs to be processed
+
+        #Process the data
+        process_result = ProcessResult('T0.txt')
+
+        #Pass?
+        #any collisions/lane invasions 
+        result_pass = False
+        if (not process_result.had_collision()) and (not process_result.had_lane_invasion()):
+            result_pass = True
+        
+        display_result_data = {
+            "result_pass":result_pass
+        }
+
+        self.gui.set_view_result_data(display_result_data)
+
+
     
 
 

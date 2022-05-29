@@ -22,6 +22,7 @@ class ScenarioFollowVehicle:
 
     PITCH = 0
     YAW = 270
+    #YAW = 270
     ROLL = 0 
 
     EGO_VEHICLE_NAME = 'ego_vehicle'

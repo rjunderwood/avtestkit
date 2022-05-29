@@ -8,7 +8,7 @@ import math
 import subprocess
 import pathlib
 #TODO when not in development change from .mock_follow_vehicle => .follow_vehicle
-from ..util.util import *
+from ..util.mock_util import *
 
 class ScenarioFollowVehicle:
 

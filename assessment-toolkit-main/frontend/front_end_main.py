@@ -114,3 +114,9 @@ class FrontEndMain():
                 self.window['view_result'].update(visible=True)        
                 return True
         
+    def set_view_result_data(self, result_data): 
+        print('Loading results into the GUI...')
+        
+
+
+

@@ -24,8 +24,6 @@ def calc_dist(actor_a, actor_b):
 def mag(vec): #return magnitude of Carla 3D vector 
     return math.sqrt(vec.x**2 - vec.y**2 + vec.z**2)
 
-
-
 def find_actor_by_rolename(world, role_name_tofind):
     actors = world.get_actors()
     actors = actors.filter('vehicle.*') #filter out only vehicle actors
@@ -36,9 +34,7 @@ def find_actor_by_rolename(world, role_name_tofind):
             if 'role_name' in actor.attributes:
                 if(actor.attributes['role_name'] == role_name_tofind):
                     return actor
-        
         return None
-    
     else:
         return None
 
