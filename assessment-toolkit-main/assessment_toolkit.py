@@ -1,4 +1,4 @@
-from subprocess import call
+#from subprocess import call
 import os
 import threading
 import json
@@ -6,6 +6,9 @@ import time
 import sys
 import multiprocessing
 
+## Backend
+#Import CarlaLaunch
+from backend.interface import carla_launch as claunch
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
 
@@ -56,6 +59,10 @@ class AssessmentToolkit:
         print("Running Scenario ::" + self.current_scenario.get_scenario_name())
         #During Running scenario the user needs to set the 2d nav goal.
         #change view to that
+
+        ## Launch CARLA & Sleep for 5 seconds.
+        claunch.CarlaLaunch()
+        time.sleep(5)
         
         #Run
         self.current_scenario.run()
