@@ -92,6 +92,7 @@ class ScenarioFollowVehicle:
 
             #Start Recording Scenario before the scenario loop begins
             self.start_recording_scenario()
+            
 
             while(calc_dist(lead_vehicle, ego_vehicle) > self.TRIGGER_DIST):
                 try:
