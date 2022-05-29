@@ -7,11 +7,10 @@ import sys
 import multiprocessing
 
 ## Backend
-#Import CarlaLaunch
-from backend.interface import carla_launch as claunch
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
 
+## Frontend
 #Import the front end
 from frontend.front_end_main import FrontEndMain
 
@@ -28,8 +27,7 @@ class AssessmentToolkit:
         self.gui = gui
         #start the gui
         self.gui.start()
-
-       
+              
 
     #Setup Scenario is called after the setup on the first GUI page has been entered and the 'start' button pressed
     #Creates a specified scenario 
@@ -59,10 +57,6 @@ class AssessmentToolkit:
         print("Running Scenario ::" + self.current_scenario.get_scenario_name())
         #During Running scenario the user needs to set the 2d nav goal.
         #change view to that
-
-        ## Launch CARLA & Sleep for 5 seconds.
-        claunch.CarlaLaunch()
-        time.sleep(5)
         
         #Run
         self.current_scenario.run()
