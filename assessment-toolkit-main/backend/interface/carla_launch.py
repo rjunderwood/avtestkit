@@ -1,4 +1,4 @@
-from subprocess import check_call as sp
+import subprocess as sp
 
 class CarlaLaunch:
 
