@@ -1,7 +1,3 @@
-import time
-## Backend
-#Import CarlaLaunch
-from backend.interface import carla_launch as claunch
 
 from cgitb import handler
 import PySimpleGUI as sg
@@ -62,10 +58,6 @@ class FrontEndMain():
 
             #User is saying that they have finished the 2D pose estimate
             elif(event["event_name"] == "start_scenario_run"):
-
-                ## Launch CARLA & Sleep for 5 seconds.
-                claunch.CarlaLaunch()
-                time.sleep(5)
             
                 self.change_view("view_set_2d_nav")
                 self.run_scenario_change+=1
