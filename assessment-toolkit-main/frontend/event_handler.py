@@ -1,4 +1,8 @@
 import PySimpleGUI as sg
+#Import CarlaLaunch
+from backend.interface import carla_launch as claunch
+#Import ROSLaunch
+from backend.interface import ros_launch as rlaunch
 
 
 
@@ -17,6 +21,18 @@ def parse_event(window):
     if event in (None, 'Exit'):
         print("[LOG] Clicked Exit!")
         return {"event_name":"close_window"}
+
+    ## If Start CALRA Button Clicked
+    elif event == 'Start CARLA':
+        ## Launch CARLA & Sleep for 5 seconds.
+        claunch.CarlaLaunch()
+        time.sleep(10)
+
+    ## If Start ROS Button Clicked
+    elif event == 'Start ROS':
+        ## Launch CARLA & Sleep for 5 seconds.
+        rlaunch.ROSLaunch()
+        time.sleep(10)
 
     elif event == 'Start Test':
         #Add Data
