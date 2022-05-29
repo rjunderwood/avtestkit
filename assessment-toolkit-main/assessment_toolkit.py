@@ -7,8 +7,6 @@ import sys
 import multiprocessing
 
 ## Backend
-#Import CarlaLaunch
-from backend.interface import carla_launch as claunch
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
 
@@ -23,9 +21,6 @@ class AssessmentToolkit:
 
 
     def __init__(self):
-        ## Launch CARLA & Sleep for 5 seconds.
-        claunch.CarlaLaunch()
-        time.sleep(5)
         #Start GUI
         gui = FrontEndMain(self)
         #Save GUI
