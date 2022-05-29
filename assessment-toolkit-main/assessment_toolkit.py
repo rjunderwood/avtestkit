@@ -4,7 +4,7 @@ import threading
 import json
 import time
 import sys
-import subprocess
+import multiprocessing
 
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
@@ -52,22 +52,24 @@ class AssessmentToolkit:
     #This runs the scenario along with the recording of the scenario data
     #CALLED after the 2D pose estimation is set in RVIS and the user clicks done on that page
     def run_scenario(self):
-         #Run
+        #Run
         print("Running Scenario ::" + self.current_scenario.get_scenario_name())
+        #During Running scenario the user needs to set the 2d nav goal.
+        #change view to that
+        
+        #Run
         self.current_scenario.run()
+    
 
-        #Wait for the scenario to finish running. 
+        # #Wait for the scenario to finish running. 
         while(not self.current_scenario.is_scenario_finished()):
             pass
         
-        #Change the gui view to results
+        # #Change the gui view to results
         self.gui.change_view("view_result")
 
         #TODO some sort of data input to the view_result GUI with the processed data
-
-
-
-
+    
 
 
             

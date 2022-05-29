@@ -2,10 +2,10 @@
 #TODO when not in development change from .mock_follow_vehicle => .follow_vehicle
 
 #Can only be imported on the system with carla. 
-#from .follow_vehicle import ScenarioFollowVehicle
+from .follow_vehicle import ScenarioFollowVehicle
 
 #Import a mock scenario 
-from .mock_follow_vehicle import ScenarioFollowVehicle
+#from .mock_follow_vehicle import ScenarioFollowVehicle
 
 class Scenario: 
     
@@ -26,13 +26,10 @@ class Scenario:
 
 
     def run(self):
+        
+
         #Run the scenario
         self.scenario_runner.run()
-
-        #Start Recording Data
-        #TODO Add the recording data functionality
-        
-        
 
 
     

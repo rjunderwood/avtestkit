@@ -6,6 +6,8 @@ import time
 import argparse
 import math
 import carla
+import subprocess
+import pathlib
 
 from ..util.util import *
 
@@ -85,6 +87,12 @@ class ScenarioFollowVehicle:
             ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
 
+
+
+
+            #Start Recording Scenario before the scenario loop begins
+            self.start_recording_scenario()
+
             while(calc_dist(lead_vehicle, ego_vehicle) > self.TRIGGER_DIST):
                 try:
                     print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
@@ -102,6 +110,14 @@ class ScenarioFollowVehicle:
             #Set the scenario as finished
             self.scenario_finished = True
         
+            #Start recording the scenario in a separate process
+    def start_recording_scenario(self):
+        if os.name == 'nt':
+            subprocess.Popen(args=['python', str(pathlib.Path(__file__).parent.resolve())+r'\record_stats.py'], stdout=sys.stdout)
+        else:
+            subprocess.Popen(args=['python', str(pathlib.Path(__file__).parent.resolve())+r'/record_stats.py'], stdout=sys.stdout)
 
     def is_scenario_finished(self):
         return self.scenario_finished
+
+
