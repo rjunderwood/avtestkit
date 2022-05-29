@@ -24,18 +24,22 @@ def parse_event(window):
         return {"event_name":"close_window"}
 
     ## If Start CALRA Button Clicked
-    elif event == 'Start CARLA':
+    elif event == '1. Start CARLA':
+        print("1. Start CARLA")
+      
         ## Launch CARLA & Sleep for 5 seconds.
         claunch.CarlaLaunch()
         time.sleep(1)
 
     ## If Start ROS Button Clicked
-    elif event == 'Start ROS':
+    elif event == '2. Start ROS':
+        print("2. Start ROS")
+       
         ## Launch CARLA & Sleep for 5 seconds.
         rlaunch.ROSLaunch()
         time.sleep(1)
 
-    elif event == 'Start Test':
+    elif event == '3. Start Test':
         #Add Data
         form_data = {}
         for key in values:
@@ -47,7 +51,7 @@ def parse_event(window):
     elif event == '2D Pose Estimation Has Been Set':
         return {"event_name":"start_scenario_run"}
         
-
+  
 
 
     return {"event_name":"none"}

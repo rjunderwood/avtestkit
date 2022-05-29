@@ -17,7 +17,7 @@ class ScenarioFollowVehicle:
     def run(self):
         
         try:
-            self.start_recording_scenario()
+            #self.start_recording_scenario()
             
             time.sleep(5)
         finally:

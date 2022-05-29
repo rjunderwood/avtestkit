@@ -43,19 +43,20 @@ class FrontEndMain():
 
         # This is an Event Loop 
         while True:       
-
+      
             event = parse_event(self.window)
             if(event["event_name"] =="close_window"):
                 #Window Close Event if event_handler.run(window,event,values) RETURNS "close_window"
                 break
             elif(event["event_name"] == "start_scenario_setup"):
+                
                 #Setup the scenario with the inputs
                 self.assessment_toolkit.setup_scenario(event["data"])
 
 
             #User is saying that they have finished the 2D pose estimate
             elif(event["event_name"] == "start_scenario_run"):
-            
+             
                 self.change_view("view_set_2d_nav")
                 self.run_scenario_change+=1
                 
