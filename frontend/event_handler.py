@@ -40,8 +40,9 @@ def parse_event(window):
         print("2. Start ROS")
        
         ## Launch CARLA & Sleep for 5 seconds.
-        rlaunch.ROSLaunch(CONFIG['CARLA_AUTOWARE_PATH'])
+        ros = rlaunch.ROSLaunch(CONFIG['CARLA_AUTOWARE_PATH'])
         time.sleep(1)
+       
 
     elif event == '3. Patch ROS':
         print("3. Patch ROS")
