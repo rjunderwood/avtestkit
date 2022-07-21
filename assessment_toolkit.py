@@ -11,6 +11,8 @@ import multiprocessing
 from backend.interface import carla_launch as claunch
 #Import ROSLaunch
 from backend.interface import ros_launch as rlaunch
+#Import ROSClose 
+from backend.interface import ros_close as rclose
 ## Backend
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
@@ -29,6 +31,9 @@ class AssessmentToolkit:
     current_scenario = None
     gui = None
 
+    #Scenarios that are going to be runned during this session. 
+    scenario_queue = []
+    setup_controller = {"carla":False, "carla_autoware":False}
 
     def __init__(self):
         #Start GUI
@@ -38,7 +43,26 @@ class AssessmentToolkit:
         #start the gui
         self.gui.start()
   
-              
+
+   
+    def start_carla(self):
+        # Launch CARLA & Sleep for 5 seconds.
+        claunch.CarlaLaunch(CONFIG['CARLA_SIMULATOR_PATH'])
+        time.sleep(1)
+        self.setup_controller["carla"] = True
+
+    def start_carla_autoware(self):
+        # Launch CARLA AUTOWARE/ROS & Sleep for 5 seconds.
+        rlaunch.ROSLaunch(CONFIG['CARLA_AUTOWARE_PATH'])
+        time.sleep(2)
+        self.setup_controller["carla_autoware"] = True 
+
+    
+    #Setup controller GET from the gui on the view_setup_toolkit 
+    def get_setup_controller(self):
+        return self.setup_controller
+    
+
 
     #Setup Scenario is called after the setup on the first GUI page has been entered and the 'start' button pressed
     #Creates a specified scenario 
@@ -60,6 +84,35 @@ class AssessmentToolkit:
             self.gui.change_view("view_set_2d_pose_estimation")
     
 
+    #Setup multiple Scenarios
+    def setup_scenarios(self, data):
+
+        print("\n\nsetup_scenarios\n")
+        for key in data:
+                print(key, ' : ',data[key])
+        
+        try:
+            if data['scenario_check_follow_vehicle'] == True:
+                self.scenario_queue.append(Scenario("follow_vehicle", data))
+
+            # if data['scenario_check_pedestrian_crossing_road'] == True:
+            #     self.scenario_queue.append()
+
+
+            #If there are no selected Scenarios
+            if(len(self.scenario_queue) == 0):
+                print("NO SCENARIO QUEUE SET ::: ")
+                self.gui.change_view("view_setup_scenarios_none")
+                return 0
+
+            #Setup the current scenario
+            self.current_scenario = self.scenario_queue[0]
+            self.gui.change_view("view_scenario_starter_"+self.current_scenario.get_scenario_name())
+
+        finally:
+            print("Scenarios Ready") 
+
+            # self.gui.change_view("view_set_2d_pose_estimation")
 
     #This runs the scenario along with the recording of the scenario data
     #CALLED after the 2D pose estimation is set in RVIS and the user clicks done on that page
@@ -101,7 +154,14 @@ class AssessmentToolkit:
 
 
     
-
+    def get_current_scenario_name(self):
+        
+        try: 
+            print("get_current_scenario_name :: " + self.current_scenario.get_scenario_name())
+            return self.current_scenario.get_scenario_name()
+        except: 
+            print("get_current_scenario_name :: ")
+            return ""
 
             
             

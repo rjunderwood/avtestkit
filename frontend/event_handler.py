@@ -23,8 +23,12 @@ def parse_event(window):
         pass
         # print('============ Event = ', event, ' ==============')
         # print('-------- Values Dictionary (key=value) --------')
-        # for key in values:
-        #     print(key, ' = ',values[key])
+        for key in values:
+            print(key, ' = ',values[key])
+
+
+
+
     if event in (None, 'Exit'):
         print("[LOG] Clicked Exit!")
         return {"event_name":"close_window"}
@@ -72,8 +76,20 @@ def parse_event(window):
 
     elif event == '2D Pose Estimation Has Been Set':
         return {"event_name":"start_scenario_run"}
-        
+
+
+    elif event == '1. Launch Carla':   
+        return {"event_name":"launch_carla"}
+
+    elif event == '2. Launch Carla Autoware':   
+        return {"event_name":"launch_carla_autoware"}
   
+    elif event == 'Continue':
+        form_data = {}
+        for key in values:
+            print(key, ' = ',values[key])
+            form_data[key] = values[key]
+        return {"event_name":"continue", "data":form_data}
 
 
     return {"event_name":"none"}

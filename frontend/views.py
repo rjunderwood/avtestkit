@@ -7,18 +7,27 @@ import os
 
 
 
-def view_container():
+def view_container(gui):
     layout = [[
-        sg.Column(view_setup(), key='view_setup'),
-        sg.Column(view_set_2d_nav(), key='view_set_2d_nav',visible=False),
-        sg.Column(view_set_2d_pose_estimation(), key='view_set_2d_pose_estimation',visible=False),
-        sg.Column(view_result(), key='view_result',visible=False)
+        # sg.Column(view_setup(), key='view_setup'),
+        sg.Column(view_setup_toolkit(gui), key='view_setup_toolkit'),
+        sg.Column(view_setup_scenarios(gui), key='view_setup_scenarios',visible=False),
+        sg.Column(view_setup_scenarios_none(gui), key='view_setup_scenarios_none',visible=False),
+        sg.Column(view_set_2d_nav(gui), key='view_set_2d_nav',visible=False),
+        sg.Column(view_set_2d_pose_estimation(gui), key='view_set_2d_pose_estimation',visible=False),
+        sg.Column(view_result(gui), key='view_result',visible=False),
+        sg.Column(view_setup(gui), key='view_setup',visible=False),
+
+
+        #Scenario Stuff 
+        sg.Column(view_scenario_starter(gui), key='view_scenario_starter',visible=False),
+        sg.Column(view_scenario_starter_follow_vehicle(gui), key='view_scenario_starter_follow_vehicle',visible=False),
         ]]
   
     return layout
 
 
-def view_setup():
+def view_setup(gui):
 
     layout = [
         [sg.Text('Test Runner', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
@@ -36,7 +45,7 @@ def view_setup():
     return layout
 
 
-def view_set_2d_nav():
+def view_set_2d_nav(gui):
 
     layout = []
     if os.name == 'nt':
@@ -54,7 +63,7 @@ def view_set_2d_nav():
     return layout
 
 
-def view_set_2d_pose_estimation():
+def view_set_2d_pose_estimation(gui):
 
     layout = []
     if os.name == 'nt':
@@ -77,8 +86,81 @@ def view_set_2d_pose_estimation():
     return layout
 
 
-def view_result():
+def view_result(gui):
     layout = [
         [sg.Text('Set Result', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
     ]
     return layout
+
+
+def view_setup_toolkit(gui):
+    layout = [
+        [sg.Text('Assessment Toolkit Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Button('1. Launch Carla', size=(100, 2))],
+        [sg.Button('2. Launch Carla Autoware', size=(100, 2))],
+    ]
+    return layout
+
+
+def view_setup_scenarios(gui):
+    layout = [
+        [sg.Text('Scenarios Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        
+        [sg.Text('Select Scenarios')],
+        # [sg.Combo(values=("Select","All","Follow Vehicle","Pedestrian Crossing Road"), default_value='Select', key='scenario_selector', auto_size_text=True, size=(50, 5))],
+
+
+        [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
+        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
+        [sg.Button('Continue', size=(100, 2))],
+    ]
+    return layout
+
+def view_setup_scenarios_none(gui):
+    layout = [
+        [sg.Text('Scenarios Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        
+        [sg.Text('Select Scenarios')],
+        # [sg.Combo(values=("Select","All","Follow Vehicle","Pedestrian Crossing Road"), default_value='Select', key='scenario_selector', auto_size_text=True, size=(50, 5))],
+
+
+        [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
+        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
+        [sg.Text('** You need to select a minimum of 1 Scenario')],
+        [sg.Button('Continue', size=(100, 2))],
+    ]
+    return layout
+
+
+
+
+
+
+#Scenario Starter Views
+
+def view_scenario_starter(gui):
+    scenario_name = gui.get_current_scenario_name()
+    print(" view_scenario_starter | " + scenario_name)
+    title = "Start Scenario : " + scenario_name
+    layout = [
+        [sg.Text(title, size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Button('Next', size=(100, 2))],
+    ]
+    return layout    
+
+def view_scenario_starter_follow_vehicle(gui):
+    scenario_name = gui.get_current_scenario_name()
+    layout = [
+        [sg.Text('Start Scenario : Follow Vehicle' + scenario_name, size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Button('Next', size=(100, 2))],
+    ]
+    return layout   
+
+
+def view_scenario_launch_carla_autoware(gui):
+    scenario_name = gui.get_current_scenario_name()
+    layout = [
+        [sg.Text('Start Scenario : Follow Vehicle' + scenario_name, size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Button('Next', size=(100, 2))],
+    ]
+    return layout   
