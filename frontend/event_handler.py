@@ -4,6 +4,8 @@ import PySimpleGUI as sg
 from backend.interface import carla_launch as claunch
 #Import ROSLaunch
 from backend.interface import ros_launch as rlaunch
+#Import ROSClose 
+from backend.interface import ros_close as rclose
 
 from backend.interface import patch_ros as patchros
 import json
@@ -59,6 +61,14 @@ def parse_event(window):
             form_data[key] = values[key]
 
         return {"event_name":"start_scenario_setup", "data":form_data}
+
+
+    elif event == 'CLOSE ROS':
+        #Add Data
+        print("CLOSE ROS")
+        rclose.ROSClose()
+        time.sleep(1)
+
 
     elif event == '2D Pose Estimation Has Been Set':
         return {"event_name":"start_scenario_run"}

@@ -30,7 +30,8 @@ def view_setup():
         [sg.Button('1. Start CARLA', size=(100, 2))],
         [sg.Button('2. Start ROS', size=(100, 2))],
         [sg.Button('3. Patch ROS', size=(100, 2))],
-        [sg.Button('4. Start Test', size=(100, 2))]
+        [sg.Button('4. Start Test', size=(100, 2))],
+        [sg.Button('CLOSE ROS', size=(100, 2))]
     ]
     return layout
 

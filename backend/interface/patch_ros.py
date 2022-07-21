@@ -9,8 +9,10 @@ class PatchRos:
     def __init__(self):
         self.setup_patch_files()
         script_path = self.directory +"/ros_patch/setup_carla_autoware_docker_container.sh"
-        self.__rospatch__ = os.system("gnome-terminal -e 'bash -c \"" + script_path +" -s; exec bash\"'")
+        # self.__rospatch__ = os.system("gnome-terminal -e 'bash -c \"" + script_path +" -s; exec bash\"'")
 
+        self.__rospatch__ = os.system("gnome-terminal -e 'bash -c \"" + script_path +" -s;\"'")
+    
     def apply_ros_patch(self):
         self.setup_patch_files()
         return self.__rospatch__

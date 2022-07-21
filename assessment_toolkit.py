@@ -71,7 +71,7 @@ class AssessmentToolkit:
         
         #Run
         self.current_scenario.run()
-    
+        
 
         # #Wait for the scenario to finish running. 
         while(not self.current_scenario.is_scenario_finished()):
@@ -79,8 +79,6 @@ class AssessmentToolkit:
         
         # #Change the gui view to results
         self.gui.change_view("view_result")
-
-      
 
 
         #When the program has finished running, 

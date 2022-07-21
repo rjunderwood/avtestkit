@@ -42,7 +42,7 @@ class ScenarioFollowVehicle:
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
-    TRIGGER_DIST = 25 
+    TRIGGER_DIST = 80 
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -57,8 +57,8 @@ class ScenarioFollowVehicle:
 
     SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
 
-    LEAD_VEHICLE_VELOCITY = 3
-
+    # LEAD_VEHICLE_VELOCITY = 3
+    LEAD_VEHICLE_VELOCITY = 8
 
 
     def run(self):
@@ -117,10 +117,12 @@ class ScenarioFollowVehicle:
                     lead_vehicle.destroy()
             
             lead_vehicle.set_target_velocity(carla.Vector3D(0,self.LEAD_VEHICLE_VELOCITY,0))
+            print("SCENARIO RUNNER :: Set Lead Vehicle" + str(self.LEAD_VEHICLE_VELOCITY))
 
-            time.sleep(60)
+            time.sleep(30)
 
             lead_vehicle.destroy()
+            # ego_vehicle.destroy()
         finally:
             print("Scenario Finished :: Follow Vehicle") 
 
