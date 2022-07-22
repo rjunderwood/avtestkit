@@ -13,6 +13,8 @@ from backend.interface import carla_launch as claunch
 from backend.interface import ros_launch as rlaunch
 #Import ROSClose 
 from backend.interface import ros_close as rclose
+#Import ROSPatch
+from backend.interface import patch_ros as patchros
 ## Backend
 #Import the scenario maker
 from backend.scenario.scenario import Scenario
@@ -163,8 +165,11 @@ class AssessmentToolkit:
             print("get_current_scenario_name :: ")
             return ""
 
-            
-            
+    
+    #Run the ros patch
+    #Only is going to be successful if the docker is run. 
+    def run_ros_patch(self):
+        patchros.PatchRos()        
 
             
 

@@ -52,7 +52,7 @@ class FrontEndMain():
 
 
     def start(self):
-        window = self.make_window(sg.theme())
+        window = self.make_window(sg.theme("Reddit"))
         #Set the window to be accessed later. 
         self.window = window
 
@@ -88,12 +88,18 @@ class FrontEndMain():
                 
             elif(event["event_name"] == "continue"):
 
-
-                #Continue from Scenario Setup 
+                print()
+             
+                
+                if self.current_view == "view_scenario_starter_follow_vehicle":
+                    self.change_view("view_start_autoware")
+                
+                   #Continue from Scenario Setup 
                 if self.current_view == "view_setup_scenarios" or self.current_view == "view_setup_scenarios_none":
 
                     #Setup the scenario with the inputs
                     self.assessment_toolkit.setup_scenarios(event["data"])
+                    print("#Continue from Scenario Setup")
 
 
             #User is saying that they have finished the 2D pose estimate
@@ -101,6 +107,16 @@ class FrontEndMain():
                 
                 self.change_view("view_set_2d_nav")
                 self.run_scenario_change+=1
+
+            #Connect Carla Autoware View docker container has loaded
+            elif(event["event_name"] == "carla_autoware_docker_container_loaded"):
+                #Time to run the patch on docker and then move to the run scenario phase screen. 
+                self.assessment_toolkit.run_ros_patch()
+
+    
+
+
+
 
             if(self.run_scenario_change > 0):
                 print(self.run_scenario_change)
@@ -135,127 +151,33 @@ class FrontEndMain():
     def change_view(self,target_view):
         print("gui: change_view : ", target_view)
 
-        if(len(target_view) > 0):
+        available_views = [
+            "view_setup_toolkit",
+            "view_setup_scenarios",
+            "view_setup_scenarios_none",
+            "view_set_2d_pose_estimation",
+            "view_setup",
+            "view_set_2d_pose_estimation",
+            "view_setup",
+            "view_set_2d_nav",
+            "view_result",
+            "view_scenario_starter",
+            "view_scenario_starter_follow_vehicle",
+            "view_start_autoware"
+        ]
 
-
-            if(target_view == "view_setup_toolkit"):
-                self.current_view = target_view
-                self.window['view_setup_toolkit'].update(visible=True)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_setup_scenarios"):
-                self.current_view = target_view                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=True)
-                self.window['view_setup_scenarios_none'].update(visible=False) 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)
-                self.window['view_scenario_starter'].update(visible=False)                
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_setup_scenarios_none"):
-                self.current_view = target_view                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=True) 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-
-
-
-
-
-            elif(target_view == "view_set_2d_pose_estimation"):
-                self.current_view = target_view               
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=True)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_setup"):
-                self.current_view = target_view               
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=True)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_set_2d_nav"):
-                self.current_view = target_view                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=True)
-                self.window['view_result'].update(visible=False)  
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True    
-            elif(target_view == "view_result"):
-                self.current_view = target_view                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=True)        
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_scenario_starter"):
-                self.current_view = target_view
-                #REFRESH VIEW
-                self.window.layout = view_container(self)                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)        
-                self.window['view_scenario_starter'].update(visible=True)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=False)
-                return True
-            elif(target_view == "view_scenario_starter_follow_vehicle"):
-                self.current_view = target_view
-                #REFRESH VIEW
-                self.window.layout = view_container(self)                
-                self.window['view_setup_toolkit'].update(visible=False)
-                self.window['view_setup_scenarios'].update(visible=False)
-                self.window['view_setup_scenarios_none'].update(visible=False)                 
-                self.window['view_set_2d_pose_estimation'].update(visible=False)
-                self.window['view_setup'].update(visible=False)
-                self.window['view_set_2d_nav'].update(visible=False)
-                self.window['view_result'].update(visible=False)        
-                self.window['view_scenario_starter'].update(visible=False)
-                self.window['view_scenario_starter_follow_vehicle'].update(visible=True)
-                return True
-        
+        if target_view in available_views:
+            
+            for view in available_views:
+                if(view == target_view):
+                    self.window[view].update(visible=True)
+                    self.current_view = target_view
+                else:
+                    self.window[view].update(visible=False)
+            
+            return True
+          
+       
     def set_view_result_data(self, result_data): 
         print('Loading results into the GUI...')
         

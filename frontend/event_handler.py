@@ -23,9 +23,10 @@ def parse_event(window):
         pass
         # print('============ Event = ', event, ' ==============')
         # print('-------- Values Dictionary (key=value) --------')
-        for key in values:
-            print(key, ' = ',values[key])
-
+        # for key in values:
+        #     print(key, ' = ',values[key])
+    
+    print(event)
 
 
 
@@ -84,12 +85,21 @@ def parse_event(window):
     elif event == '2. Launch Carla Autoware':   
         return {"event_name":"launch_carla_autoware"}
   
-    elif event == 'Continue':
+    #Continue is within the event because multiple continue buttons rendered make Continue, Continue2, Continue3
+    elif 'Continue' in event:
         form_data = {}
         for key in values:
             print(key, ' = ',values[key])
             form_data[key] = values[key]
         return {"event_name":"continue", "data":form_data}
+    
+    elif event == 'Next':
+        print('elif event == Next:')
+
+        return {"event_name":"next"}
+
+    elif event == 'Step (2) docker container has loaded (see above)':
+        return {"event_name":"carla_autoware_docker_container_loaded",}
 
 
     return {"event_name":"none"}

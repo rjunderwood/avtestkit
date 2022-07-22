@@ -5,23 +5,25 @@ import PySimpleGUI as sg
 import pathlib
 import os
 
-
+font = ("courier 10 pitch", 16)
+sg.set_options(font=font)
 
 def view_container(gui):
     layout = [[
-        # sg.Column(view_setup(), key='view_setup'),
-        sg.Column(view_setup_toolkit(gui), key='view_setup_toolkit'),
+        #sg.Column(view_setup(gui), key='view_setup'),
+        sg.Column(view_setup_toolkit(gui), key='view_setup_toolkit',visible=True),
         sg.Column(view_setup_scenarios(gui), key='view_setup_scenarios',visible=False),
         sg.Column(view_setup_scenarios_none(gui), key='view_setup_scenarios_none',visible=False),
         sg.Column(view_set_2d_nav(gui), key='view_set_2d_nav',visible=False),
         sg.Column(view_set_2d_pose_estimation(gui), key='view_set_2d_pose_estimation',visible=False),
         sg.Column(view_result(gui), key='view_result',visible=False),
         sg.Column(view_setup(gui), key='view_setup',visible=False),
-
+        
 
         #Scenario Stuff 
         sg.Column(view_scenario_starter(gui), key='view_scenario_starter',visible=False),
         sg.Column(view_scenario_starter_follow_vehicle(gui), key='view_scenario_starter_follow_vehicle',visible=False),
+        sg.Column(view_start_autoware(gui), key='view_start_autoware',visible=False),
         ]]
   
     return layout
@@ -96,7 +98,9 @@ def view_result(gui):
 def view_setup_toolkit(gui):
     layout = [
         [sg.Text('Assessment Toolkit Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+         [sg.Text("\n\n")],
         [sg.Button('1. Launch Carla', size=(100, 2))],
+                 [sg.Text("\n")],
         [sg.Button('2. Launch Carla Autoware', size=(100, 2))],
     ]
     return layout
@@ -112,6 +116,7 @@ def view_setup_scenarios(gui):
 
         [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
         [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
+        [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout
@@ -127,6 +132,7 @@ def view_setup_scenarios_none(gui):
         [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
         [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
         [sg.Text('** You need to select a minimum of 1 Scenario')],
+        [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout
@@ -151,8 +157,9 @@ def view_scenario_starter(gui):
 def view_scenario_starter_follow_vehicle(gui):
     scenario_name = gui.get_current_scenario_name()
     layout = [
-        [sg.Text('Start Scenario : Follow Vehicle' + scenario_name, size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        [sg.Button('Next', size=(100, 2))],
+        [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\nFollow Vehicle\n")],
+        [sg.Button('Continue', size=(100, 2))],
     ]
     return layout   
 
@@ -164,3 +171,25 @@ def view_scenario_launch_carla_autoware(gui):
         [sg.Button('Next', size=(100, 2))],
     ]
     return layout   
+
+
+
+def view_start_autoware(gui):
+   
+
+    layout = [
+        [sg.Text('Connect Carla Autoware', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("Step (1)")],
+        [sg.Text("In the 'Carla Autoware' terminal")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla-autoware-terminal.png')],
+        [sg.Text('\nENTER COMMAND:\n\nsudo ./run.sh\n\n')],
+
+        [sg.Text("Step (2)")],
+        [sg.Text("Wait for the docker container to load in the 'Carla Autoware' terminal.\n")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
+        [sg.Text("")],
+        [sg.Button('Step (2) docker container has loaded (see above)', size=(100, 2))],
+        [sg.Text('Warning. Do not click button above until docker has loaded (will cause errors)', font=("courier 10 pitch", 14))],
+    ]
+    return layout   
+
