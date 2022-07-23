@@ -121,38 +121,55 @@ class AssessmentToolkit:
     def run_scenario(self):
         #Run
         print("Running Scenario ::" + self.current_scenario.get_scenario_name())
-        #During Running scenario the user needs to set the 2d nav goal.
-        #change view to that
+    
+        #change view to running scenario text
+
         
+
+
         #Run
         self.current_scenario.run()
         
 
-        # #Wait for the scenario to finish running. 
-        while(not self.current_scenario.is_scenario_finished()):
+        # #Wait for the scenario metamorphic test to finish running. 
+        while(self.current_scenario.is_metamorphic_test_running()):
             pass
-        
-        # #Change the gui view to results
-        self.gui.change_view("view_result")
+
+        #Is scenario finished | all the metamorphic tests have been completed 
+        if self.current_scenario.is_scenario_finished():
+
+            #Is there more scenarios left in queue? 
+            if len(self.scenario_queue) > 1:
+                #Go to next scenario 
+                self.scenario_queue.pop(0)
+                self.current_scenario = self.scenario_queue[0]
+                #Set view_loading_next_scenario 
+                self.gui.change_view('view_loading_next_scenario')
+                #Close the Carla Autoware docker that is setup.
+                rclose.ROSClose()
+                #Go to the view_scenario_starter (next scenario)
+                self.gui.change_view("view_scenario_starter_"+ self.get_current_scenario_name())
+                
+                
+                
+            else:
+                #All Scenarios are completed running.
+                print("All scenarios are complete.")
+                self.gui.change_view("view_all_scenario_complete")
+
+        else:
+            #Go to next metamorphic test for current scenario 
+            self.gui.change_view("view_next_metamorphic")
+
+            
 
 
-        #When the program has finished running, 
-        #the result data needs to be processed
 
-        #Process the data
-        process_result = ProcessResult('T0.txt')
 
-        #Pass?
-        #any collisions/lane invasions 
-        result_pass = False
-        if (not process_result.had_collision()) and (not process_result.had_lane_invasion()):
-            result_pass = True
-        
-        display_result_data = {
-            "result_pass":result_pass
-        }
 
-        self.gui.set_view_result_data(display_result_data)
+
+    
+
 
 
     
@@ -169,7 +186,7 @@ class AssessmentToolkit:
     #Run the ros patch
     #Only is going to be successful if the docker is run. 
     def run_ros_patch(self):
-        patchros.PatchRos()        
+        patchros.PatchRos(self.get_current_scenario_name())        
 
             
 

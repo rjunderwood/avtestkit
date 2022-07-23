@@ -26,7 +26,7 @@ def parse_event(window):
         # for key in values:
         #     print(key, ' = ',values[key])
     
-    print(event)
+
 
 
 
@@ -98,8 +98,21 @@ def parse_event(window):
 
         return {"event_name":"next"}
 
-    elif event == 'Step (2) docker container has loaded (see above)':
+    elif event == '(CONFIRM) Step (2) is complete':
         return {"event_name":"carla_autoware_docker_container_loaded",}
+
+    elif event == 'Run Patch':
+        return {'event_name': 'run_patch'}
+
+    elif event == 'Patch has Finished':
+        return {'event_name': 'patch_has_finished'}
+
+    elif event == '(CONFIRM) RVIZ has loaded':
+        return {'event_name': 'start_scenario_run'}
+
+    elif event == '(CONFIRM) Terminal process has stopped':
+        return {'event_name': 'next_metamorphic_test'}
+
 
 
     return {"event_name":"none"}

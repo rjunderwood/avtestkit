@@ -24,6 +24,16 @@ def view_container(gui):
         sg.Column(view_scenario_starter(gui), key='view_scenario_starter',visible=False),
         sg.Column(view_scenario_starter_follow_vehicle(gui), key='view_scenario_starter_follow_vehicle',visible=False),
         sg.Column(view_start_autoware(gui), key='view_start_autoware',visible=False),
+        sg.Column(view_patch_autoware(gui), key='view_patch_autoware',visible=False),
+        sg.Column(view_patch_autoware_finished(gui), key='view_patch_autoware_finished',visible=False),
+        sg.Column(view_metamorphic_test_state_page(gui), key='view_metamorphic_test_state_page',visible=False),
+        sg.Column(view_test_is_running(gui), key='view_test_is_running',visible=False),
+        sg.Column(view_next_metamorphic(gui), key='view_next_metamorphic',visible=False),
+        sg.Column(view_loading_next_scenario(gui), key='view_loading_next_scenario',visible=False),
+        sg.Column(view_all_scenario_complete(gui), key='view_all_scenario_complete',visible=False),
+        
+
+
         ]]
   
     return layout
@@ -188,8 +198,119 @@ def view_start_autoware(gui):
         [sg.Text("Wait for the docker container to load in the 'Carla Autoware' terminal.\n")],
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
         [sg.Text("")],
-        [sg.Button('Step (2) docker container has loaded (see above)', size=(100, 2))],
+        [sg.Button('(CONFIRM) Step (2) is complete', size=(100, 2))],
         [sg.Text('Warning. Do not click button above until docker has loaded (will cause errors)', font=("courier 10 pitch", 14))],
     ]
     return layout   
+
+
+def view_patch_autoware(gui):
+    
+    layout = [
+        [sg.Text('Setup Carla Autoware', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("")],
+        [sg.Text("Scenario Patch for Carla Autoware.\n\nA new terminal that will require you to enter [sudo] password\n")],
+        [sg.Button('Run Patch', size=(100, 2))],
+        [sg.Text("")],
+   
+    ]
+    return layout   
+
+def view_patch_autoware_finished(gui):
+    
+    layout = [
+        [sg.Text('Setup Carla Autoware', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("")],
+        [sg.Text("Scenario Patch for Carla Autoware.\n\nA new terminal that will require you to enter [sudo] password\n")],
+        [sg.Button('Run Patch', size=(100, 2))],
+        [sg.Text("\n\n")],
+        [sg.Button('Patch has Finished', size=(100, 2))]
+    ]
+    return layout   
+
+
+
+
+def view_start_simulation(gui): 
+    
+    layout = [
+        [sg.Text('Setup Carla Autoware', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("")],
+        [sg.Text("Scenario Patch for Carla Autoware.\n\nA new terminal that will require you to enter [sudo] password\n")],
+        [sg.Button('Run Patch', size=(100, 2))],
+        [sg.Text("\n\n")],
+        [sg.Button('Patch has Finished', size=(100, 2))]
+    ]
+    return layout   
+
+
+
+
+def view_metamorphic_test_state_page(gui):
+
+    layout = [
+        [sg.Text('Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("Step (1)")],
+        [sg.Text("In the 'Carla Autoware' terminal")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
+        [sg.Text("ENTER COMMAND:\n\n./Documents/run-simulation.sh\n\n\n")],    
+        [sg.Text("Step (2)")],
+        [sg.Text("Wait for 'RVIS' Window to load.\n")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/rvis-launch.png')],
+        [sg.Text("")],
+        [sg.Text("If the RVIZ does not load after one minute. In the 'Carla Autoware' terminal \n\nKEYPRESS: Control+C\n", font=("courier 10 pitch", 12))],
+        [sg.Text('\nENTER COMMAND: ./Documents/run-simulation.sh\n\n', font=("courier 10 pitch", 12))],
+        [sg.Button('(CONFIRM) RVIZ has loaded', size=(100, 2))],
+    ]
+    return layout   
+
+
+def view_test_is_running(gui):
+
+    layout = [
+           [sg.Text('Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\n\n\n\nScenario running...",justification='center')],
+
+    ]
+    return layout   
+
+
+
+def view_next_metamorphic(gui):
+    layout = [
+        [sg.Text('Setup for Next Metamorphic Test', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("Step (1)")],
+        [sg.Text("In the 'Carla Autoware' terminal")],
+        
+        [sg.Text("\n\nKEYPRESS: Control+C\n\n\n")],    
+        [sg.Text("Step (2)")],
+        [sg.Text("Wait for terminal to stop process.\n")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
+        [sg.Text("")],
+    
+        [sg.Button('(CONFIRM) Terminal process has stopped', size=(100, 2))],
+    ]
+    return layout
+
+
+
+def view_loading_next_scenario(gui):
+
+    layout = [
+           [sg.Text('Changing Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\n\n\n\nLoading Next Scenario...",justification='center')],
+
+    ]
+    return layout   
+
+def view_all_scenario_complete(gui):
+
+    layout = [
+           [sg.Text('Scenario Complete', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\n\n\nAll scenarios and tests complete.",justification='center')],
+         [sg.Button('View Results', size=(100, 2))],
+
+    ]
+    return layout   
+
 

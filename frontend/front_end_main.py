@@ -1,6 +1,7 @@
 
 from cgitb import handler
 import PySimpleGUI as sg
+import base64
 
 from .views import *
 from .event_handler import parse_event
@@ -12,6 +13,8 @@ class FrontEndMain():
     window = None
     run_scenario_change = 0
     current_view = ""
+
+    run_scenario_next_frame = False
     
     #This is a one off variable that controlls after the view_setup_toolkit has
     # had both the " 1. Launch Carla " & "2. Launch Carla Autoware"
@@ -26,25 +29,33 @@ class FrontEndMain():
         sg.theme(theme)
   
         layout = view_container(self)
+
+        directory = os.getcwd() 
+        print("directory cwd :: " + directory)
+        icon=base64.b64encode(open(directory+"/frontend/img/app-icon.png", 'rb').read())
         window = sg.Window(
             'Assessment Toolkit For Safe Self Driving Cars', 
             layout, 
-            grab_anywhere=True, 
+            # grab_anywhere=True, 
             resizable=True, 
             margins=(0,0), 
-            use_custom_titlebar=True, 
+            # use_custom_titlebar=True, 
+            # min_size=(200,300),
             finalize=True, 
-            keep_on_top=True,
-            
+            keep_on_top=False,
+            icon=icon
             )
-        window.TKroot.minsize(400,500)
+       
+        window.TKroot.minsize(400,900)
         # window.set_min_size(window.size)
-
+        
         return window
 
     def get_current_scenario_name(self):
         return self.assessment_toolkit.get_current_scenario_name()
 
+    def get_current_view(self):
+        return self.current_view
 
     def refresh_window_data():
         self.window.layout = view_container()
@@ -67,6 +78,13 @@ class FrontEndMain():
             #Setup Toolkit listener 
             self.handle_setup_toolkit()
 
+
+            if self.run_scenario_next_frame:
+                self.run_scenario_next_frame = False
+                self.assessment_toolkit.run_scenario()
+
+
+                
             if(event["event_name"] =="close_window"):
                 #Window Close Event if event_handler.run(window,event,values) RETURNS "close_window"
                 break
@@ -88,34 +106,60 @@ class FrontEndMain():
                 
             elif(event["event_name"] == "continue"):
 
-                print()
-             
+              
+                if self.current_view == "view_scenario_starter_follow_vehicle":
+                    self.change_view("view_start_autoware")             
                 
                 if self.current_view == "view_scenario_starter_follow_vehicle":
                     self.change_view("view_start_autoware")
                 
                    #Continue from Scenario Setup 
-                if self.current_view == "view_setup_scenarios" or self.current_view == "view_setup_scenarios_none":
+                if self.current_view == "view_setup_scenarios":
 
                     #Setup the scenario with the inputs
                     self.assessment_toolkit.setup_scenarios(event["data"])
                     print("#Continue from Scenario Setup")
 
 
-            #User is saying that they have finished the 2D pose estimate
+                if self.current_view == "view_setup_scenarios_none":
+                    #Setup the scenario with the inputs
+                    self.assessment_toolkit.setup_scenarios(event["data"])
+                    print("#Continue from Scenario Setup")
+
+      
             elif(event["event_name"] == "start_scenario_run"):
-                
-                self.change_view("view_set_2d_nav")
-                self.run_scenario_change+=1
+                self.change_view("view_test_is_running")
+                #On the next frame the run scenario needs to run. This needs to be done so that the system renders the next view_test_is_running before entering the run_scenario() while loop
+                #
+                self.run_scenario_next_frame = True
+            
+            
+            
+
+
 
             #Connect Carla Autoware View docker container has loaded
             elif(event["event_name"] == "carla_autoware_docker_container_loaded"):
-                #Time to run the patch on docker and then move to the run scenario phase screen. 
+                # #Time to run the patch on docker and then move to the run scenario phase screen. 
+                self.change_view("view_patch_autoware")
+
+
+            #Run the patch on the docker container
+            elif(event['event_name'] == 'run_patch'):
+                
                 self.assessment_toolkit.run_ros_patch()
+                #Change view
+                self.change_view("view_patch_autoware_finished")
+            
+            #Patch has finished. Redirect to the retamorphic text page
+            elif(event['event_name'] == 'patch_has_finished'):
 
-    
+                self.change_view("view_metamorphic_test_state_page")
 
 
+            elif(event['event_name'] == 'next_metamorphic_test'):
+                #Go to next metamorphic test page
+                self.change_view("view_metamorphic_test_state_page")
 
 
             if(self.run_scenario_change > 0):
@@ -126,7 +170,15 @@ class FrontEndMain():
                 #Run the ready scenario
                 self.assessment_toolkit.run_scenario()
                 self.run_scenario_change = 0
+
+
+
+      
+
         # End while
+
+
+
                 
 
         window.close()
@@ -163,7 +215,14 @@ class FrontEndMain():
             "view_result",
             "view_scenario_starter",
             "view_scenario_starter_follow_vehicle",
-            "view_start_autoware"
+            "view_start_autoware",
+            "view_patch_autoware",
+            "view_patch_autoware_finished",
+            "view_metamorphic_test_state_page",
+            "view_test_is_running",
+            "view_next_metamorphic",
+            "view_loading_next_scenario",
+            "view_all_scenario_complete"
         ]
 
         if target_view in available_views:

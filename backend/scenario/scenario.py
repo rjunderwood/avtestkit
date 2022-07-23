@@ -41,6 +41,10 @@ class Scenario:
     def is_scenario_finished(self):
         return self.scenario_runner.is_scenario_finished()
 
+    #Checks to see if the metamorphic test on the scenario is running. This gets called from the assessment_toolkit.py
+    def is_metamorphic_test_running(self):
+        return self.scenario_runner.is_metamorphic_test_running()
+
 
 
     

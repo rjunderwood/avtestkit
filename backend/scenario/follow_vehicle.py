@@ -5,7 +5,7 @@ import random
 import time
 import argparse
 import math
-
+from backend.util.results.process_results import ProcessResult
 
 
 
@@ -61,6 +61,36 @@ class ScenarioFollowVehicle:
     LEAD_VEHICLE_VELOCITY = 8
 
 
+    #Metamorphic Tests
+    metamorphic_tests = [
+        {
+         "paramaters":{
+            "weather":"none"
+            },
+            "done":False, 
+            
+        }        
+    #     },
+    #     {
+    #       "paramaters":{
+    #         "weather":"rain"
+    #         },
+    #         "done":False, 
+            
+    #     },
+    #    {
+    #       "paramaters":{
+    #         "weather":"night"
+    #         },
+    #         "done":False, 
+            
+    #     }
+    ]
+
+    metamorphic_test_running = False
+
+
+
     def run(self):
         
         try:
@@ -102,7 +132,11 @@ class ScenarioFollowVehicle:
             
             ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
+            
 
+            #At this point start the metamorphic test running.
+            self.metamorphic_test_running = True 
+            
 
 
 
@@ -126,8 +160,10 @@ class ScenarioFollowVehicle:
         finally:
             print("Scenario Finished :: Follow Vehicle") 
 
-            #Set the scenario as finished
-            self.scenario_finished = True
+            
+            #Set the metamorphic test as finished
+            self.set_test_finished()
+ 
         
             #Start recording the scenario in a separate process
     def start_recording_scenario(self):
@@ -139,4 +175,59 @@ class ScenarioFollowVehicle:
     def is_scenario_finished(self):
         return self.scenario_finished
 
+
+    #For the assessment toolkit processor to know if it needs to start running the next metamorphic test in queue for this scenario. 
+    def is_metamorphic_test_running(self):
+        return self.metamorphic_test_running 
+
+
+
+    def get_current_metamorphic_test_index(self):
+        index =0
+        for test in self.metamorphic_tests:
+            # print(test)
+            if test['done'] == False:
+                return index
+            index+=1
+        return False
+
+        
+    def all_metamorphic_tests_complete(self):
+
+        result = True 
+        for test in self.metamorphic_tests:
+            # print(test)
+            if test['done'] == False:
+                result = False
+        return result
+
+    #When the metamorphic test is finished.
+    def set_test_finished(self):
+
+        self.process_result()
+
+        #Set metamorphic test as done. 
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        self.metamorphic_test_running = False
+
+        #Completed all tests, hence scenario complete
+        if self.all_metamorphic_tests_complete():
+            self.scenario_finished = True 
+
+         
+          
+    def process_result(self):
+        
+        
+        #Process the data
+        process_result = ProcessResult('T0.txt')
+
+        #Pass?
+        #any collisions/lane invasions 
+        result_pass = False
+        if (not process_result.had_collision()) and (not process_result.had_lane_invasion()):
+            result_pass = True
+        
+
+        #TODO Write Result to the JSON line. 
 
