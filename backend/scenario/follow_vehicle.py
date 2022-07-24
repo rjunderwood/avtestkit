@@ -5,6 +5,7 @@ import random
 import time
 import argparse
 import math
+from backend.scenario.stats_recorder import StatsRecorder
 from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
@@ -60,6 +61,12 @@ class ScenarioFollowVehicle:
 
     # LEAD_VEHICLE_VELOCITY = 3
     LEAD_VEHICLE_VELOCITY = 8
+
+    
+    #How long the scenario actually should run once recording is triggered. 
+    RUNNING_TIME = 30
+
+
 
 
     ego_vehicle = None
@@ -152,13 +159,14 @@ class ScenarioFollowVehicle:
 
 
 
-            #Start Recording Scenario before the scenario loop begins
-            self.start_recording_scenario()
+            # #Start Recording Scenario before the scenario loop begins
+            # self.start_recording_scenario()
             
 
             while(calc_dist(lead_vehicle, ego_vehicle) > self.TRIGGER_DIST):
                 try:
-                    print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+                    #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+                    pass
                 except KeyboardInterrupt:
                     lead_vehicle.destroy()
             
@@ -166,10 +174,13 @@ class ScenarioFollowVehicle:
             print("SCENARIO RUNNER :: Set Lead Vehicle" + str(self.LEAD_VEHICLE_VELOCITY))
 
 
-            #Time to allow for scenario to happen
-            time.sleep(30)
+
+            self.handle_results_output(world)
+  
 
             lead_vehicle.destroy()
+            
+            #After the record stats has completed in the RUNNING_TIME the scenario will finish
             
         finally:
             print("Scenario Finished :: Follow Vehicle") 
@@ -181,10 +192,12 @@ class ScenarioFollowVehicle:
         
             #Start recording the scenario in a separate process
     def start_recording_scenario(self):
+        
         if os.name == 'nt':
             subprocess.Popen(args=['python', str(pathlib.Path(__file__).parent.resolve())+r'\record_stats.py'], stdout=sys.stdout)
         else:
             subprocess.Popen(args=['python', str(pathlib.Path(__file__).parent.resolve())+r'/record_stats.py'], stdout=sys.stdout)
+        
 
     def is_scenario_finished(self):
         return self.scenario_finished
@@ -250,3 +263,10 @@ class ScenarioFollowVehicle:
 
         #TODO Write Result to the JSON line. 
 
+    def handle_results_output(self, world):
+        cwd = os.getcwd() 
+        #This is where the Real scenario begins. Time to start recording stats. 
+        results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
+        results_file_path = cwd + "/backend/scenario/results/"+results_file_name+".txt"
+        stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
+        stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

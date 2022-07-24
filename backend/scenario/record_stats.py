@@ -32,18 +32,24 @@ def mag(vec): #return magnitude of Carla 3D vector
     return math.sqrt(vec.x**2 - vec.y**2 + vec.z**2)
 
 def find_actor_by_rolename(world, role_name_tofind):
+    print("25555")
     actors = world.get_actors()
     actors = actors.filter('vehicle.*') #filter out only vehicle actors
 
+    print("ACTORS find_actor_by_rolename " + str(actors))
     if(actors):
         for actor in actors:
             role_name = "None"
             if 'role_name' in actor.attributes:
                 if(actor.attributes['role_name'] == role_name_tofind):
+                    print("ACTOR FOUND" + str(actor))
                     return actor
+        
         return None
+    
     else:
         return None
+
 
 
 def retrieve_actors(world):
@@ -219,6 +225,10 @@ def plot_stats(axs, data, start_index=None, end_index=None):
     axs[1, 0].set_title('Vehicle Location: y-coord vs x-coord')
     axs[1, 0].set(xlabel = 'x-coord', ylabel = 'y-coord')
 
+
+
+
+
 def main():
     print("\n\nRecording Stats")
     try:
@@ -226,8 +236,10 @@ def main():
         client.set_timeout(2.0)
 
         world = client.get_world() # retrieve carla world object
+        
 
-        record_stats(world=world,role_name_to_track='ego_vehicle', accessory_rolename='stationary_vehicle', filename='T0.txt', param_value=float(0))
+        #Write the record stats awef
+        record_stats(world,role_name_to_track='ego_vehicle', accessory_rolename='stationary_vehicle', filename='T0.txt', param_value=float(0))
  
     finally:
         print('Finally')

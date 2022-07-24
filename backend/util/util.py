@@ -58,12 +58,14 @@ def mag(vec): #return magnitude of Carla 3D vector
 def find_actor_by_rolename(world, role_name_tofind):
     actors = world.get_actors()
     actors = actors.filter('vehicle.*') #filter out only vehicle actors
-
+    print("ACTORS find_actor_by_rolename " + str(actors))
     if(actors):
         for actor in actors:
             role_name = "None"
             if 'role_name' in actor.attributes:
                 if(actor.attributes['role_name'] == role_name_tofind):
+
+                    print("ACTOR FOUND" + str(actor))
                     return actor
         
         return None
