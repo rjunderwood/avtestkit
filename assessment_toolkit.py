@@ -97,6 +97,7 @@ class AssessmentToolkit:
             if data['scenario_check_follow_vehicle'] == True:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))
 
+
             # if data['scenario_check_pedestrian_crossing_road'] == True:
             #     self.scenario_queue.append()
 
@@ -143,10 +144,10 @@ class AssessmentToolkit:
                 #Go to next scenario 
                 self.scenario_queue.pop(0)
                 self.current_scenario = self.scenario_queue[0]
+          
                 #Set view_loading_next_scenario 
                 self.gui.change_view('view_loading_next_scenario')
-                #Close the Carla Autoware docker that is setup.
-                rclose.ROSClose()
+
                 #Go to the view_scenario_starter (next scenario)
                 self.gui.change_view("view_scenario_starter_"+ self.get_current_scenario_name())
                 
@@ -188,7 +189,9 @@ class AssessmentToolkit:
     def run_ros_patch(self):
         patchros.PatchRos(self.get_current_scenario_name())        
 
-            
+    
+
+
 
 
     

@@ -6,7 +6,8 @@ import time
 import argparse
 import math
 from backend.util.results.process_results import ProcessResult
-
+#Import ROSClose 
+from backend.interface import ros_close as rclose
 
 
 try:
@@ -61,6 +62,8 @@ class ScenarioFollowVehicle:
     LEAD_VEHICLE_VELOCITY = 8
 
 
+    ego_vehicle = None
+
     #Metamorphic Tests
     metamorphic_tests = [
         {
@@ -99,6 +102,15 @@ class ScenarioFollowVehicle:
         
             world = client.get_world()
 
+
+            #Speed
+            # settings = world.get_settings()
+            # settings.fixed_delta_seconds = 0.05
+            # world.apply_settings(settings)
+
+
+
+
             spectator = world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
@@ -132,7 +144,7 @@ class ScenarioFollowVehicle:
             
             ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
-            
+            self.ego_vehicle = ego_vehicle
 
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
@@ -153,10 +165,12 @@ class ScenarioFollowVehicle:
             lead_vehicle.set_target_velocity(carla.Vector3D(0,self.LEAD_VEHICLE_VELOCITY,0))
             print("SCENARIO RUNNER :: Set Lead Vehicle" + str(self.LEAD_VEHICLE_VELOCITY))
 
+
+            #Time to allow for scenario to happen
             time.sleep(30)
 
             lead_vehicle.destroy()
-            # ego_vehicle.destroy()
+            
         finally:
             print("Scenario Finished :: Follow Vehicle") 
 
@@ -212,7 +226,12 @@ class ScenarioFollowVehicle:
 
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
+
             self.scenario_finished = True 
+            #Destroy the ego vehicle to get ready for the next scenario change.
+            self.ego_vehicle.destroy()
+            #Close the Carla Autoware docker that is setup.
+            rclose.ROSClose()
 
          
           
