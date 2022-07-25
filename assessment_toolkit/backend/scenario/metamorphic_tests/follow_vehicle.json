@@ -1,0 +1,14 @@
+[
+    {
+        "parameters": {
+            "weather": "none"
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "rain"
+        },
+        "done": false
+    }
+]

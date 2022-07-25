@@ -1,0 +1,20 @@
+10,17d9
+< #update keys
+< USER root
+< RUN apt-key del 7fa2af80
+< RUN rm /etc/apt/sources.list.d/cuda.list && rm /etc/apt/sources.list.d/nvidia-ml.list
+< RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb
+< RUN dpkg -i cuda-keyring_1.0-1_all.deb
+< USER autoware
+< 
+82,91d73
+< 
+< # Update Launch Files
+< RUN mkdir ./Documents
+< COPY --chown=autoware update_vehicle_model.launch.patch update_my_mission_planning.launch.patch /home/$USERNAME/Documents
+< RUN patch /home/$USERNAME/Autoware/install/vehicle_description/share/vehicle_description/launch/vehicle_model.launch /home/$USERNAME/Documents/update_vehicle_model.launch.patch
+< RUN patch /home/$USERNAME/carla-autoware/carla-autoware-agent/agent/launch/my_mission_planning.launch /home/$USERNAME/Documents/update_my_mission_planning.launch.patch
+< 
+< # Copy over autoware-contents
+< RUN mkdir /home/autoware/autoware-contents
+< COPY --chown=autoware ./autoware-contents /home/autoware/autoware-contents

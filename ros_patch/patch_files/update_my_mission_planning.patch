@@ -1,4 +1,0 @@
-42c42
-<       <arg name='enableRvizInput' value='true' />
----
->       <arg name='enableRvizInput' value='false' />

@@ -1,0 +1,5 @@
+16c16,17
+<     -it \
+---
+>     -it --rm \
+>     --volume=$(pwd)/autoware-contents:/home/autoware/autoware-contents:rw \
