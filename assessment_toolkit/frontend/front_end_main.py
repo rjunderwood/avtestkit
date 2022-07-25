@@ -2,10 +2,11 @@
 from cgitb import handler
 import PySimpleGUI as sg
 import base64
-
+import subprocess
 from .views import *
 from .event_handler import parse_event
 
+CWD = os.getcwd()
 
 class FrontEndMain():
 
@@ -164,6 +165,16 @@ class FrontEndMain():
                 #Go to next metamorphic test page
                 self.change_view("view_metamorphic_test_state_page")
 
+            
+            elif(event['event_name'] == 'view_results'):
+                #Open the results toolkit
+                print(CWD)
+                
+                results_toolkit_file_location = self.get_results_toolkit_location()
+                print(results_toolkit_file_location)
+                subprocess.call('python results_toolkit.py', shell=True, cwd=results_toolkit_file_location)
+                # subprocess.call(['python results_toolkit.py'], cwd=results_toolkit_file_location)
+
 
             if(self.run_scenario_change > 0):
                 print(self.run_scenario_change)
@@ -175,15 +186,7 @@ class FrontEndMain():
                 self.run_scenario_change = 0
 
 
-
-      
-
         # End while
-
-
-
-                
-
         window.close()
         exit(0)
     
@@ -246,3 +249,18 @@ class FrontEndMain():
 
 
 
+    def get_results_toolkit_location(self):
+        base = CWD
+
+        location_of_last_slash = 0
+        for index,char in enumerate(base):
+            if(char == '/'):
+                location_of_last_slash = index
+        start = location_of_last_slash
+        stop = len(base) - 1
+        # Remove charactes from index 5 to 10
+        if len(base) > stop :
+            base = base[0: start:] + base[stop + 1::]
+
+        location = base + '/results_toolkit/'
+        return location

@@ -1,14 +1,9 @@
 import time
 import PySimpleGUI as sg
 #Import CarlaLaunch
-from backend.interface import carla_launch as claunch
-#Import ROSLaunch
-from backend.interface import ros_launch as rlaunch
-#Import ROSClose 
-from backend.interface import ros_close as rclose
-from backend.interface import patch_ros as patchros
+
 import json
-CONFIG = json.load(open('./config.json'))
+
 
 #Handle Object Events and return the action that needs to be taken
 def parse_event(window):
@@ -27,20 +22,14 @@ def parse_event(window):
         print("[LOG] Clicked Exit!")
         return {"event_name":"close_window"}
 
-    ## If Start CALRA Button Clicked
-    elif event == '1. Start CARLA':
-        print("1. Start CARLA")
-      
-        ## Launch CARLA & Sleep for 5 seconds.
-        claunch.CarlaLaunch(CONFIG['CARLA_SIMULATOR_PATH'])
-        time.sleep(1)
+
 
     ## If Start ROS Button Clicked
     elif event == '2. Start ROS':
         print("2. Start ROS")
        
         ## Launch CARLA & Sleep for 5 seconds.
-        ros = rlaunch.ROSLaunch(CONFIG['CARLA_AUTOWARE_PATH'])
+       
         time.sleep(1)
        
 
@@ -48,7 +37,7 @@ def parse_event(window):
         print("3. Patch ROS")
        
         ## Launch CARLA & Sleep for 5 seconds.
-        patchros.PatchRos()
+    
         time.sleep(1)
 
     elif event == '4. Start Test':
@@ -64,7 +53,7 @@ def parse_event(window):
     elif event == 'CLOSE ROS':
         #Add Data
         print("CLOSE ROS")
-        rclose.ROSClose()
+        
         time.sleep(1)
 
 
@@ -106,8 +95,6 @@ def parse_event(window):
     elif event == '(CONFIRM) Terminal process has stopped':
         return {'event_name': 'next_metamorphic_test'}
 
-    elif event == 'View Results':
-        return {'event_name': 'view_results'}
 
 
     return {"event_name":"none"}
