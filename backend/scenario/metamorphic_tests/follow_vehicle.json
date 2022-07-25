@@ -1,12 +1,12 @@
 [
     {
-        "paramaters": {
+        "parameters": {
             "weather": "none"
         },
         "done": false
     },
     {
-        "paramaters": {
+        "parameters": {
             "weather": "rain"
         },
         "done": false

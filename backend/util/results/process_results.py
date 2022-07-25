@@ -6,17 +6,23 @@ from .result_data import ResultData
 import pathlib
 import os
 import csv
+import json
+CWD = os.getcwd()
+
 
 class ProcessResult():
 
     #results an array of result_data
-
+    scenario_name=None
+    scenario_metamorphic_test_number=None
+    scenario_metamorphic_test_data=None
     result_data_list = []
 
-    def __init__(self, file_name):
 
+    def __init__(self, file_name, scenario_name, scenario_metamorphic_test_number):
         
-        file_path = self.get_file_path(file_name)
+        print(file_name)
+        file_path = CWD + "/backend/scenario/results/" + file_name
         try:
             with open(file_path) as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')          
@@ -26,20 +32,24 @@ class ProcessResult():
             print("Result File Not Found")
             print(Exception)
 
-    def get_file_path(self, file_name):
-        
-        path_string = str(pathlib.Path(__file__).parent.resolve())
-        construct_path_string = ""
 
-        for char in path_string:
-            if "AV-Tester" in construct_path_string:
-                # add the \ 
-                construct_path_string+=char
-                construct_path_string+=file_name
-                return construct_path_string
-            construct_path_string+=char
+        self.scenario_name = scenario_name
+        self.scenario_metamorphic_test_number = scenario_metamorphic_test_number
+        self.import_metamorphic_data()
 
 
+    def import_metamorphic_data(self):  
+
+        file_path = CWD + "/backend/scenario/metamorphic_tests/" + self.scenario_name + ".json"
+        file = open(file_path)  
+        file_data = json.loads(file.read())   
+
+        for index,metamorphic_test in enumerate(file_data):
+            if index == int(self.scenario_metamorphic_test_number):
+                self.scenario_metamorphic_test_data = metamorphic_test['parameters']
+
+
+ 
 
     def get_result_data(self):
         return self.result_data_list
@@ -58,5 +68,8 @@ class ProcessResult():
                 return True
         return False
 
+    def get_metamorphic_test_data(self):
+        return self.scenario_metamorphic_test_data
     
-    
+    def get_scenario_name(self):
+        return self.scenario_name
