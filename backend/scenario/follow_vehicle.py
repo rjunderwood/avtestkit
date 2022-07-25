@@ -79,15 +79,15 @@ class ScenarioFollowVehicle:
             },
             "done":False, 
             
-        }        
+        },        
     #     },
-    #     {
-    #       "paramaters":{
-    #         "weather":"rain"
-    #         },
-    #         "done":False, 
+        {
+          "paramaters":{
+            "weather":"rain"
+            },
+            "done":False, 
             
-    #     },
+        }
     #    {
     #       "paramaters":{
     #         "weather":"night"
@@ -181,6 +181,7 @@ class ScenarioFollowVehicle:
             lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
+
             
         finally:
             print("Scenario Finished :: Follow Vehicle") 
@@ -239,12 +240,13 @@ class ScenarioFollowVehicle:
 
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
-
             self.scenario_finished = True 
-            #Destroy the ego vehicle to get ready for the next scenario change.
-            self.ego_vehicle.destroy()
-            #Close the Carla Autoware docker that is setup.
-            rclose.ROSClose()
+
+
+        #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
+        self.ego_vehicle.destroy()
+        #Close the Carla Autoware docker that is setup.
+        rclose.ROSClose()
 
          
           

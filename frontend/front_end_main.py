@@ -126,6 +126,9 @@ class FrontEndMain():
                     self.assessment_toolkit.setup_scenarios(event["data"])
                     print("#Continue from Scenario Setup")
 
+
+                if self.current_view == 'view_next_metamorphic':
+                    self.change_view("view_scenario_starter_"+ self.assessment_toolkit.get_current_scenario_name())
       
             elif(event["event_name"] == "start_scenario_run"):
                 self.change_view("view_test_is_running")

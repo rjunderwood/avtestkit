@@ -96,7 +96,7 @@ class AssessmentToolkit:
         try:
             if data['scenario_check_follow_vehicle'] == True:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))
-
+                
 
             # if data['scenario_check_pedestrian_crossing_road'] == True:
             #     self.scenario_queue.append()
@@ -160,9 +160,9 @@ class AssessmentToolkit:
 
         else:
             #Go to next metamorphic test for current scenario 
+            
             self.gui.change_view("view_next_metamorphic")
 
-            
 
 
 

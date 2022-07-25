@@ -279,16 +279,16 @@ def view_test_is_running(gui):
 def view_next_metamorphic(gui):
     layout = [
         [sg.Text('Setup for Next Metamorphic Test', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        [sg.Text("Step (1)")],
-        [sg.Text("In the 'Carla Autoware' terminal")],
+        [sg.Text("\n\n")],
+        [sg.Text("The next metamorphic test for this scenario will be run.")],
         
-        [sg.Text("\n\nKEYPRESS: Control+C\n\n\n")],    
-        [sg.Text("Step (2)")],
-        [sg.Text("Wait for terminal to stop process.\n")],
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
-        [sg.Text("")],
+        # [sg.Text("\n\nKEYPRESS: Control+C\n\n\n")],    
+        # [sg.Text("Step (2)")],
+        # [sg.Text("Wait for terminal to stop process.\n")],
+        # [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
+        # [sg.Text("")],
     
-        [sg.Button('(CONFIRM) Terminal process has stopped', size=(100, 2))],
+        [sg.Button('Continue', size=(100, 2))],
     ]
     return layout
 
@@ -297,7 +297,7 @@ def view_next_metamorphic(gui):
 def view_loading_next_scenario(gui):
 
     layout = [
-           [sg.Text('Changing Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text('Changing Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("\n\n\n\nLoading Next Scenario...",justification='center')],
 
     ]
