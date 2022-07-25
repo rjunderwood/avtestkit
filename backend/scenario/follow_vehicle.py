@@ -5,6 +5,7 @@ import random
 import time
 import argparse
 import math
+import json
 from backend.scenario.stats_recorder import StatsRecorder
 from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
@@ -27,6 +28,9 @@ import subprocess
 import pathlib
 
 from ..util.util import *
+
+
+CWD = os.getcwd() 
 
 class ScenarioFollowVehicle:
 
@@ -72,31 +76,8 @@ class ScenarioFollowVehicle:
     ego_vehicle = None
 
     #Metamorphic Tests
-    metamorphic_tests = [
-        {
-         "paramaters":{
-            "weather":"none"
-            },
-            "done":False, 
-            
-        },        
-    #     },
-        {
-          "paramaters":{
-            "weather":"rain"
-            },
-            "done":False, 
-            
-        }
-    #    {
-    #       "paramaters":{
-    #         "weather":"night"
-    #         },
-    #         "done":False, 
-            
-    #     }
-    ]
-
+    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json")
+    metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
 
 
@@ -147,7 +128,8 @@ class ScenarioFollowVehicle:
                 try:
                     print("Waiting for ego vehicle to spawn... ")
                 except KeyboardInterrupt:
-                    lead_vehicle.destroy()
+                    # lead_vehicle.destroy()
+                    pass
             
             ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
@@ -168,7 +150,8 @@ class ScenarioFollowVehicle:
                     #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
                     pass
                 except KeyboardInterrupt:
-                    lead_vehicle.destroy()
+                    #lead_vehicle.destroy()
+                    pass
             
             lead_vehicle.set_target_velocity(carla.Vector3D(0,self.LEAD_VEHICLE_VELOCITY,0))
             print("SCENARIO RUNNER :: Set Lead Vehicle" + str(self.LEAD_VEHICLE_VELOCITY))
@@ -178,7 +161,7 @@ class ScenarioFollowVehicle:
             self.handle_results_output(world)
   
 
-            lead_vehicle.destroy()
+            # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
 
@@ -188,7 +171,7 @@ class ScenarioFollowVehicle:
 
             
             #Set the metamorphic test as finished
-            self.set_test_finished()
+            self.set_test_finished(world)
  
         
             #Start recording the scenario in a separate process
@@ -230,7 +213,7 @@ class ScenarioFollowVehicle:
         return result
 
     #When the metamorphic test is finished.
-    def set_test_finished(self):
+    def set_test_finished(self, world):
 
         self.process_result()
 
@@ -241,13 +224,17 @@ class ScenarioFollowVehicle:
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
             self.scenario_finished = True 
+            # self.ego_vehicle.destroy()
+            #Close the Carla Autoware docker that is setup.
+            rclose.ROSClose()
 
-
-        #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
-        self.ego_vehicle.destroy()
-        #Close the Carla Autoware docker that is setup.
+        # self.ego_vehicle.destroy()
         rclose.ROSClose()
-
+        # #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
+        # self.ego_vehicle.destroy()
+        # #Close the Carla Autoware docker that is setup.
+        # rclose.ROSClose()
+        destroy_all_vehicle_actors(world)
          
           
     def process_result(self):
@@ -266,9 +253,9 @@ class ScenarioFollowVehicle:
         #TODO Write Result to the JSON line. 
 
     def handle_results_output(self, world):
-        cwd = os.getcwd() 
+  
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
-        results_file_path = cwd + "/backend/scenario/results/"+results_file_name+".txt"
+        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

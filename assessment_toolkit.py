@@ -135,7 +135,8 @@ class AssessmentToolkit:
         # #Wait for the scenario metamorphic test to finish running. 
         while(self.current_scenario.is_metamorphic_test_running()):
             pass
-
+        
+        
         #Is scenario finished | all the metamorphic tests have been completed 
         if self.current_scenario.is_scenario_finished():
 
@@ -162,6 +163,7 @@ class AssessmentToolkit:
             #Go to next metamorphic test for current scenario 
             
             self.gui.change_view("view_next_metamorphic")
+            
 
 
 
@@ -190,7 +192,7 @@ class AssessmentToolkit:
         patchros.PatchRos(self.get_current_scenario_name())        
 
     
-
+    
 
 
 

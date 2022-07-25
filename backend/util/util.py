@@ -90,6 +90,21 @@ def retrieve_actors(world):
         print('There are currently no vehicle actors in the Carla world. ')    
 
 
+
+def destroy_all_vehicle_actors(world): 
+
+    actors = world.get_actors()
+    actors = actors.filter('vehicle.*') #filter out only vehicle actors
+
+    if(actors):
+        for actor in actors:
+            actor.destroy()
+
+   
+    else:
+        print('There are currently no vehicle actors in the Carla world. ')    
+
+
 #returns actor object for a specified id
 def ret_actor(world, actor_id):
     actors = world.get_actors().filter('vehicle.*') #filter out only vehicle actors

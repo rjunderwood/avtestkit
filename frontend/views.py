@@ -112,6 +112,7 @@ def view_setup_toolkit(gui):
         [sg.Button('1. Launch Carla', size=(100, 2))],
                  [sg.Text("\n")],
         [sg.Button('2. Launch Carla Autoware', size=(100, 2))],
+        [sg.Text('\n\nNOTE:\nThe \'Carla Terminal\' and \'Carla Autoware Terminal\' both will be interacted with throughout running the scenario tests.\n\nPlease read the INSTRUCTIONS of each terminal window and arange them on screen so that they are easily accessible', font=("courier 10 pitch", 14))],
     ]
     return layout
 
@@ -190,15 +191,17 @@ def view_start_autoware(gui):
     layout = [
         [sg.Text('Connect Carla Autoware', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("Step (1)")],
-        [sg.Text("In the 'Carla Autoware' terminal")],
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla-autoware-terminal.png')],
-        [sg.Text('\nENTER COMMAND:\n\nsudo ./run.sh\n\n')],
-
+        [sg.Text("START CARLA: Carla Terminal\n")],
         [sg.Text("Step (2)")],
-        [sg.Text("Wait for the docker container to load in the 'Carla Autoware' terminal.\n")],
+        [sg.Text("START DOCKER: Carla Autoware Terminal\n")],
+        # [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla-autoware-terminal.png')],
+        # [sg.Text('\nENTER COMMAND:\n\nsudo ./run.sh\n\n')],
+
+        [sg.Text("Step (3)")],
+        [sg.Text("Wait for the docker container to load in : Carla Autoware Terminal.\n")],
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
         [sg.Text("")],
-        [sg.Button('(CONFIRM) Step (2) is complete', size=(100, 2))],
+        [sg.Button('(CONFIRM) Step(3) is complete', size=(100, 2))],
         [sg.Text('Warning. Do not click button above until docker has loaded (will cause errors)', font=("courier 10 pitch", 14))],
     ]
     return layout   
@@ -251,15 +254,16 @@ def view_metamorphic_test_state_page(gui):
     layout = [
         [sg.Text('Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("Step (1)")],
-        [sg.Text("In the 'Carla Autoware' terminal")],
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
-        [sg.Text("ENTER COMMAND:\n\n./Documents/run-simulation.sh\n\n\n")],    
+        [sg.Text("START SIMULATION: Carla Autoware Terminal\n")],
+        # [sg.Text("In the 'Carla Autoware' terminal")],
+        # [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
+        # [sg.Text("ENTER COMMAND:\n\n./Documents/run-simulation.sh\n\n\n")],    
         [sg.Text("Step (2)")],
         [sg.Text("Wait for 'RVIS' Window to load.\n")],
         [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/rvis-launch.png')],
         [sg.Text("")],
-        [sg.Text("If the RVIZ does not load after one minute. In the 'Carla Autoware' terminal \n\nKEYPRESS: Control+C\n", font=("courier 10 pitch", 12))],
-        [sg.Text('\nENTER COMMAND: ./Documents/run-simulation.sh\n\n', font=("courier 10 pitch", 12))],
+        [sg.Text("If the RVIS loads with errors or does not load within 1 minute", font=("courier 10 pitch", 12))],
+        [sg.Text("RESTART SIMULATION: Carla Autoware Terminal\n")],
         [sg.Button('(CONFIRM) RVIZ has loaded', size=(100, 2))],
     ]
     return layout   
@@ -281,7 +285,7 @@ def view_next_metamorphic(gui):
         [sg.Text('Setup for Next Metamorphic Test', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("\n\n")],
         [sg.Text("The next metamorphic test for this scenario will be run.")],
-        
+        [sg.Text("\nBefore continuing you must:\n\nRESTART CARLA: Carla Terminal")],
         # [sg.Text("\n\nKEYPRESS: Control+C\n\n\n")],    
         # [sg.Text("Step (2)")],
         # [sg.Text("Wait for terminal to stop process.\n")],
@@ -299,6 +303,7 @@ def view_loading_next_scenario(gui):
     layout = [
         [sg.Text('Changing Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("\n\n\n\nLoading Next Scenario...",justification='center')],
+        
 
     ]
     return layout   

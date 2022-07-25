@@ -1,4 +1,3 @@
-
 from http import client
 from logging import exception
 import glob
@@ -10,7 +9,6 @@ import argparse
 import math
 import matplotlib.pyplot as plt
 import numpy as np
-
 try:
     sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
@@ -18,8 +16,8 @@ try:
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
 except IndexError:
     pass
-
 import carla
+
 
 # euclidean distance
 def calc_dist(actor_a, actor_b):
@@ -35,7 +33,6 @@ def find_actor_by_rolename(world, role_name_tofind):
     print("25555")
     actors = world.get_actors()
     actors = actors.filter('vehicle.*') #filter out only vehicle actors
-
     print("ACTORS find_actor_by_rolename " + str(actors))
     if(actors):
         for actor in actors:
@@ -44,12 +41,9 @@ def find_actor_by_rolename(world, role_name_tofind):
                 if(actor.attributes['role_name'] == role_name_tofind):
                     print("ACTOR FOUND" + str(actor))
                     return actor
-        
         return None
-    
     else:
         return None
-
 
 
 def retrieve_actors(world):

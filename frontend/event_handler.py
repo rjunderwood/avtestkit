@@ -6,13 +6,9 @@ from backend.interface import carla_launch as claunch
 from backend.interface import ros_launch as rlaunch
 #Import ROSClose 
 from backend.interface import ros_close as rclose
-
 from backend.interface import patch_ros as patchros
 import json
 CONFIG = json.load(open('./config.json'))
-
-
-
 
 #Handle Object Events and return the action that needs to be taken
 def parse_event(window):
@@ -25,9 +21,6 @@ def parse_event(window):
         # print('-------- Values Dictionary (key=value) --------')
         # for key in values:
         #     print(key, ' = ',values[key])
-    
-
-
 
 
     if event in (None, 'Exit'):
@@ -98,7 +91,7 @@ def parse_event(window):
 
         return {"event_name":"next"}
 
-    elif event == '(CONFIRM) Step (2) is complete':
+    elif event == '(CONFIRM) Step(3) is complete':
         return {"event_name":"carla_autoware_docker_container_loaded",}
 
     elif event == 'Run Patch':

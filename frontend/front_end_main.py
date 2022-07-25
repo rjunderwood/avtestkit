@@ -57,7 +57,7 @@ class FrontEndMain():
     def get_current_view(self):
         return self.current_view
 
-    def refresh_window_data():
+    def refresh_window_data(self):
         self.window.layout = view_container()
         self.change_view(self.current_view)
 
