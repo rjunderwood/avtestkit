@@ -12,11 +12,14 @@ class FrontEndMain():
     result_toolkit = None
     window = None
     current_view = ""
-    
+    #Result data
+    result_data = ""
 
-    def __init__(self, result_toolkit):
+    def __init__(self, result_toolkit, result_data):
         #Set the assessment toolkit
         self.result_toolkit = result_toolkit   
+        self.result_data = result_data 
+
         
 
     def make_window(self,theme):
@@ -56,11 +59,28 @@ class FrontEndMain():
         self.change_view(self.current_view)
 
 
+
+    def create_plot(self):
+        year = [2021,2020,3033,331]
+        unemployment_rate = [9,8,2,2.5]
+        plt.plot(year, unemployment_rate, color='blue', marker='o')
+        plt.title("Unemployment Rate vs Year", fontsize=14) 
+        plt.xlabel('Year', fontsize=14)
+        plt.ylabel('Unemployment Rate', fontsize=14)
+        plt.grid(True)
+        return plt.gcf()
+
+    def draw_figure(self,canvas, figure):
+        figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+        figure_canvas_agg.draw()
+        figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+        return figure_canvas_agg
+
     def start(self):
         window = self.make_window(sg.theme("Reddit"))
         #Set the window to be accessed later. 
         self.window = window
-
+        
 
         # This is an Event Loop 
         while True:       
@@ -69,12 +89,16 @@ class FrontEndMain():
             
             if(event["event_name"] =="close_window"):
                 #Window Close Event if event_handler.run(window,event,values) RETURNS "close_window"
-                break
+                break      
+            
+            #Open the results page for a specific scenario 
+            if(event['event_name'] == 'open_result'):
+                self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
+                self.change_view('view_results_page_'+event['scenario'])
 
-          
-
-              
-                
+            if(event['event_name'] == 'open_result_from_summary_table'):
+                scenario_name = self.result_data.get_all_process_result_available_scenarios()[event['scenario_index'][0]]
+                self.change_view('view_results_page_'+scenario_name)
 
         window.close()
         exit(0)
@@ -92,7 +116,9 @@ class FrontEndMain():
 
         available_views = [
             "view_results_main_menu",
+            "view_results_page_follow_vehicle"
         ]
+
 
         if target_view in available_views:
             
@@ -108,7 +134,12 @@ class FrontEndMain():
        
     def set_view_result_data(self, result_data): 
         print('Loading results into the GUI...')
-        
 
+    
+
+
+        
+    def get_result_data(self):
+        return self.result_data
 
 

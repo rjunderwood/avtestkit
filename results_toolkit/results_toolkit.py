@@ -21,8 +21,8 @@ class ResultsToolkit:
         self.main()
         print("START")
         #Start GUI
-        gui = FrontEndMain(self)
-  
+        gui = FrontEndMain(self, self.processed_results)
+        
         #Save GUI
         self.gui = gui
         #start the gui

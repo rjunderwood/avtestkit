@@ -57,6 +57,9 @@ class ProcessResult():
         return self.result_data_list
 
 
+    def failed(self):
+        return self.had_collision() or self.had_lane_invasion()
+
     def had_collision(self):
         
         for result_data in self.get_result_data():

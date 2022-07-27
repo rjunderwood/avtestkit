@@ -32,8 +32,6 @@ def view_container(gui):
         sg.Column(view_loading_next_scenario(gui), key='view_loading_next_scenario',visible=False),
         sg.Column(view_all_scenario_complete(gui), key='view_all_scenario_complete',visible=False),
         
-
-
         ]]
   
     return layout

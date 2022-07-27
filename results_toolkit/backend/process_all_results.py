@@ -70,3 +70,72 @@ class ProcessAllResults():
 
 
 
+    #Get a basoc summary of all the scenarios 
+    def get_all_process_results_summary(self):
+        
+        scenario_names = self.get_all_process_result_available_scenarios()
+        scenario_summary = []
+        for scenario_name in scenario_names:
+            scenario_data = self.get_all_process_result_scenario(scenario_name)
+            parameters = scenario_data[0].get_metamorphic_test_data()
+            total_cases = len(scenario_data)
+            failed_cases = 0 
+            #Test fails
+            for scenario in scenario_data:
+                
+                if(scenario.had_collision() or scenario.had_lane_invasion()):
+                    failed_cases+=1
+            
+            scenario_summary.append({
+                'scenario':scenario_name,
+                'parameters':parameters,
+                'failed_cases':failed_cases,
+                'total_cases':total_cases
+            })
+        
+        return scenario_summary
+              
+
+    #Returns the failure data for a specific scenario | its parameters and values. 
+    def get_scenario_failed_data(self, scenario_name):    
+        
+        print('get_scenario_failed_data()')
+        scenario_tests = self.get_all_process_result_scenario(scenario_name)
+        
+        failed_data = {}
+        #Set the original parameters names for failed_data
+        parameters = scenario_tests[0].get_metamorphic_test_data()
+        for parameter in parameters:
+            failed_data[parameter] = {}
+        
+   
+
+        for scenario in scenario_tests:
+            scenario.get_metamorphic_test_data()
+            #Add the parameters and values for this test. 
+            parameters = scenario.get_metamorphic_test_data()
+            for parameter in parameters:
+                value = parameters[parameter]
+                
+                #Value is not a key already for the parameter
+                if value not in failed_data[parameter]:
+                    #Add the value
+                    failed_data[parameter][value] = {'total':0, 'percentage':0}
+
+                if scenario.failed():
+                    print("SCENARIO FAILED")
+                    failed_data[parameter][value]['total']+=1
+
+
+        #Calculate percentages
+        for parameter in failed_data:
+            total_fail = 0
+            for parameter_value in failed_data[parameter]:
+                total_fail+=failed_data[parameter][parameter_value]['total']
+
+            for parameter_value in failed_data[parameter]:
+                failed_data[parameter][parameter_value]['percentage'] = failed_data[parameter][parameter_value]['total'] / total_fail
+
+
+        return failed_data
+        
