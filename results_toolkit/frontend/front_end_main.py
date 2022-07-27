@@ -91,13 +91,10 @@ class FrontEndMain():
                 #Window Close Event if event_handler.run(window,event,values) RETURNS "close_window"
                 break      
             
-            #Open the results page for a specific scenario 
-            if(event['event_name'] == 'open_result'):
-                self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
-                self.change_view('view_results_page_'+event['scenario'])
 
             if(event['event_name'] == 'open_result_from_summary_table'):
                 scenario_name = self.result_data.get_all_process_result_available_scenarios()[event['scenario_index'][0]]
+                self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
                 self.change_view('view_results_page_'+scenario_name)
 
         window.close()
