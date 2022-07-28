@@ -16,7 +16,8 @@ def view_container(gui):
     layout = [[
     
         sg.Column(view_results_main_menu(gui), key='view_results_main_menu',visible=True),
-        sg.Column(view_results_page(gui,'follow_vehicle'), key=('view_results_page_follow_vehicle'),visible=False, scrollable=True, vertical_scroll_only=True)
+        sg.Column(view_results_page(gui,'follow_vehicle'), key=('view_results_page_follow_vehicle'),visible=False, scrollable=True, vertical_scroll_only=True),
+         sg.Column(view_results_page(gui,'pedestrian_crossing'), key=('view_results_page_pedestrian_crossing'),visible=False, scrollable=True, vertical_scroll_only=True)
         ]]
     
 

@@ -21,10 +21,12 @@ def view_container(gui):
         #Scenario Stuff 
         sg.Column(view_scenario_starter(gui), key='view_scenario_starter',visible=False),
         sg.Column(view_scenario_starter_follow_vehicle(gui), key='view_scenario_starter_follow_vehicle',visible=False),
+        sg.Column(view_scenario_starter_pedestrian_crossing(gui), key='view_scenario_starter_pedestrian_crossing',visible=False),
         sg.Column(view_start_autoware(gui), key='view_start_autoware',visible=False),
         sg.Column(view_patch_autoware(gui), key='view_patch_autoware',visible=False),
         sg.Column(view_patch_autoware_finished(gui), key='view_patch_autoware_finished',visible=False),
-        sg.Column(view_metamorphic_test_state_page(gui, 'follow_vehicle'), key='view_metamorphic_test_state_page_follow_vehicle',visible=False),
+        sg.Column(view_metamorphic_test_state_page(gui, 'pedestrian_crossing'), key='view_metamorphic_test_state_page_pedestrian_crossing',visible=False),
+         sg.Column(view_metamorphic_test_state_page(gui, 'follow_vehicle'), key='view_metamorphic_test_state_page_follow_vehicle',visible=False),
         sg.Column(view_test_is_running(gui), key='view_test_is_running',visible=False),
         sg.Column(view_next_metamorphic(gui), key='view_next_metamorphic',visible=False),
         sg.Column(view_loading_next_scenario(gui), key='view_loading_next_scenario',visible=False),
@@ -64,7 +66,7 @@ def view_setup_scenarios(gui):
 
 
         [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
-        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
+        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
         [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
     ]
@@ -79,7 +81,7 @@ def view_setup_scenarios_none(gui):
 
 
         [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
-        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing_road')],
+        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
         [sg.Text('** You need to select a minimum of 1 Scenario')],
         [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
@@ -108,6 +110,15 @@ def view_scenario_starter_follow_vehicle(gui):
     layout = [
         [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("\nFollow Vehicle\n")],
+        [sg.Button('Continue', size=(100, 2))],
+    ]
+    return layout   
+
+def view_scenario_starter_pedestrian_crossing(gui):
+    scenario_name = gui.get_current_scenario_name()
+    layout = [
+        [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\nPedestrian Crossing\n")],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout   

@@ -113,7 +113,8 @@ class FrontEndMain():
 
         available_views = [
             "view_results_main_menu",
-            "view_results_page_follow_vehicle"
+            "view_results_page_follow_vehicle",
+            "view_results_page_pedestrian_crossing"
         ]
 
 

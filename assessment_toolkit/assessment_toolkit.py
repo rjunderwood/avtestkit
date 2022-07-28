@@ -78,7 +78,17 @@ class AssessmentToolkit:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))
             if data['scenario_check_follow_vehicle0'] == True:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))    
+            try:
 
+                if data['scenario_check_pedestrian_crossing'] == True:
+                    self.scenario_queue.append(Scenario("pedestrian_crossing", data))
+            except: 
+                pass
+            try:
+                if data['scenario_check_pedestrian_crossing0'] == True:
+                    self.scenario_queue.append(Scenario("pedestrian_crossing", data))    
+            except: 
+                pass
             # if data['scenario_check_pedestrian_crossing_road'] == True:
             #     self.scenario_queue.append()
 

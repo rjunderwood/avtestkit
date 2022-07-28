@@ -107,7 +107,7 @@ class FrontEndMain():
                 if self.current_view == "view_scenario_starter_follow_vehicle":
                     self.change_view("view_start_autoware")             
                 
-                if self.current_view == "view_scenario_starter_follow_vehicle":
+                if self.current_view == "view_scenario_starter_pedestrian_crossing":
                     self.change_view("view_start_autoware")
                 
                    #Continue from Scenario Setup 
@@ -212,11 +212,12 @@ class FrontEndMain():
             "view_result",
             "view_scenario_starter",
             "view_scenario_starter_follow_vehicle",
+            "view_scenario_starter_pedestrian_crossing",
             "view_start_autoware",
             "view_patch_autoware",
             "view_patch_autoware_finished",
-    
             "view_metamorphic_test_state_page_follow_vehicle",
+            "view_metamorphic_test_state_page_pedestrian_crossing",
             "view_test_is_running",
             "view_next_metamorphic",
             "view_loading_next_scenario",
