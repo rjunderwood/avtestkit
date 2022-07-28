@@ -98,10 +98,6 @@ class FrontEndMain():
             elif(event["event_name"] == "launch_carla_autoware"):
                 self.assessment_toolkit.start_carla_autoware()
 
-            elif(event["event_name"] == "start_scenario_setup"):
-                
-                #Setup the scenario with the inputs
-                self.assessment_toolkit.setup_scenario(event["data"])
 
 
                 
@@ -158,12 +154,12 @@ class FrontEndMain():
             #Patch has finished. Redirect to the retamorphic text page
             elif(event['event_name'] == 'patch_has_finished'):
 
-                self.change_view("view_metamorphic_test_state_page")
+                self.change_view("view_metamorphic_test_state_page_"+self.get_current_scenario_name())
 
 
             elif(event['event_name'] == 'next_metamorphic_test'):
                 #Go to next metamorphic test page
-                self.change_view("view_metamorphic_test_state_page")
+                self.change_view("view_metamorphic_test_state_page_"+self.get_current_scenario_name())
 
             
             elif(event['event_name'] == 'view_results'):
@@ -213,18 +209,14 @@ class FrontEndMain():
             "view_setup_toolkit",
             "view_setup_scenarios",
             "view_setup_scenarios_none",
-            "view_set_2d_pose_estimation",
-            "view_setup",
-            "view_set_2d_pose_estimation",
-            "view_setup",
-            "view_set_2d_nav",
             "view_result",
             "view_scenario_starter",
             "view_scenario_starter_follow_vehicle",
             "view_start_autoware",
             "view_patch_autoware",
             "view_patch_autoware_finished",
-            "view_metamorphic_test_state_page",
+    
+            "view_metamorphic_test_state_page_follow_vehicle",
             "view_test_is_running",
             "view_next_metamorphic",
             "view_loading_next_scenario",

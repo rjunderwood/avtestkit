@@ -14,7 +14,7 @@ sg.set_options(font=font)
 def view_container(gui):
 
     layout = [[
-        #sg.Column(view_setup(gui), key='view_setup'),
+    
         sg.Column(view_results_main_menu(gui), key='view_results_main_menu',visible=True),
         sg.Column(view_results_page(gui,'follow_vehicle'), key=('view_results_page_follow_vehicle'),visible=False, scrollable=True, vertical_scroll_only=True)
         ]]

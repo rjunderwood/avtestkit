@@ -66,26 +66,6 @@ class AssessmentToolkit:
     
 
 
-    #Setup Scenario is called after the setup on the first GUI page has been entered and the 'start' button pressed
-    #Creates a specified scenario 
-    def setup_scenario(self, data):
-
-        print("\n\nSetting Up Scenario....")
-        for key in data:
-                print(key, ' : ',data[key])
-        
-        try:
-            #Setup the scenario
-            if(data["scenario"] == 'Follow Vehicle'):
-                print("Creating Scenario :: Follow Vehicle")
-                #Create
-                self.current_scenario = Scenario("follow_vehicle", data)
-
-        finally:
-            print("Scenario Ready") 
-            self.gui.change_view("view_set_2d_pose_estimation")
-    
-
     #Setup multiple Scenarios
     def setup_scenarios(self, data):
 
@@ -96,7 +76,8 @@ class AssessmentToolkit:
         try:
             if data['scenario_check_follow_vehicle'] == True:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))
-                
+            if data['scenario_check_follow_vehicle0'] == True:
+                self.scenario_queue.append(Scenario("follow_vehicle", data))    
 
             # if data['scenario_check_pedestrian_crossing_road'] == True:
             #     self.scenario_queue.append()

@@ -10,14 +10,12 @@ sg.set_options(font=font)
 
 def view_container(gui):
     layout = [[
-        #sg.Column(view_setup(gui), key='view_setup'),
+        
+        #Toolkit Setup
         sg.Column(view_setup_toolkit(gui), key='view_setup_toolkit',visible=True),
         sg.Column(view_setup_scenarios(gui), key='view_setup_scenarios',visible=False),
         sg.Column(view_setup_scenarios_none(gui), key='view_setup_scenarios_none',visible=False),
-        sg.Column(view_set_2d_nav(gui), key='view_set_2d_nav',visible=False),
-        sg.Column(view_set_2d_pose_estimation(gui), key='view_set_2d_pose_estimation',visible=False),
         sg.Column(view_result(gui), key='view_result',visible=False),
-        sg.Column(view_setup(gui), key='view_setup',visible=False),
         
 
         #Scenario Stuff 
@@ -26,7 +24,7 @@ def view_container(gui):
         sg.Column(view_start_autoware(gui), key='view_start_autoware',visible=False),
         sg.Column(view_patch_autoware(gui), key='view_patch_autoware',visible=False),
         sg.Column(view_patch_autoware_finished(gui), key='view_patch_autoware_finished',visible=False),
-        sg.Column(view_metamorphic_test_state_page(gui), key='view_metamorphic_test_state_page',visible=False),
+        sg.Column(view_metamorphic_test_state_page(gui, 'follow_vehicle'), key='view_metamorphic_test_state_page_follow_vehicle',visible=False),
         sg.Column(view_test_is_running(gui), key='view_test_is_running',visible=False),
         sg.Column(view_next_metamorphic(gui), key='view_next_metamorphic',visible=False),
         sg.Column(view_loading_next_scenario(gui), key='view_loading_next_scenario',visible=False),
@@ -36,64 +34,6 @@ def view_container(gui):
   
     return layout
 
-
-def view_setup(gui):
-
-    layout = [
-        [sg.Text('Test Runner', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        [sg.Text('Scenario: ')],
-        [sg.Combo(values=("Default", "Follow Vehicle"), default_value='Follow Vehicle',readonly=True, k='scenario', auto_size_text=True, size=(100, 5))],
-        [sg.Text('Metrics:')],
-        [sg.Text('Speed:'), sg.Input(key='metric_speed'), sg.Text('km/ph')],
-        [sg.Text('Distance:'), sg.Spin([i for i in range(1, 4)],initial_value=1, k='metric_distance'), sg.Text('sec')],
-        [sg.Button('1. Start CARLA', size=(100, 2))],
-        [sg.Button('2. Start ROS', size=(100, 2))],
-        [sg.Button('3. Patch ROS', size=(100, 2))],
-        [sg.Button('4. Start Test', size=(100, 2))],
-        [sg.Button('CLOSE ROS', size=(100, 2))]
-    ]
-    return layout
-
-
-def view_set_2d_nav(gui):
-
-    layout = []
-    if os.name == 'nt':
-        layout = [
-            [sg.Text('Set 2D Nav', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)], 
-            [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_nav.png')]
-        ]
-    else:
-        layout = [
-            [sg.Text('Set 2D Nav', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)], 
-            [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/follow_vehicle/2d_nav.png')]
-        ]
-
-
-    return layout
-
-
-def view_set_2d_pose_estimation(gui):
-
-    layout = []
-    if os.name == 'nt':
-        layout = [
-        
-        [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'\img\scenarios\follow_vehicle\2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
-        [sg.Button('2D Pose Estimation Has Been Set', size=(100, 2))]
-        ]
-    else:
-        layout = [
-        
-        [sg.Text('Set 2D Pose', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        #The Image that is shown depends on what scenario is ran #TODO when more scenarios are implemented
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/follow_vehicle/2d_pose.png',key='view_set_2d_pose_estimation_follow_vehicle')],
-        [sg.Button('2D Pose Estimation Has Been Set', size=(100, 2))]
-        ]
-
-    return layout
 
 
 def view_result(gui):
@@ -247,7 +187,7 @@ def view_start_simulation(gui):
 
 
 
-def view_metamorphic_test_state_page(gui):
+def view_metamorphic_test_state_page(gui, scenario):
 
     layout = [
         [sg.Text('Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
@@ -257,8 +197,9 @@ def view_metamorphic_test_state_page(gui):
         # [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/carla_autoware_docker_loaded.png')],
         # [sg.Text("ENTER COMMAND:\n\n./Documents/run-simulation.sh\n\n\n")],    
         [sg.Text("Step (2)")],
-        [sg.Text("Wait for 'RVIS' Window to load.\n")],
-        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/rvis-launch.png')],
+        [sg.Text("Wait for 'RVIZ' to load scenario : "+ scenario +"\n")],
+        [sg.Image(str(pathlib.Path(__file__).parent.resolve())+r'/img/scenarios/'+scenario+'/rviz.png')],
+        
         [sg.Text("")],
         [sg.Text("If the RVIS loads with errors or does not load within 1 minute", font=("courier 10 pitch", 12))],
         [sg.Text("RESTART SIMULATION: Carla Autoware Terminal\n")],

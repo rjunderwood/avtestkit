@@ -10,7 +10,7 @@ from backend.scenario.stats_recorder import StatsRecorder
 from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
-
+from .weather import get_weather_parameters
 
 try:
     sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
@@ -37,7 +37,7 @@ class ScenarioFollowVehicle:
     scenario_finished = False
     # X = -2.1
     # Y = 120
-    X = 340
+    X = 339
     Y = 240
     Z = 0.2
 
@@ -48,7 +48,7 @@ class ScenarioFollowVehicle:
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
-    TRIGGER_DIST = 80 
+    TRIGGER_DIST = 30
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -64,7 +64,7 @@ class ScenarioFollowVehicle:
     SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
 
     # LEAD_VEHICLE_VELOCITY = 3
-    LEAD_VEHICLE_VELOCITY = 8
+    LEAD_VEHICLE_VELOCITY = 5
 
     
     #How long the scenario actually should run once recording is triggered. 
@@ -103,27 +103,32 @@ class ScenarioFollowVehicle:
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
 
-            world.set_weather(carla.WeatherParameters())
 
+
+
+      
             blueprint_library = world.get_blueprint_library()
 
-            #Blueprint for the lead vehicle
+
+            #Lead Vehicle
             lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
-
             lead_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
-
-
             spawn_loc = carla.Location(self.X,self.Y,self.Z)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
-
             lead_vehicle = world.spawn_actor(lead_vehicle_bp, transform)
-
             lead_vehicle.set_light_state(carla.VehicleLightState.All)
 
 
-            # wait for the ego vehicle to spawn 
 
+            #Metamophic Parameters Specific for this test
+            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            
+            world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
+
+
+
+            # wait for the ego vehicle to spawn 
             while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
                 try:
                     print("Waiting for ego vehicle to spawn... ")
@@ -153,8 +158,58 @@ class ScenarioFollowVehicle:
                     #lead_vehicle.destroy()
                     pass
             
-            lead_vehicle.set_target_velocity(carla.Vector3D(0,self.LEAD_VEHICLE_VELOCITY,0))
-            print("SCENARIO RUNNER :: Set Lead Vehicle" + str(self.LEAD_VEHICLE_VELOCITY))
+            lead_vehicle.set_target_velocity(carla.Vector3D(0,-self.LEAD_VEHICLE_VELOCITY,0))
+
+
+
+            #Set the other vehicles on the other direction 
+            number_of_other_vehicles = metamorphic_parameters['passing_vehicles']
+            #Other vehicles moving the opposite direction 
+            npm_y_value = 150
+            for vehicle in range(number_of_other_vehicles):
+                npc_vehicle_blueprint = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
+                spawn_loc = carla.Location(335, npm_y_value,self.Z)
+                rotation = carla.Rotation(self.PITCH,90,self.ROLL)
+                transform = carla.Transform(spawn_loc, rotation)
+                npm_y_value-=20; 
+                npc_vehicle = world.spawn_actor(npc_vehicle_blueprint, transform)
+                npc_vehicle.set_target_velocity(carla.Vector3D(0,7,0))
+
+
+            current_velocity = self.LEAD_VEHICLE_VELOCITY 
+            #Speed up the vehicle at y 200 
+            lead_vehicle_target_stop_y = 220
+            while(lead_vehicle.get_location().y > lead_vehicle_target_stop_y):
+                print(lead_vehicle.get_location().y)
+            while current_velocity < 6:
+                current_velocity+=0.01
+                lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
+
+
+
+            #Slow down the vehicle at y 150
+            lead_vehicle_target_stop_y = 200
+            while(lead_vehicle.get_location().y > lead_vehicle_target_stop_y):
+                pass
+         
+            while current_velocity > 4:
+                current_velocity-=0.01
+                lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
+
+            
+            #Slow down to stop the vehicle at y 100
+            lead_vehicle_target_stop_y = 180
+            while(lead_vehicle.get_location().y > lead_vehicle_target_stop_y):
+                pass
+         
+            while current_velocity > 0:
+                current_velocity-=0.01
+                lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
+
+            
+            #Speed up 
+            #Slow Down To stol
+            lead_vehicle.set_target_velocity(carla.Vector3D(0,0,0))
 
 
 
