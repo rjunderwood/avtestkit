@@ -11,12 +11,11 @@ Autonomous Vehicle Assessment Toolkit
 
 ## Requirements
 * Python 3.7
-* CUDA-10.0
-* Docker (19.03+)
+* CUDA-10.0 (https://docs.nvidia.com/cuda/archive/10.0/cuda-installation-guide-linux/index.html)
+* Docker (19.03+) (https://github.com/autowarefoundation/autoware_ai_documentation/wiki/docker-installation)
 * Nvidia docker (https://github.com/NVIDIA/nvidia-docker)
 * carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
 * carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
-* ros-bridge 0.9.11 (https://github.com/carla-simulator/ros-bridge)
 
 # Setup
 ## 1. Install Requirements
@@ -36,6 +35,7 @@ git lfs install
 ```
 
 ### 1.3 Install CUDA-10.0 & CUDA-TOOLKIT-10.0
+For installation instructions for CUDA 10.0, see https://docs.nvidia.com/cuda/archive/10.0/cuda-installation-guide-linux/index.html
 ```sh
 sudo apt clean && sudo apt update && sudo apt purge cuda && sudo apt purge nvidia-* && sudo apt autoremove
 sudo apt-get install freeglut3 freeglut3-dev libxi-dev libxmu-dev
@@ -121,3 +121,4 @@ results_toolkit/frontend/front_end_main.py
 
 results_toolkit/frontend/views.py 
 - view_container()
+
