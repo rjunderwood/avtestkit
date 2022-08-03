@@ -27,7 +27,7 @@ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda
 sudo apt-get install -y cuda-10-0 cuda-toolkit-10-0
 echo "export PATH=/usr/local/cuda-10.0/bin:$PATH" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
-```sh
+```
 * carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
 * carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
 * ros-bridge 0.9.11 (https://github.com/carla-simulator/ros-bridge)
