@@ -11,7 +11,6 @@ Autonomous Vehicle Assessment Toolkit
 
 ## Requirements
 * Python 3.7
-* CUDA enabled GPU
 * CUDA-10.0
 * Docker (19.03+)
 * Nvidia docker (https://github.com/NVIDIA/nvidia-docker)
