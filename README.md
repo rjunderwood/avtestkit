@@ -45,7 +45,23 @@ git lfs install
 
 ### 1.2 Install Carla-Simulator
 
-```sudo apt-get install carla-simulator=0.9.11```
+Other requirements. Two Python modules: Pygame to create graphics directly with Python, and Numpy for great calculus.
+To install both modules using pip, run the following commands.
+```sh
+pip install --user pygame numpy
+```
+
+Set up the Debian repository in the system.
+```sh
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1AF1527DE64CB8D9
+sudo add-apt-repository "deb [arch=amd64] http://dist.carla.org/carla $(lsb_release -sc) main"
+```
+Install CARLA and check for the installation in the /opt/ folder.
+```sh
+sudo apt-get update # Update the Debian package index
+sudo apt-get install carla-simulator=0.9.11 # Install the 0.9.11 CARLA version
+cd /opt/carla-simulator # Open the folder where CARLA is installed
+```
 
 ### 1.3 Install Carla-Autoware
 
@@ -64,7 +80,6 @@ patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
     "CARLA_AUTOWARE_PATH":"/home/riley/Desktop/carla-autoware/"
 }
 ```
-
 
 ## Usage
 1. Start Toolkit 
