@@ -32,9 +32,23 @@ echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_
 * carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
 * ros-bridge 0.9.11 (https://github.com/carla-simulator/ros-bridge)
 
-## Setup
-1. Install Requirements
-2. Edit assessment_toolkit/config.json 
+# Setup
+## 1. Install Requirements
+
+## 2. Install Carla-Simulator
+
+```sudo apt-get install carla-simulator=0.9.11```
+
+## 3. Install Carla-Autoware
+
+```sh 
+git clone --recurse-submodules https://github.com/Kailthen/carla-autoware.git
+patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
+cd carla-autoware && sudo ./build.sh
+patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
+```
+
+## 4. Edit assessment_toolkit/config.json 
 
 ```json
 {
