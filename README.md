@@ -10,12 +10,33 @@ Autonomous Vehicle Assessment Toolkit
 * Ubuntu 18.04
 
 ## Requirements
-* Anaconda 4.13.0
 * Python 3.7
-* CUDA enabled GPU
-* CUDA-10.0 & CUDA-TOOLKIT-10.0
+* CUDA-10.0
+* Docker (19.03+)
+* Nvidia docker (https://github.com/NVIDIA/nvidia-docker)
+* carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
+* carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
+* ros-bridge 0.9.11 (https://github.com/carla-simulator/ros-bridge)
+
+# Setup
+## 1. Install Requirements
+
+### 1.1 Python 3
 ```sh
-# INSTALL CUDA-10.0 & CUDA-TOOLKIT-10.0
+sudo apt install -y python3-pip python3-colcon-common-extensions python3-setuptools python3-vcstool
+pip3 install -U setuptools
+```
+
+### 1.2 Install GIT LFS
+
+```sh 
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
+git lfs install
+```
+
+### 1.3 Install CUDA-10.0 & CUDA-TOOLKIT-10.0
+```sh
 sudo apt clean && sudo apt update && sudo apt purge cuda && sudo apt purge nvidia-* && sudo apt autoremove
 sudo apt-get install freeglut3 freeglut3-dev libxi-dev libxmu-dev
 wget -p https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 ~/Downloads
@@ -27,22 +48,8 @@ sudo apt-get install -y cuda-10-0 cuda-toolkit-10-0
 echo "export PATH=/usr/local/cuda-10.0/bin:$PATH" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
 ```
-* carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
-* carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
-* ros-bridge 0.9.11 (https://github.com/carla-simulator/ros-bridge)
 
-# Setup
-## 1. Install Requirements
-
-### 1.1 Install GIT LFS
-
-```sh 
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt-get install git-lfs
-git lfs install
-```
-
-### 1.2 Install Carla-Simulator
+### 1.4 Install Carla-Simulator
 
 Other requirements. Two Python modules: Pygame to create graphics directly with Python, and Numpy for great calculus.
 To install both modules using pip, run the following commands.
@@ -62,7 +69,7 @@ sudo apt-get install carla-simulator=0.9.11 # Install the 0.9.11 CARLA version
 cd /opt/carla-simulator # Open the folder where CARLA is installed
 ```
 
-### 1.3 Install Carla-Autoware
+### 1.5 Install Carla-Autoware
 
 ```sh 
 git clone --recurse-submodules https://github.com/Kailthen/carla-autoware.git
@@ -79,7 +86,6 @@ patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
     "CARLA_AUTOWARE_PATH":"/home/riley/Desktop/carla-autoware/"
 }
 ```
-
 
 ## Usage
 1. Start Toolkit 
@@ -115,3 +121,4 @@ results_toolkit/frontend/front_end_main.py
 
 results_toolkit/frontend/views.py 
 - view_container()
+
