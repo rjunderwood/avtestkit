@@ -16,6 +16,7 @@ Autonomous Vehicle Assessment Toolkit
 * Nvidia docker (https://github.com/NVIDIA/nvidia-docker)
 * carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
 * carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
+* PySimpleGUI (https://pypi.org/project/PySimpleGUI)
 
 # Environment Setup
 ## 1. Install Requirements
@@ -78,7 +79,12 @@ cd carla-autoware && sudo ./build.sh
 patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
 ```
 # Tool-kit Setup
-## 1. Edit assessment_toolkit/config.json 
+## 1. Install PySimpleGUI
+```sh
+pip install PySimpleGUI
+```
+
+## 2. Edit assessment_toolkit/config.json 
 
 ```json
 {
