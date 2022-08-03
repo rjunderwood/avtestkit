@@ -36,6 +36,7 @@ git lfs install
 ```
 
 ### 1.3 Install CUDA-10.0 & CUDA-TOOLKIT-10.0
+For installation instructions for CUDA 10.0, see https://docs.nvidia.com/cuda/archive/10.0/cuda-installation-guide-linux/index.html
 ```sh
 sudo apt clean && sudo apt update && sudo apt purge cuda && sudo apt purge nvidia-* && sudo apt autoremove
 sudo apt-get install freeglut3 freeglut3-dev libxi-dev libxmu-dev
