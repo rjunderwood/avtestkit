@@ -17,7 +17,7 @@ Autonomous Vehicle Assessment Toolkit
 * carla-simulator 0.9.11 (https://github.com/carla-simulator/carla)
 * carla-autoware 0.9.11 (https://github.com/Kailthen/carla-autoware)
 
-# Setup
+# Environment Setup
 ## 1. Install Requirements
 
 ### 1.1 Python 3
@@ -77,8 +77,8 @@ patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
 cd carla-autoware && sudo ./build.sh
 patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
 ```
-
-## 2. Edit assessment_toolkit/config.json 
+# Tool-kit Setup
+## 1. Edit assessment_toolkit/config.json 
 
 ```json
 {
