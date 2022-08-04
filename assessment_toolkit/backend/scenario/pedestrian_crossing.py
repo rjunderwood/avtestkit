@@ -11,9 +11,13 @@ from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from .weather import get_weather_parameters
+CWD = os.getcwd() 
+
+CONFIG = json.load(open(CWD+'/config.json'));
+
 
 try:
-    sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
+    sys.path.append(glob.glob(CONFIG['CARLA_SIMULATOR_PATH']+'PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
         sys.version_info.minor,
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
@@ -48,16 +52,16 @@ class ScenarioPedestrianCrossing:
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
-    TRIGGER_DIST = 30
+    TRIGGER_DIST = 20
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
 
-    SPEC_CAM_X = 340
-    SPEC_CAM_Y = 240
-    SPEC_CAM_Z = 120
+    SPEC_CAM_X = 155
+    SPEC_CAM_Y = 65
+    SPEC_CAM_Z = 100
     SPEC_CAM_PITCH = -90
-    SPEC_CAM_YAW = 0
+    SPEC_CAM_YAW = 90
     SPEC_CAM_ROLL = 0 
 
 
@@ -113,7 +117,7 @@ class ScenarioPedestrianCrossing:
             #Lead Vehicle
             lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
             lead_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
-            spawn_loc = carla.Location(self.X,self.Y,self.Z)
+            spawn_loc = carla.Location(152,53,0.4)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
             
@@ -149,9 +153,6 @@ class ScenarioPedestrianCrossing:
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
             
-
-
-
             # #Start Recording Scenario before the scenario loop begins
             # self.start_recording_scenario()
             
@@ -166,7 +167,7 @@ class ScenarioPedestrianCrossing:
             
             #Start walking the pedestrian
             pedestrian_controller.start()
-            pedestrian_controller.go_to_location(carla.Location(self.Y,360,self.Z))
+            pedestrian_controller.go_to_location(carla.Location(153,69,0.2))
 
 
 

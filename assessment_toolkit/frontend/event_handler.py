@@ -92,7 +92,9 @@ def parse_event(window):
         return {"event_name":"next"}
 
     elif event == '(CONFIRM) Step(3) is complete':
-        return {"event_name":"carla_autoware_docker_container_loaded",}
+
+        print("event_handler.py (CONFIRM) Step(3) is complete");
+        return {"event_name":"carla_autoware_docker_container_loaded"}
 
     elif event == 'Run Patch':
         return {'event_name': 'run_patch'}
@@ -100,7 +102,8 @@ def parse_event(window):
     elif event == 'Patch has Finished':
         return {'event_name': 'patch_has_finished'}
 
-    elif event == '(CONFIRM) RVIZ has loaded':
+    elif '(CONFIRM) RVIZ has loaded' in event:
+        print("event_handler.py (CONFIRM) RVIZ has loaded");
         return {'event_name': 'start_scenario_run'}
 
     elif event == '(CONFIRM) Terminal process has stopped':

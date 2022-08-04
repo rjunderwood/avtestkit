@@ -10,31 +10,13 @@ import argparse
 import math
 # import matplotlib.pyplot as plt
 import numpy as np
+import json
 
-# Get CARLA .egg file
-# try:
-#     sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-0.9.11-py3.7-linux-x86_64.egg')[0])
-# except IndexError:
-#     print("Error: carla-0.9.10-py3.7-linux-x86_64.egg file doesn't exsit.")
-#     pass
-# else:
-#     try:
-#         sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-0.9.11-py2.7-linux-x86_64.egg')[0])
-#     except Exception as e:
-#         print(e)
-#         print("Error: carla-0.9.10-py2.7-linux-x86_64.egg file doesn't exist.")
-#         pass
-#     # else:
-#     #     print("Error: .egg file doesn't exist.")
-# try:
-#     sys.path.append('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-0.9.11-py3.7-linux-x86_64.egg')
-# except:
-#     print("Fail")
-# import carla
+CWD = os.getcwd() 
 
-
+CONFIG = json.load(open(CWD+'/config.json'));
 try:
-    sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
+    sys.path.append(glob.glob(CONFIG['CARLA_SIMULATOR_PATH']+'PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
         sys.version_info.minor,
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])

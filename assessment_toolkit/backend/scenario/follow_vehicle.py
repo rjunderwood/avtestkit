@@ -11,9 +11,12 @@ from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from .weather import get_weather_parameters
+CWD = os.getcwd() 
+
+CONFIG = json.load(open(CWD+'/config.json'));
 
 try:
-    sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
+    sys.path.append(glob.glob(CONFIG['CARLA_SIMULATOR_PATH']+'PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
         sys.version_info.minor,
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
@@ -30,7 +33,6 @@ import pathlib
 from ..util.util import *
 
 
-CWD = os.getcwd() 
 
 class ScenarioFollowVehicle:
 

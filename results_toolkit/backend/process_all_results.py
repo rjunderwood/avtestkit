@@ -54,9 +54,12 @@ class ProcessAllResults():
     #Returns the ProcessResult objects for given *scenario
     def get_all_process_result_scenario(self, scenario_name):
         result = []
+        print("processed_resultsprocessed_resultsprocessed_resultsprocessed_results   " + scenario_name)
+        print(self.processed_results)
         for process_result in self.processed_results:
             if(process_result.get_scenario_name() == scenario_name):
                 result.append(process_result)
+        print("self.processed_results || " + str(result))
         return result
 
     
@@ -82,8 +85,9 @@ class ProcessAllResults():
             failed_cases = 0 
             #Test fails
             for scenario in scenario_data:
-                
+                print("scenario.had_collision()scenario.had_collision()scenario.had_collision() "+str(scenario.had_collision()))
                 if(scenario.had_collision() or scenario.had_lane_invasion()):
+                   
                     failed_cases+=1
             
             scenario_summary.append({
@@ -103,6 +107,7 @@ class ProcessAllResults():
         scenario_tests = self.get_all_process_result_scenario(scenario_name)
         
         failed_data = {}
+        print("LENGTH scenario_tests" + str(len(scenario_tests)))
         #Set the original parameters names for failed_data
         parameters = scenario_tests[0].get_metamorphic_test_data()
         for parameter in parameters:

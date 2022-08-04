@@ -94,7 +94,7 @@ class FrontEndMain():
 
             if(event['event_name'] == 'open_result_from_summary_table'):
                 scenario_name = self.result_data.get_all_process_result_available_scenarios()[event['scenario_index'][0]]
-                self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
+                #self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
                 self.change_view('view_results_page_'+scenario_name)
 
         window.close()

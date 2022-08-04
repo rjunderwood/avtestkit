@@ -17,18 +17,26 @@ class ProcessResult():
     scenario_metamorphic_test_number=None
     scenario_metamorphic_test_data=None
     result_data_list = []
-
+    from_file = ""
 
     def __init__(self, file_name, scenario_name, scenario_metamorphic_test_number):
-        
+        print("ProcessResult ___init___ "+file_name)
         print(file_name)
+        self.from_file = file_name
         assessment_toolkit_cwd = CWD[:len(CWD) - 15] + "assessment_toolkit"
         file_path = assessment_toolkit_cwd + "/backend/scenario/results/" + file_name
         try:
             with open(file_path) as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')          
+                csv_row_count = 0
+                print("NUMBER OF CSV ROWS ")
+               
                 for row in csv_reader:
                     self.result_data_list.append(ResultData(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]))
+                    csv_row_count+=1 
+                 
+              
+            csv_file.close()
         except Exception:
             print("Result File Not Found")
             print(Exception)
@@ -61,10 +69,15 @@ class ProcessResult():
         return self.had_collision() or self.had_lane_invasion()
 
     def had_collision(self):
+        line_count = 0 
         
-        for result_data in self.get_result_data():
-            if(float(result_data.get_collision()) > 0.0):
+        for result_data in self.result_data_list:
+            line_count+=1
+  
+            if(float(result_data.get_collision()) > 0):
+                #print("RESULT COLLISION ::: " + str(line_count) + " " + result_data.get_collision() + self.scenario_name + str(self.scenario_metamorphic_test_number) + "  "+self.from_file)
                 return True
+      
         return False
     
     def had_lane_invasion(self):

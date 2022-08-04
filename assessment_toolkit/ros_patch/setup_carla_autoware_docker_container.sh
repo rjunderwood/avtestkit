@@ -31,16 +31,16 @@ sleep 0s  # Waits 5 seconds.
     ##################
 
 # COPY EGOCAR SCRIPT TO RUNNING DOCKER
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/assessment-toolkit/AV-Tester/assessment_toolkit/ros_patch/scenarios/pedestrian_crossing.sh %%:/home/autoware/Documents
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/assessment-toolkit/AV-Tester/assessment_toolkit/ros_patch/scenarios/follow_vehicle.sh %%:/home/autoware/Documents
 sleep 0s  # Waits 5 seconds.
 # RUN THE EGOCAR SCRIPT
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% bash /home/autoware/Documents/pedestrian_crossing.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% bash /home/autoware/Documents/follow_vehicle.sh
 
 # MAKE SCRIPT EXECUTABLE
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec %% chmod +x /home/autoware/Documents/pedestrian_crossing.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec %% chmod +x /home/autoware/Documents/follow_vehicle.sh
 sleep 0s  # Waits 5 seconds.
 # RUN SCRIPT
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% /home/autoware/Documents/pedestrian_crossing.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% /home/autoware/Documents/follow_vehicle.sh
 sleep 0s  # Waits 5 seconds.
 #COPY THE RUN SIMULATION SCRIPT 
 docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/assessment-toolkit/AV-Tester/assessment_toolkit/ros_patch/run-simulation.bash %%:/home/autoware/Documents

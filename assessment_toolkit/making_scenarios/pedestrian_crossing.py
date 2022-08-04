@@ -2,8 +2,10 @@ import glob
 import os
 import sys
 import random
+import json
+CONFIG = json.load(open('../config.json'));
 try:
-    sys.path.append(glob.glob('/home/riley/Desktop/CARLA_0.9.11/PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
+    sys.path.append(glob.glob(CONFIG['CARLA_SIMULATOR_PATH']+'PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
         sys.version_info.minor,
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
@@ -34,13 +36,24 @@ class ScenarioFollowVehicle:
 
     #Setup the spectator camera
 
-    SPEC_CAM_X = 340
-    SPEC_CAM_Y = 240
-    SPEC_CAM_Z = 20
+    SPEC_CAM_X = 155
+    SPEC_CAM_Y = 65
+    SPEC_CAM_Z = 100
     SPEC_CAM_PITCH = -90
-    SPEC_CAM_YAW = 0
+    SPEC_CAM_YAW = 90
     SPEC_CAM_ROLL = 0 
 
+
+
+
+    # EGO_VEHICLE_X= 105
+    # EGO_VEHICLE_Y = 63
+    # EGO_VEHICLE_Z = 0.2
+
+
+    EGO_VEHICLE_X= 190
+    EGO_VEHICLE_Y = 63
+    EGO_VEHICLE_Z = 0.2
 
     SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
 
@@ -57,7 +70,7 @@ class ScenarioFollowVehicle:
             client = carla.Client('localhost', 2000)
             client.set_timeout(2.0)
 
-            world = client.load_world('Town01')
+            world = client.load_world('Town03')
             self.destroy_all_vehicle_actors(world)
             spectator = world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
@@ -66,8 +79,8 @@ class ScenarioFollowVehicle:
 
             blueprint_library = world.get_blueprint_library()
 
-            spawn_loc = carla.Location(self.X,self.Y,self.Z)
-            rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
+            spawn_loc = carla.Location(152,53,0.4)
+            rotation = carla.Rotation(self.PITCH,90,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
             # lead_vehicle = world.spawn_actor(lead_vehicle_bp, transform)
             # lead_vehicle.set_light_state(carla.VehicleLightState.All)
@@ -88,22 +101,25 @@ class ScenarioFollowVehicle:
             walker_controller_bp = world.get_blueprint_library().find('controller.ai.walker')
             controller = world.spawn_actor(walker_controller_bp,carla.Transform(), pedestiran)
 
-
-
-          
-            
+            #EGO Vehicle
+            lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
+            lead_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
+            ego_spawn_loc = carla.Location(self.EGO_VEHICLE_X,self.EGO_VEHICLE_Y, self.EGO_VEHICLE_Z)
+            ego_rotation = carla.Rotation(0,0,0)
+            ego_transform = carla.Transform(ego_spawn_loc, ego_rotation)
+            ego_vehicle = world.spawn_actor(lead_vehicle_bp, ego_transform)
 
                   # wait for the ego vehicle to spawn 
-            while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
-                try:
-                    print("Waiting for ego vehicle to spawn... ")
-                except KeyboardInterrupt:
-                    # lead_vehicle.destroy()
-                    pass
+            # while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
+            #     try:
+            #         print("Waiting for ego vehicle to spawn... ")
+            #     except KeyboardInterrupt:
+            #         # lead_vehicle.destroy()
+            #         pass
             
-            ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
-            print('Ego vehicle found')
-            self.ego_vehicle = ego_vehicle
+            # ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
+          
+            # self.ego_vehicle = ego_vehicle
 
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
@@ -115,17 +131,17 @@ class ScenarioFollowVehicle:
             # self.start_recording_scenario()
             
 
-            while(calc_dist(pedestiran, ego_vehicle) > self.TRIGGER_DIST):
-                try:
-                    #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
-                    pass
-                except KeyboardInterrupt:
-                    #lead_vehicle.destroy()
-                    pass
+            # while(calc_dist(pedestiran, ego_vehicle) > self.TRIGGER_DIST):
+            #     try:
+            #         #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+            #         pass
+            #     except KeyboardInterrupt:
+            #         #lead_vehicle.destroy()
+            #         pass
 
 
             controller.start()
-            controller.go_to_location(carla.Location(-200,-20,self.Z))
+            controller.go_to_location(carla.Location(153,69,0.2))
             #pedestiran.set_target_velocity(carla.Vector3D(0,-self.LEAD_VEHICLE_VELOCITY,0))
             # # #Start Recording Scenario before the scenario loop begins
             # # self.start_recording_scenario()
@@ -180,7 +196,14 @@ class ScenarioFollowVehicle:
             #Speed up 
             #Slow Down 
             # lead_vehicle.set_target_velocity(carla.Vector3D(0,0,0))
-
+            while(True):
+                # spectator_location = spectator.get_location()
+                # print(spectator_location.x)
+                # print(spectator_location.y) 
+                spectator_rotation = spectator.get_transform()
+                print(str(spectator_rotation)+"\n\n")
+          
+            
 
             # lead_vehicle.destroy()
             
