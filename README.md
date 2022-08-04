@@ -78,6 +78,15 @@ patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
 cd carla-autoware && sudo ./build.sh
 patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
 ```
+
+### 1.6 Setup BASH Environment
+```sh
+echo "export CARLA_AUTOWARE_ROOT=/home/$(whoami)/carla-autoware" >> ~/.bashrc
+echo "export CARLA_AUTOWARE_CONTENTS=/home/$(whoami)/carla-autoware/autoware-contents" >> ~/.bashrc
+echo "export CARLA_SIM=/opt/carla-simulator" >> ~/.bashrc
+```
+
+
 # Tool-kit Setup
 ## 1. Install PySimpleGUI
 ```sh
