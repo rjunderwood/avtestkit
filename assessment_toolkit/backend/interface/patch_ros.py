@@ -1,10 +1,15 @@
 import os
+import json
+
+
 
 class PatchRos:
     
     __rospatch__ = None
     directory = os.getcwd() 
     directory = directory.replace("/backend/interface","")
+    ROSLAUNCH_CONFIG = json.load(open(directory + '/ros_patch/scenarios/roslaunch_config.json'))
+
 
     def __init__(self, scenario):
         if(len(scenario) > 1):
@@ -52,4 +57,28 @@ class PatchRos:
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp "+ self.directory +"/ros_patch/run-simulation.bash %%:/home/autoware/Documents\n"
             ros_patch_new.write(line)
             line_number+=1
+        
+        ros_patch_new.close()
+        
+        
+        #Adjust the run-simulation.bash 
+        run_simulation_bash = open(self.directory+'/ros_patch/run-simulation.bash')
+        run_simulation_bash_lines = run_simulation_bash.readlines()
+        run_simulation_bash.close()
+
+        run_simulation_new = open(self.directory+'/ros_patch/run-simulation.bash', 'w')
+        line_number = 1
+        for line in run_simulation_bash_lines:
+            print("READLINE LINE " + line)
+            if line_number == 1:
+                run_simulation_new.write(line)
             
+            elif line_number == 2:
+                line = self.ROSLAUNCH_CONFIG[scenario]
+                run_simulation_new.write(line)
+                run_simulation_new.write('\n')
+            else:
+                run_simulation_new.write(line)
+       
+            line_number+=1
+        run_simulation_new.close()
