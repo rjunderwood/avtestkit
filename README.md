@@ -73,10 +73,8 @@ cd /opt/carla-simulator # Open the folder where CARLA is installed
 ### 1.5 Install Carla-Autoware
 
 ```sh 
-git clone --recurse-submodules https://github.com/Kailthen/carla-autoware.git
-patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
-cd carla-autoware && sudo ./build.sh
-patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
+git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
+cd carla-autoware && ./build.sh
 ```
 
 ### 1.6 Setup BASH Environment
