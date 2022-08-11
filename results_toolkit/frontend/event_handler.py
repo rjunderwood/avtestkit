@@ -1,8 +1,5 @@
 import time
 import PySimpleGUI as sg
-#Import CarlaLaunch
-
-import json
 
 
 #Handle Object Events and return the action that needs to be taken

@@ -1,7 +1,3 @@
-
-from concurrent.futures import ProcessPoolExecutor
-from tkinter import E
-from unittest import result
 from .result_data import ResultData
 import pathlib
 import os
@@ -23,8 +19,8 @@ class ProcessResult():
         print("ProcessResult ___init___ "+file_name)
         print(file_name)
         self.from_file = file_name
-        assessment_toolkit_cwd = CWD[:len(CWD) - 15] + "assessment_toolkit"
-        file_path = assessment_toolkit_cwd + "/backend/scenario/results/" + file_name
+        assessment_toolkit_cwd = CWD
+        file_path = assessment_toolkit_cwd + "/backend/results/" + file_name
         try:
             with open(file_path) as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')          
@@ -49,8 +45,8 @@ class ProcessResult():
 
     def import_metamorphic_data(self):  
 
-        assessment_toolkit_cwd = CWD[:len(CWD) - 15] + "assessment_toolkit"
-        file_path = assessment_toolkit_cwd + "/backend/scenario/metamorphic_tests/" + self.scenario_name + ".json"
+        assessment_toolkit_cwd = CWD
+        file_path = assessment_toolkit_cwd + "/backend/metamorphic_tests/" + self.scenario_name + ".json"
         file = open(file_path)  
         file_data = json.loads(file.read())   
 

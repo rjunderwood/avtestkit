@@ -17,10 +17,10 @@ class ProcessAllResults():
 
         print("CWD")
         print(CWD)
-        assessment_toolkit_cwd = CWD[:len(CWD) - 15] + "assessment_toolkit"
+        assessment_toolkit_cwd = CWD
 
         #Get the files 
-        result_file_directory = assessment_toolkit_cwd + "/backend/scenario/results/"
+        result_file_directory = assessment_toolkit_cwd + "/backend/results/"
         for filename in os.listdir(result_file_directory):
             f = os.path.join(result_file_directory, filename)
             # checking if it is a file
