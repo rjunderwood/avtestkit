@@ -61,6 +61,13 @@ class FrontEndMain():
 
 
     def create_plot(self):
+        follow_vehicle = self.result_data.get_all_process_result_scenario('follow_vehicle') 
+        for result in follow_vehicle:
+            for result_data in result.get_result_data(): 
+                print(result_data.get_location_x())
+            print(result.get_metamorphic_test_data())
+ 
+
         year = [2021,2020,3033,331]
         unemployment_rate = [9,8,2,2.5]
         plt.plot(year, unemployment_rate, color='blue', marker='o')
