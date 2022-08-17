@@ -4,6 +4,7 @@
 #Can only be imported on the system with carla. 
 from .follow_vehicle import ScenarioFollowVehicle
 from .pedestrian_crossing import ScenarioPedestrianCrossing
+from .red_light import ScenarioRedLight
 #Import a mock scenario 
 #from .mock_follow_vehicle import ScenarioFollowVehicle
 
@@ -23,6 +24,8 @@ class Scenario:
             self.scenario_runner = ScenarioFollowVehicle()
         if(scenario_name == 'pedestrian_crossing'):
             self.scenario_runner = ScenarioPedestrianCrossing()
+        if(scenario_name == 'red_light'):
+            self.scenario_runner = ScenarioRedLight()
         
         #TODO scenario_params (These are the metrics that were entered by the user of the GUI)
 

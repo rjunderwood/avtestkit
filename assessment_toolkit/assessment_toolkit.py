@@ -6,6 +6,7 @@ import json
 import time
 import sys
 import multiprocessing
+from unittest import case
 
 #Import CarlaLaunch
 from backend.interface import carla_launch as claunch
@@ -72,7 +73,7 @@ class AssessmentToolkit:
         print("\n\nsetup_scenarios\n")
         for key in data:
                 print(key, ' : ',data[key])
-        
+
         try:
             if data['scenario_check_follow_vehicle'] == True:
                 self.scenario_queue.append(Scenario("follow_vehicle", data))
@@ -88,6 +89,13 @@ class AssessmentToolkit:
                 if data['scenario_check_pedestrian_crossing0'] == True:
                     self.scenario_queue.append(Scenario("pedestrian_crossing", data))    
             except: 
+                pass
+            try:
+                if data['scenario_check_red_light'] == True:
+                    self.scenario_queue.append(Scenario("red_light", data))
+                if data['scenario_check_red_light0'] == True:
+                    self.scenario_queue.append(Scenario("red_light", data))
+            except:
                 pass
             # if data['scenario_check_pedestrian_crossing_road'] == True:
             #     self.scenario_queue.append()

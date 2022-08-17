@@ -1,16 +1,19 @@
-import glob 
-import os
-import sys
-import random
-import time
 import argparse
-import math
+import glob
 import json
-from backend.scenario.stats_recorder import StatsRecorder
-from backend.util.results.process_results import ProcessResult
+import math
+import os
+import random
+import sys
+import time
+
 #Import ROSClose 
 from backend.interface import ros_close as rclose
+from backend.scenario.stats_recorder import StatsRecorder
+from backend.util.results.process_results import ProcessResult
+
 from .weather import get_weather_parameters
+
 CWD = os.getcwd() 
 
 CONFIG = json.load(open(CWD+'/config.json'));
@@ -23,12 +26,11 @@ try:
 except IndexError:
     pass
 
-import carla
-
-
+import pathlib
 # import carla
 import subprocess
-import pathlib
+
+import carla
 
 from ..util.util import *
 
@@ -43,13 +45,14 @@ class ScenarioRedLight:
     scenario_finished = False
     # X = -2.1
     # Y = 120
-    X = 339
-    Y = 240
+
+    #red light vehicle spawn coords
+    X = 315
+    Y = 199
     Z = 0.2
 
     PITCH = 0
-    YAW = 270
-    #YAW = 270
+    YAW = 0
     ROLL = 0 
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
@@ -67,10 +70,9 @@ class ScenarioRedLight:
     SPEC_CAM_ROLL = 0 
 
 
-    SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
+    SPAWNED_VEHICLE_ROLENAME = 'running_vehicle'
 
-    # LEAD_VEHICLE_VELOCITY = 3
-    LEAD_VEHICLE_VELOCITY = 5
+    RUNNING_VEHICLE_VELOCITY = 3
 
     
     #How long the scenario actually should run once recording is triggered. 
@@ -142,15 +144,15 @@ class ScenarioRedLight:
             
 
             # TODO: trigger dist for sending running red light vehicle?
-            while(calc_dist(running_vehicle, ego_vehicle) > self.TRIGGER_DIST):
-                try:
-                    #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
-                    pass
-                except KeyboardInterrupt:
-                    #lead_vehicle.destroy()
-                    pass
+            # while(calc_dist(running_vehicle, ego_vehicle) > self.TRIGGER_DIST):
+            #     try:
+            #         #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+            #         pass
+            #     except KeyboardInterrupt:
+            #         #lead_vehicle.destroy()
+            #         pass
             
-            running_vehicle.set_target_velocity(carla.Vector3D(0,-self.LEAD_VEHICLE_VELOCITY,0))
+            running_vehicle.set_target_velocity(carla.Vector3D(self.RUNNING_VEHICLE_VELOCITY,0,0))
 
 
             # TODO: Are the other vehicles in here necessary? Likely is just noise not 
@@ -173,41 +175,14 @@ class ScenarioRedLight:
                 npc_vehicle.set_target_velocity(carla.Vector3D(0,7,0))
 
 
-            current_velocity = self.LEAD_VEHICLE_VELOCITY 
-            #Speed up the vehicle at y 200 
-            lead_vehicle_target_stop_y = 220
-            while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
-                print(running_vehicle.get_location().y)
-            while current_velocity < 6:
-                current_velocity+=0.01
-                running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
-
-
-            #Slow down the vehicle at y 150
-            lead_vehicle_target_stop_y = 200
-            while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
-                pass
-         
-            while current_velocity > 4:
-                current_velocity-=0.01
-                running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
-            
-            #Slow down to stop the vehicle at y 100
-            lead_vehicle_target_stop_y = 180
-            while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
-                pass
-         
-            while current_velocity > 0:
-                current_velocity-=0.01
-                running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
-            
-            #Speed up 
-            #Slow Down To stol
-            running_vehicle.set_target_velocity(carla.Vector3D(0,0,0))
-
+            # current_velocity = self.LEAD_VEHICLE_VELOCITY 
+            # #Speed up the vehicle at y 200 
+            # lead_vehicle_target_stop_y = 220
+            # while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
+            #     print(running_vehicle.get_location().y)
+            # while current_velocity < 6:
+            #     current_velocity+=0.01
+            #     running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
 
 
             self.handle_results_output(world)

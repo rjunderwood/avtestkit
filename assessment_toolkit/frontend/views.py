@@ -131,7 +131,7 @@ def view_scenario_starter_red_light(gui):
     scenario_name = gui.get_current_scenario_name()
     layout = [
         [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        [sg.Text("\nRunning Red Light\n")],
+        [sg.Text("\nVehicle Running Red Light\n")],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout   

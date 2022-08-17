@@ -1,4 +1,4 @@
 {
-    "CARLA_SIMULATOR_PATH":"/home/riley/Desktop/CARLA_0.9.11/", 
-    "CARLA_AUTOWARE_PATH":"/home/riley/Desktop/carla-autoware/"
+    "CARLA_SIMULATOR_PATH":"/opt/carla-simulator/", 
+    "CARLA_AUTOWARE_PATH":"/home/jvlaj/carla-autoware/"
 }

@@ -5,10 +5,11 @@ import time
 
 ## Frontend
 #Import the front end
-from frontend.front_end_main import FrontEndMain
+# from .frontend.front_end_main import FrontEndMain
+# from .backend.process_all_results import ProcessAllResults
+
 from backend.process_all_results import ProcessAllResults
-
-
+from frontend.front_end_main import FrontEndMain
 
 class ResultsToolkit:
 
