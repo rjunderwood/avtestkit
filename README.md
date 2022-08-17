@@ -23,7 +23,7 @@ Autonomous Vehicle Assessment Toolkit
 
 ### 1.1 Python 3
 ```sh
-sudo apt install -y python3-pip python3-colcon-common-extensions python3-setuptools python3-vcstool
+sudo apt install -y python3-pip python3-setuptools python3-vcstools python3-tk
 pip3 install -U setuptools
 ```
 
@@ -40,8 +40,8 @@ For installation instructions for CUDA 10.0, see https://docs.nvidia.com/cuda/ar
 ```sh
 sudo apt clean && sudo apt update && sudo apt purge cuda && sudo apt purge nvidia-* && sudo apt autoremove
 sudo apt-get install freeglut3 freeglut3-dev libxi-dev libxmu-dev
-wget -p https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64 ~/Downloads
-wget -p http://developer.download.nvidia.com/compute/cuda/10.0/Prod/patches/1/cuda-repo-ubuntu1804-10-0-local-nvjpeg-update-1_1.0-1_amd64.deb ~/Downloads
+wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64.deb -P ~/Downloads/
+wget -p http://developer.download.nvidia.com/compute/cuda/10.0/Prod/patches/1/cuda-repo-ubuntu1804-10-0-local-nvjpeg-update-1_1.0-1_amd64.deb -P ~/Downloads/
 sudo dpkg -i ~/Downloads/cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64.deb
 sudo dpkg -i ~/Downloads/cuda-repo-ubuntu1804-10-0-local-nvjpeg-update-1_1.0-1_amd64.deb
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
@@ -55,7 +55,7 @@ echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_
 Other requirements. Two Python modules: Pygame to create graphics directly with Python, and Numpy for great calculus.
 To install both modules using pip, run the following commands.
 ```sh
-pip install --user pygame numpy
+pip3 install --user pygame numpy
 ```
 
 Set up the Debian repository in the system.
@@ -70,12 +70,19 @@ sudo apt-get install carla-simulator=0.9.11 # Install the 0.9.11 CARLA version
 cd /opt/carla-simulator # Open the folder where CARLA is installed
 ```
 
-### 1.5 Install Carla-Autoware
+### 1.5 Install Carla-Autoware (and fix a few things)
 
 ```sh 
-git clone --recurse-submodules https://github.com/Kailthen/carla-autoware.git
+git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
+git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
+cd carla-autoware
+cp ~/carla-autoware-mods/patch_files/update_* ./
+sed -i 'autoware-contents/d' .dockerignore
+mv update_my_mission_planning_launch update_my_mission_planning_launch.patch
 patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
-cd carla-autoware && sudo ./build.sh
+
+./build.sh # build carla-autoware
+
 patch ~/carla-autoware/run.sh ~/carla-autoware/update_run.sh.patch
 ```
 
