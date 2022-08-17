@@ -128,6 +128,8 @@ assessment_toolkit/frontend/front_end_main.py
 - start()
 - change_view()
 
+assessment_toolkit/backend/scenario/scenario.py
+- __init__
 
 results_toolkit/frontend/front_end_main.py
 - change_view()
