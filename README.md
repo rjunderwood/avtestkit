@@ -77,9 +77,10 @@ git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
 git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
 cd carla-autoware
 cp ~/carla-autoware-mods/patch_files/update_* ./
-sed -i 'autoware-contents/d' .dockerignore
-mv update_my_mission_planning_launch update_my_mission_planning_launch.patch
+sed -i 'autoware-contents/d' .dockerignore # make sure autoware contents are copied over
+mv update_my_mission_planning_launch update_my_mission_planning_launch.patch # rename file correctly
 patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
+sed -i '85s/$/\//' Dockerfile # update trailing slash for COPY
 
 ./build.sh # build carla-autoware
 
