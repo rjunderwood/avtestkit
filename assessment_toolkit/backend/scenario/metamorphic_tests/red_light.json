@@ -1,0 +1,16 @@
+[
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 0
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Hard Rain Sunset",
+            "passing_vehicles": 0
+        },
+        "done": false
+    }
+]
