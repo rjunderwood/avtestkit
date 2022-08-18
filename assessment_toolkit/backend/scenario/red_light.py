@@ -154,13 +154,6 @@ class ScenarioRedLight:
             
             running_vehicle.set_target_velocity(carla.Vector3D(self.RUNNING_VEHICLE_VELOCITY,0,0))
 
-
-            # TODO: Are the other vehicles in here necessary? Likely is just noise not 
-            # relevant to the scenario and will just slow the simulation down later on...
-
-            # TODO: Seems to be quite a few hardcoded numbers + constants coordinates
-            # Should this be changed? e.g. lead_vehicle_target_stop_y
-
             #Set the other vehicles on the other direction 
             number_of_other_vehicles = metamorphic_parameters['passing_vehicles']
             #Other vehicles moving the opposite direction 
@@ -173,7 +166,6 @@ class ScenarioRedLight:
                 npm_y_value-=20; 
                 npc_vehicle = world.spawn_actor(npc_vehicle_blueprint, transform)
                 npc_vehicle.set_target_velocity(carla.Vector3D(0,7,0))
-
 
             # current_velocity = self.LEAD_VEHICLE_VELOCITY 
             # #Speed up the vehicle at y 200 

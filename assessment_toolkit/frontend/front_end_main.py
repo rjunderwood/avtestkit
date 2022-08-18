@@ -171,9 +171,8 @@ class FrontEndMain():
                 
                 results_toolkit_file_location = self.get_results_toolkit_location()
                 print(results_toolkit_file_location)
-                #subprocess.call('python3 results_toolkit.py', shell=True, cwd=results_toolkit_file_location)
+                subprocess.call('python3 results_toolkit.py', shell=True, cwd=results_toolkit_file_location)
                 # not sure what the deal here is,  but seems to work after hardcoding the wd:
-                subprocess.call('python3 results_toolkit.py', shell=True, cwd="/home/jvlaj/AV-Tester/results_toolkit/")
                 #subprocess.call(['python results_toolkit.py'], cwd=results_toolkit_file_location)
 
 
