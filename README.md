@@ -53,7 +53,7 @@ echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_
 ### 1.4 Install Carla-Simulator
 
 Other requirements. Two Python modules: Pygame to create graphics directly with Python, and Numpy for great calculus.
-To install both modules using pip, run the following commands.
+To install both modules using pip3, run the following commands.
 ```sh
 pip3 install --user pygame numpy
 ```
@@ -73,7 +73,7 @@ cd /opt/carla-simulator # Open the folder where CARLA is installed
 ### 1.5 Install Carla-Autoware (and fix a few things)
 
 ```sh 
-git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
+cd & git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
 git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
 cd carla-autoware
 cp ~/carla-autoware-mods/patch_files/update_* ./
@@ -98,22 +98,23 @@ echo "export CARLA_SIM=/opt/carla-simulator" >> ~/.bashrc
 # Tool-kit Setup
 ## 1. Install PySimpleGUI
 ```sh
-pip install PySimpleGUI
+pip3 install PySimpleGUI
 ```
 
 ## 2. Edit assessment_toolkit/config.json 
 
 ```json
 {
-    "CARLA_SIMULATOR_PATH":"/home/riley/Desktop/CARLA_0.9.11/", 
-    "CARLA_AUTOWARE_PATH":"/home/riley/Desktop/carla-autoware/"
+    "CARLA_SIMULATOR_PATH":"/opt/carla-simulator", 
+    "CARLA_AUTOWARE_PATH":"/home/$USER/carla-autoware/"
 }
 ```
 
 ## Usage
 1. Start Toolkit 
 ```sh
-python assessment_toolkit/assessment_toolkit.py
+cd assessment_toolkit/
+python3 assessment_toolkit.py
 ```
 
 
