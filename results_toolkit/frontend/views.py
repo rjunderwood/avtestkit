@@ -145,6 +145,20 @@ def create_plot():
     plt.grid(True)
     return plt.gcf()
 
+def create_radar():
+    fig = pgo.Figure(data=pgo.Scatterpolar(
+        r=[1, 5],
+        theta=['Cloudy Noon','Hard Rain Sunset'],
+        fill='toself'
+    ))
+
+    fig.update_layout(
+        polar=dict( radialaxis=dict(visible=True),),
+        showlegend=False
+    )
+
+    fig.show()
+
 def draw_figure(canvas, figure):
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
     figure_canvas_agg.draw()
