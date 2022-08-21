@@ -77,19 +77,26 @@ class FrontEndMain():
         plt.grid(True)
         return plt.gcf()
     
-    def create_radar():
-    fig = pgo.Figure(data=pgo.Scatterpolar(
-        r=[1, 5],
-        theta=['Cloudy Noon','Hard Rain Sunset'],
-        fill='toself'
-    ))
+    def create_radar(self):
+        follow_vehicle = self.result_data.get_all_process_result_scenario('follow_vehicle') 
+        for result in follow_vehicle:
+            for result_data in result.get_result_data(): 
+                print(result_data.get_location_x())
+                print(result_data.get_location_x())
+            print(result.get_metamorphic_test_data())
 
-    fig.update_layout(
-        polar=dict( radialaxis=dict(visible=True),),
-        showlegend=False
-    )
+        fig = pgo.Figure(data=pgo.Scatterpolar(
+            r=[1, 5],
+            theta=['Cloudy Noon','Hard Rain Sunset'],
+            fill='toself'
+        ))
 
-    fig.show()
+        fig.update_layout(
+            polar=dict( radialaxis=dict(visible=True),),
+            showlegend=False
+        )
+
+        fig.show()
 
     def draw_figure(self,canvas, figure):
         figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -116,6 +123,7 @@ class FrontEndMain():
             if(event['event_name'] == 'open_result_from_summary_table'):
                 scenario_name = self.result_data.get_all_process_result_available_scenarios()[event['scenario_index'][0]]
                 self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_plot())
+                self.draw_figure(self.window['-CANVAS-'].TKCanvas, self.create_radar())
                 self.change_view('view_results_page_'+scenario_name)
 
         window.close()
