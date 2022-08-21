@@ -76,6 +76,20 @@ class FrontEndMain():
         plt.ylabel('Unemployment Rate', fontsize=14)
         plt.grid(True)
         return plt.gcf()
+    
+    def create_radar():
+    fig = pgo.Figure(data=pgo.Scatterpolar(
+        r=[1, 5],
+        theta=['Cloudy Noon','Hard Rain Sunset'],
+        fill='toself'
+    ))
+
+    fig.update_layout(
+        polar=dict( radialaxis=dict(visible=True),),
+        showlegend=False
+    )
+
+    fig.show()
 
     def draw_figure(self,canvas, figure):
         figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
