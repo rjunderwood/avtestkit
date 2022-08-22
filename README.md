@@ -74,15 +74,9 @@ cd /opt/carla-simulator # Open the folder where CARLA is installed
 
 ```sh 
 cd & git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
-<<<<<<< HEAD
 cd & git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
 cd ~/carla-autoware
 cp ~/carla-autoware-mods/patch_files/update_* ~/carla-autoware/
-=======
-git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
-cd carla-autoware
-cp ~/carla-autoware-mods/patch_files/update_* ./
->>>>>>> 5b82e0bff149045992d2ec00aabe15e9240cadf4
 sed -i '/autoware-contents/d' .dockerignore # make sure autoware contents are copied over
 mv update_my_mission_planning.patch update_my_mission_planning.launch.patch # rename file correctly
 patch ~/carla-autoware/Dockerfile ~/carla-autoware/update_Dockerfile.patch
