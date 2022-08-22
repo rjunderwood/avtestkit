@@ -52,16 +52,16 @@ class ScenarioPedestrianCrossing:
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
-    TRIGGER_DIST = 20
+    TRIGGER_DIST = 32
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
 
-    SPEC_CAM_X = 155
-    SPEC_CAM_Y = 65
-    SPEC_CAM_Z = 100
-    SPEC_CAM_PITCH = -90
-    SPEC_CAM_YAW = 90
+    SPEC_CAM_X = 2
+    SPEC_CAM_Y = 133
+    SPEC_CAM_Z = 18
+    SPEC_CAM_PITCH = -33
+    SPEC_CAM_YAW = 179
     SPEC_CAM_ROLL = 0 
 
 
@@ -83,7 +83,7 @@ class ScenarioPedestrianCrossing:
     metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json")
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
-
+    
 
 
     def run(self):
@@ -94,41 +94,23 @@ class ScenarioPedestrianCrossing:
         
             world = client.get_world()
 
-
-            #Speed
-            # settings = world.get_settings()
-            # settings.fixed_delta_seconds = 0.05
-            # world.apply_settings(settings)
-
-
-
-
+            #Set Spectator
             spectator = world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
 
-
-
-
       
             blueprint_library = world.get_blueprint_library()
 
-
-            #Lead Vehicle
-            lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
-            lead_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
-            spawn_loc = carla.Location(152,53,0.4)
-            rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
-            transform = carla.Transform(spawn_loc, rotation)
-            
             # #Pedestrian
+            pedestrian_spawn_loc = carla.Location(-13,142,0.4)
+            pedestrian_rotation = carla.Rotation(7,1,self.ROLL)
+            pedestrian_transform = carla.Transform(pedestrian_spawn_loc, pedestrian_rotation)
             blueprintsWalkers = blueprint_library.filter("walker.pedestrian.*")
             walker_bp = random.choice(blueprintsWalkers)
-            pedestrian = world.spawn_actor(walker_bp, transform)
+            pedestrian = world.spawn_actor(walker_bp, pedestrian_transform)
             walker_controller_bp = world.get_blueprint_library().find('controller.ai.walker')
             pedestrian_controller = world.spawn_actor(walker_controller_bp,carla.Transform(), pedestrian)
-
-
 
 
             #Metamophic Parameters Specific for this test
@@ -167,8 +149,7 @@ class ScenarioPedestrianCrossing:
             
             #Start walking the pedestrian
             pedestrian_controller.start()
-            pedestrian_controller.go_to_location(carla.Location(153,69,0.2))
-
+            pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
 
 
 

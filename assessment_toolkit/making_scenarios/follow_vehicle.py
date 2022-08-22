@@ -57,7 +57,7 @@ class ScenarioFollowVehicle:
             
         try:
             client = carla.Client('localhost', 2000)
-            client.set_timeout(2.0)
+            client.set_timeout(10.0)
 
             world = client.load_world('Town01')
             self.destroy_all_vehicle_actors(world)
