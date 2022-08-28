@@ -116,6 +116,7 @@ class FrontEndMain():
             "view_results_page_follow_vehicle",
             "view_results_page_pedestrian_crossing",
             "view_results_page_red_light"
+            "view_results_page_intersection_left_turn"
         ]
 
 
