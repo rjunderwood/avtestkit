@@ -11,122 +11,158 @@ try:
         'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
 except IndexError:
     pass
- 
 import carla
-
+#Weather functions
+from weather import get_weather_parameters
 
 class ScenarioFollowVehicle:
-
+    #Extra Vehicle Spawning Functions
+    from extra_scenario_vehicles import handle_spawn_extra_scenario_vehicles, spawn_vehicle_carla
+    #Spectator camera
+    from spectator_camera import setup_spectator_camera
+    
+    #How long the scenario actually should run once recording is triggered. 
+    RUNNING_TIME = 30
     scenario_finished = False
-    # X = -2.1
-    # Y = 120
+    world=None
+    blueprint_library=None
     X = 330
     Y = 240
     Z = 0.2
-
     PITCH = 0
     YAW = 0
-    #YAW = 270
     ROLL = 0 
-
     EGO_VEHICLE_NAME = 'ego_vehicle'
-
     TRIGGER_DIST = 40
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
-    #Setup the spectator camera
-
-    # SPEC_CAM_X = 2
-    # SPEC_CAM_Y = 133
-    # SPEC_CAM_Z = 18
-    # SPEC_CAM_PITCH = -33
-    # SPEC_CAM_YAW = 179
-    # SPEC_CAM_ROLL = 0 
-
+    #SPECTATOR CAMERA
     SPEC_CAM_X = 2
     SPEC_CAM_Y = 133
-    SPEC_CAM_Z = 50
+    SPEC_CAM_Z = 80
     SPEC_CAM_PITCH = -90
     SPEC_CAM_YAW = 0
     SPEC_CAM_ROLL = 0 
 
-
-
-
-    # EGO_VEHICLE_X= 105
-    # EGO_VEHICLE_Y = 63
-    # EGO_VEHICLE_Z = 0.2
-
-
+    #EGO POSITION 
     EGO_VEHICLE_X= -60
     EGO_VEHICLE_Y = 135
     EGO_VEHICLE_Z = 0.2
-
     SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
 
     # LEAD_VEHICLE_VELOCITY = 3
     LEAD_VEHICLE_VELOCITY = 6
 
     
-    #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    #Metamophic Parameters Specific for this test
+    metamorphic_parameters = {
+        "weather": "Cloudy Noon",
+        "pedestrian_number":5,
+        "pedestrian_type":"adult",
+        "pedestrian_adult":2,
+        "pedestrian_child":2,
+        "spawn_vehicle_location_1": [
+            {
+                "model":"sedan",
+                "location":{
+                    "X":2,
+                    "Y":160, 
+                    "Z":0.2, 
+                    "PITCH":0,
+                    "YAW":-90, 
+                    "ROLL":0,
+                    "velocity":0 
+                }
+            },
+            {
+                "model":"motorbike",
+                "location":{
+                    "X":2,
+                    "Y":150, 
+                    "Z":0.2, 
+                    "PITCH":0,
+                    "YAW":-90, 
+                    "ROLL":0,
+                    "velocity":0 
+                }
+            }
+        ],
+        
+        "spawn_vehicle_location_2": [
+            {
+                "model":"sedan",
+                "location":{
+                    "X":-6,
+                    "Y":110, 
+                    "Z":0.2, 
+                    "PITCH":0,
+                    "YAW":90, 
+                    "ROLL":0,
+                    "velocity":0 
+                }
+            },
+              {
+                "model":"motorbike",
+                "location":{
+                    "X":-6,
+                    "Y":102, 
+                    "Z":0.2, 
+                    "PITCH":0,
+                    "YAW":90, 
+                    "ROLL":0,
+                    "velocity":0 
+                }
+            }
+        ],
+    }
 
+
+    ###Spawned Vehicle Traffic Controller. 
+    #Holds the spawned vehicles and sets their 
+   
+    #Specific Scenario Parameters 
+    pedestrian_controllers = []
+        
+    
+
+    #Connects to the carla world and setups necessary components
+    def scenario_setup(self):
+        client = carla.Client('localhost', 2000)
+        client.set_timeout(10.0)
+        world = client.load_world('Town03')
+        self.world = world 
+        self.destroy_all_vehicle_actors(world)
+        blueprint_library = world.get_blueprint_library()
+        self.blueprint_library = blueprint_library
+        #Setup the Specator Camera
+        self.setup_spectator_camera(self.SPEC_CAM_X, self.SPEC_CAM_Y, self.SPEC_CAM_Z, self.SPEC_CAM_PITCH, self.SPEC_CAM_YAW, self.SPEC_CAM_ROLL)
+        #Setup Weather 
+        world.set_weather(get_weather_parameters(self.metamorphic_parameters['weather']))
+
+
+
+
+
+    #Run the scenario: Actors, Recording, Finishing
     def run(self):
-            
         try:
-            client = carla.Client('localhost', 2000)
-            client.set_timeout(10.0)
-
-            world = client.load_world('Town03')
-            self.destroy_all_vehicle_actors(world)
-            spectator = world.get_spectator()
-            spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
-            carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
+            #Setup the basics of the scenario 
+            self.scenario_setup() 
 
 
-            blueprint_library = world.get_blueprint_library()
-
+            #Scenario Specific Logic 
             spawn_loc = carla.Location(-13,142,0.4)
             rotation = carla.Rotation(7,1,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
             # lead_vehicle = world.spawn_actor(lead_vehicle_bp, transform)
             # lead_vehicle.set_light_state(carla.VehicleLightState.All)
 
+            #Spawn pedestrians
+            self.spawn_pedestrians()
 
-
-            #Metamophic Parameters Specific for this test
-            metamorphic_parameters = {
-                "pedestrian_number":2
-            }
-            
-            world.set_weather(self.get_weather_parameters('Cloudy Sunset'))
-            blueprintsWalkers = blueprint_library.filter("walker.pedestrian.*")
-            walker_bp = random.choice(blueprintsWalkers)
-
-            # #Pedestrian
-            #pedestrian = world.spawn_actor(walker_bp, transform)
-            walker_controller_bp = world.get_blueprint_library().find('controller.ai.walker')
-            #controller = world.spawn_actor(walker_controller_bp,carla.Transform(), pedestrian)
-            
-            #Pedestrians. 
-            pedestrian_actors = []
-            pedestrian_controllers = []
-            
-            pedestrian_x = -13
-            for i in range(0, metamorphic_parameters['pedestrian_number']):
-                
-                spawn_loc = carla.Location(pedestrian_x,142,0.4)
-                pedestrian_x+=1
-                rotation = carla.Rotation(7,1,self.ROLL)
-                transform = carla.Transform(spawn_loc, rotation)
-                pedestrian_actor=world.spawn_actor(walker_bp, transform)
-                pedestrian_actors.append(pedestrian_actor)
-                pedestrian_controllers.append(world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
-
-                
-
-
-
+            #Spawn extra vehicles 
+            self.handle_spawn_extra_scenario_vehicles()
+            return 0
 
             #EGO Vehicle
             lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
@@ -136,7 +172,7 @@ class ScenarioFollowVehicle:
             ego_transform = carla.Transform(ego_spawn_loc, ego_rotation)
             ego_vehicle = world.spawn_actor(lead_vehicle_bp, ego_transform)
             ego_vehicle.set_target_velocity(carla.Vector3D(6.8,0,0))
-                  # wait for the ego vehicle to spawn 
+            # wait for the ego vehicle to spawn 
             # while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
             #     try:
             #         print("Waiting for ego vehicle to spawn... ")
@@ -169,7 +205,7 @@ class ScenarioFollowVehicle:
             
 
             #Run pedestrian controllers
-            for pedestrian_controller in pedestrian_controllers:
+            for pedestrian_controller in self.pedestrian_controllers:
 
                 pedestrian_controller.start()
                 pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
@@ -203,79 +239,14 @@ class ScenarioFollowVehicle:
             #     lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
 
 
- 
-            # #Slow down the vehicle at y 150
-            # lead_vehicle_target_stop_y = 200
-            # while(lead_vehicle.get_location().y > lead_vehicle_target_stop_y):
-            #     pass
-         
-            # while current_velocity > 4:
-            #     current_velocity-=0.01
-            #     lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
 
-            
-            # #Slow down to stop the vehicle at y 100
-            # lead_vehicle_target_stop_y = 180
-            # while(lead_vehicle.get_location().y > lead_vehicle_target_stop_y):
-            #     pass
-         
-            # while current_velocity > 0:
-            #     current_velocity-=0.01
-            #     lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
 
-            
-            #Speed up 
-            #Slow Down 
-            # lead_vehicle.set_target_velocity(carla.Vector3D(0,0,0))
-            while(True):
-                # spectator_location = spectator.get_location()
-                # print(spectator_location.x)
-                # print(spectator_location.y) 
-                spectator_rotation = spectator.get_transform()
-                print(str(spectator_rotation)+"\n\n")
-          
-            
 
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
         finally:
             pass
-
-
-    def get_weather_parameters(self,weather):
-
-        if weather == 'Clear Noon':
-            return carla.WeatherParameters.ClearNoon 
-
-        elif weather == 'Cloudy Noon':
-            return carla.WeatherParameters.CloudyNoon 
-        elif weather == 'Wet Noon':
-            return carla.WeatherParameters.WetNoon
-        elif weather == 'Wet Cloudy Noon':
-            return carla.WeatherParameters.WetCloudyNoon
-        elif weather == 'Mid Rain Noon': 
-            return carla.WeatherParameters.MidRainyNoon
-        elif weather == 'Hard Rain Noon': 
-            return carla.WeatherParameters.HardRainNoon
-        elif weather == 'Soft Rain Noon':
-            return carla.WeatherParameters.SoftRainNoon
-        elif weather == 'Clear Sunset':
-            return carla.WeatherParameters.ClearSunset
-        elif weather == 'Cloudy Sunset':
-            return carla.WeatherParameters.CloudySunset
-        elif weather == 'Wet Sunset':
-            return carla.WeatherParameters.WetSunset
-        elif weather == 'Wet Cloudy Sunset':
-            return carla.WeatherParameters.WetCloudySunset
-        elif weather == 'Mid Rain Sunset':
-            return carla.WeatherParameters.MidRainSunset
-        elif weather == 'Hard Rain Sunset':
-            return carla.WeatherParameters.HardRainSunset
-        elif weather == 'Soft Rain Sunset':
-            return carla.WeatherParameters.SoftRainSunset
-
-
 
 
     def destroy_all_vehicle_actors(self,world): 
@@ -287,10 +258,46 @@ class ScenarioFollowVehicle:
             for actor in actors:
                 actor.destroy()
 
-    
         else:
             print('There are currently no vehicle actors in the Carla world. ')    
+
+
+
+    #Handles the spawning of pedestrians
+    def spawn_pedestrians(self):
+        childBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0013')[0]
+        adultBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0021')[0]
+        walker_controller_bp = self.world.get_blueprint_library().find('controller.ai.walker')
+
+        #Pedestrians. 
+        pedestrian_actors = []
+       
         
+        pedestrian_x = -10
+        #Spawn Children 
+        for i in range(0, self.metamorphic_parameters['pedestrian_adult']):
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+            pedestrian_actors.append(pedestrian_actor)
+            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+        #Spawn Adults
+        for i in range(0, self.metamorphic_parameters['pedestrian_child']):
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
+            pedestrian_actors.append(pedestrian_actor)
+            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+
+
+
+
+
+    #Start te
 
 scenario_follow_vehicle = ScenarioFollowVehicle()
 scenario_follow_vehicle.run()
