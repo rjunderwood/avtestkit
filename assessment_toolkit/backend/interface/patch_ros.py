@@ -28,7 +28,7 @@ class PatchRos:
     #Setting up the patch files is important for the bash scripts copying files from the correct system directory.
     def setup_patch_files(self, scenario):
 
-
+        print("Setup patch files SCENARIO ::: "+scenario)
         ros_patch = open(self.directory+'/ros_patch/setup_carla_autoware_docker_container.sh')
         ros_patch_lines = ros_patch.readlines()
         ros_patch.close()

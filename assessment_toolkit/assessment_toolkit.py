@@ -90,6 +90,22 @@ class AssessmentToolkit:
                     self.scenario_queue.append(Scenario("pedestrian_crossing", data))    
             except: 
                 pass
+
+
+            try:
+
+                if data['scenario_check_follow_vehicle_town3'] == True:
+                    
+                    self.scenario_queue.append(Scenario("follow_vehicle_town3", data))
+            except: 
+                pass
+
+            try:
+                if data['scenario_check_follow_vehicle_town30'] == True:
+                    self.scenario_queue.append(Scenario("follow_vehicle_town3", data))    
+            except: 
+                pass
+
             try:
                 if data['scenario_check_red_light'] == True:
                     self.scenario_queue.append(Scenario("red_light", data))
@@ -106,6 +122,7 @@ class AssessmentToolkit:
                 print("NO SCENARIO QUEUE SET ::: ")
                 self.gui.change_view("view_setup_scenarios_none")
                 return 0
+
 
             #Setup the current scenario
             self.current_scenario = self.scenario_queue[0]
@@ -188,6 +205,7 @@ class AssessmentToolkit:
     #Run the ros patch
     #Only is going to be successful if the docker is run. 
     def run_ros_patch(self):
+        print("run_ros_patch :: "+ self.get_current_scenario_name())
         patchros.PatchRos(self.get_current_scenario_name())        
 
     

@@ -36,7 +36,7 @@ spectator.set_transform(carla.Transform(carla.Location(SPEC_CAM_X, SPEC_CAM_Y,SP
 
 while True:
     try:
-        print(spectator.get_location())
+        print(spectator.get_transform())
     except:
         pass
 
