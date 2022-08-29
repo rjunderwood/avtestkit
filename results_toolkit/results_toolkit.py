@@ -40,7 +40,7 @@ class ResultsToolkit:
         self.processed_results.process_results()
 
         scenario_names = self.processed_results.get_all_process_result_available_scenarios()
-        
+   
         for scenario in scenario_names: 
             print(scenario)
 

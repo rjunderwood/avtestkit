@@ -108,10 +108,16 @@ class ProcessAllResults():
         
         failed_data = {}
         print("LENGTH scenario_tests" + str(len(scenario_tests)))
+        print(scenario_name)
         #Set the original parameters names for failed_data
-        parameters = scenario_tests[0].get_metamorphic_test_data()
-        for parameter in parameters:
-            failed_data[parameter] = {}
+        #
+        try:
+
+            parameters = scenario_tests[0].get_metamorphic_test_data()
+            for parameter in parameters:
+                failed_data[parameter] = {}
+        except:
+            pass
         
    
 
@@ -122,7 +128,8 @@ class ProcessAllResults():
             for parameter in parameters:
                 value = parameters[parameter]
                 
-                #Value is not a key already for the parameter
+
+                # #Value is not a key already for the parameter
                 if value not in failed_data[parameter]:
                     #Add the value
                     failed_data[parameter][value] = {'total':0, 'percentage':0}
@@ -139,7 +146,8 @@ class ProcessAllResults():
                 total_fail+=failed_data[parameter][parameter_value]['total']
 
             for parameter_value in failed_data[parameter]:
-                failed_data[parameter][parameter_value]['percentage'] = failed_data[parameter][parameter_value]['total'] / total_fail
+                if(total_fail >0):
+                    failed_data[parameter][parameter_value]['percentage'] = failed_data[parameter][parameter_value]['total'] / total_fail
 
 
         return failed_data

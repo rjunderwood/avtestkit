@@ -22,3 +22,4 @@ def setup_spectator_camera(self,X,Y,Z,PITCH,YAW,ROLL):
     spectator = self.world.get_spectator()
     spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
     carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
+

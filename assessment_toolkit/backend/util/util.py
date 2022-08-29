@@ -282,6 +282,31 @@ def main(args):
 
 
 
+def await_ego_spawn(self):
+    # wait for the ego vehicle to spawn 
+    while(find_actor_by_rolename(self.world,self.EGO_VEHICLE_NAME) == None):
+        try:
+            print("Waiting for ego vehicle to spawn... ")
+        except KeyboardInterrupt:
+            # lead_vehicle.destroy()
+            pass
+    
+    ego_vehicle = find_actor_by_rolename(self.world, self.EGO_VEHICLE_NAME)
+    print('Ego vehicle found')
+    self.ego_vehicle = ego_vehicle
+
+#Distance trigger from carla actor to ego vehicle that activates the scenario
+def await_scenario_trigger(self):
+    while(calc_dist(self.scenario_trigger_actor, self.ego_vehicle) > self.TRIGGER_DIST):
+        try:
+            #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+            pass
+        except KeyboardInterrupt:
+            #lead_vehicle.destroy()
+            pass
+
+
+
 if __name__ == '__main__':
     description = 'Carla-Autoware Manual Test Case - Stationary Vehicle' 
     parser = argparse.ArgumentParser(description=description)

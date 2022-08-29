@@ -38,4 +38,12 @@ def spawn_vehicle_carla(self, spawn_vehicle, toolkit_vehicles):
     spawn_loc = carla.Location(spawn_vehicle['location']['X'],spawn_vehicle['location']['Y'],spawn_vehicle['location']['Z'])
     rotation = carla.Rotation(spawn_vehicle['location']['PITCH'],spawn_vehicle['location']['YAW'],spawn_vehicle['location']['ROLL'])
     transform = carla.Transform(spawn_loc, rotation)
-    self.world.spawn_actor(vehicle_bp, transform)
+    carla_spawn_vehicle = self.world.spawn_actor(vehicle_bp, transform)
+    self.spawned_scenario_vehicles.append({"actor":carla_spawn_vehicle, "velocity":spawn_vehicle['location']['velocity']})
+
+
+def start_extra_vehicle_velocities(self):
+    print("start_extra_vehicle_velocity1")
+    for vehicle in self.spawned_scenario_vehicles:
+        vehicle['actor'].set_target_velocity(carla.Vector3D(vehicle['velocity']['X'],vehicle['velocity']['Y'],vehicle['velocity']['Z']))
+        

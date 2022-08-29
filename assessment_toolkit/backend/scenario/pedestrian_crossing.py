@@ -6,11 +6,11 @@ import time
 import argparse
 import math
 import json
-from backend.scenario.stats_recorder import StatsRecorder
+from backend.util.stats_recorder import StatsRecorder
 from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
-from .weather import get_weather_parameters
+from backend.util.weather import get_weather_parameters
 CWD = os.getcwd() 
 
 CONFIG = json.load(open(CWD+'/config.json'));
@@ -37,26 +37,29 @@ from ..util.util import *
 CWD = os.getcwd() 
 
 class ScenarioPedestrianCrossing:
-
+    #Ego Vehicle Functions
+    from backend.util.util import await_ego_spawn,await_scenario_trigger
+    #Extra Vehicle Spawning Functions
+    from backend.util.extra_scenario_vehicles import handle_spawn_extra_scenario_vehicles, spawn_vehicle_carla, start_extra_vehicle_velocities
+    #Spectator camera
+    from backend.util.spectator_camera import setup_spectator_camera
+    
+    #How long the scenario actually should run once recording is triggered. 
+    RUNNING_TIME = 30
     scenario_finished = False
-    # X = -2.1
-    # Y = 120
+    world=None
+    blueprint_library=None
     X = 330
     Y = 240
     Z = 0.2
-
     PITCH = 0
     YAW = 0
-    #YAW = 270
     ROLL = 0 
-
     EGO_VEHICLE_NAME = 'ego_vehicle'
-
-    TRIGGER_DIST = 32
+    TRIGGER_DIST = 38
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
-
     SPEC_CAM_X = 2
     SPEC_CAM_Y = 133
     SPEC_CAM_Z = 18
@@ -64,18 +67,8 @@ class ScenarioPedestrianCrossing:
     SPEC_CAM_YAW = 179
     SPEC_CAM_ROLL = 0 
 
-
-    SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
-
-    # LEAD_VEHICLE_VELOCITY = 3
-    LEAD_VEHICLE_VELOCITY = 5
-
-    
     #How long the scenario actually should run once recording is triggered. 
     RUNNING_TIME = 30
-
-
-
 
     ego_vehicle = None
 
@@ -83,77 +76,58 @@ class ScenarioPedestrianCrossing:
     metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json")
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
-    
+    metamorphic_parameters = None
+    spawned_scenario_vehicles=[]
+
+
+    #Scenario Specific 
+    pedestrian_controllers=[] 
+    scenario_trigger_actor=None #The carla actor that is used as trigger when distance from the ego 
+
+    #Connects to the carla world and setups necessary components
+    def scenario_setup(self):
+        client = carla.Client('localhost', 2000)
+        client.set_timeout(2.0)
+        world = client.load_world('Town03')
+        self.world = world 
+        # self.destroy_all_vehicle_actors(world)
+        blueprint_library = world.get_blueprint_library()
+        self.blueprint_library = blueprint_library
+        #Setup the Specator Camera
+        self.setup_spectator_camera(self.SPEC_CAM_X, self.SPEC_CAM_Y, self.SPEC_CAM_Z, self.SPEC_CAM_PITCH, self.SPEC_CAM_YAW, self.SPEC_CAM_ROLL)
+        #Setup Weather 
+        world.set_weather(get_weather_parameters(self.metamorphic_parameters['weather']))
 
 
     def run(self):
-        
         try:
-            client = carla.Client('localhost', 2000)
-            client.set_timeout(2.0)
-        
-            world = client.get_world()
-
-            #Set Spectator
-            spectator = world.get_spectator()
-            spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
-            carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
-
-      
-            blueprint_library = world.get_blueprint_library()
-
-            # #Pedestrian
-            pedestrian_spawn_loc = carla.Location(-13,142,0.4)
-            pedestrian_rotation = carla.Rotation(7,1,self.ROLL)
-            pedestrian_transform = carla.Transform(pedestrian_spawn_loc, pedestrian_rotation)
-            blueprintsWalkers = blueprint_library.filter("walker.pedestrian.*")
-            walker_bp = random.choice(blueprintsWalkers)
-            pedestrian = world.spawn_actor(walker_bp, pedestrian_transform)
-            walker_controller_bp = world.get_blueprint_library().find('controller.ai.walker')
-            pedestrian_controller = world.spawn_actor(walker_controller_bp,carla.Transform(), pedestrian)
-
-
-            #Metamophic Parameters Specific for this test
-            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
-            
-            world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
-
-
-
-            # wait for the ego vehicle to spawn 
-            while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
-                try:
-                    print("Waiting for ego vehicle to spawn... ")
-                except KeyboardInterrupt:
-                    # lead_vehicle.destroy()
-                    pass
-            
-            ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
-            print('Ego vehicle found')
-            self.ego_vehicle = ego_vehicle
-
+            #Set current metamorphic parameters
+            self.metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            #Setup the basics of the scenario 
+            self.scenario_setup() 
+            #Spawn pedestrians
+            self.spawn_pedestrians()
+            #Spawn extra vehicles 
+            self.handle_spawn_extra_scenario_vehicles()
+            #Wait for ego to spawn 
+            self.await_ego_spawn()
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
+            # Await scenario trigger after this line the function 
+            self.await_scenario_trigger()
+
+
+            #SCENARIO Logic
+            #Pedestrian controllers
+            for pedestrian_controller in self.pedestrian_controllers:
+                pedestrian_controller.start()
+                pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
             
-            # #Start Recording Scenario before the scenario loop begins
-            # self.start_recording_scenario()
-            
-
-            while(calc_dist(pedestrian, ego_vehicle) > self.TRIGGER_DIST):
-                try:
-                    #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
-                    pass
-                except KeyboardInterrupt:
-                    #lead_vehicle.destroy()
-                    pass
-            
-            #Start walking the pedestrian
-            pedestrian_controller.start()
-            pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
+            #Start velocities of extra vehicles
+            self.start_extra_vehicle_velocities()
 
 
-
-            self.handle_results_output(world)
+            self.handle_results_output()
   
 
             # lead_vehicle.destroy()
@@ -162,14 +136,51 @@ class ScenarioPedestrianCrossing:
 
             
         finally:
-            print("Scenario Finished :: Follow Vehicle") 
-
-            
+            print("Scenario Finished :: Pedestrian Crossing") 
             #Set the metamorphic test as finished
-            self.set_test_finished(world)
- 
+            self.set_test_finished(self.world)
+
         
             #Start recording the scenario in a separate process
+    
+    
+    
+    
+        #Handles the spawning of pedestrians
+    def spawn_pedestrians(self):
+        childBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0013')[0]
+        adultBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0021')[0]
+        walker_controller_bp = self.world.get_blueprint_library().find('controller.ai.walker')
+
+        #Pedestrians. 
+        pedestrian_actors = []
+       
+        
+        pedestrian_x = -10
+        #Spawn Children 
+        for i in range(0, self.metamorphic_parameters['pedestrian_adult']):
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+            pedestrian_actors.append(pedestrian_actor)
+            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+        #Spawn Adults
+        for i in range(0, self.metamorphic_parameters['pedestrian_child']):
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
+            pedestrian_actors.append(pedestrian_actor)
+            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+
+        #One of the pedestrian actor is the trigger
+        if(self.scenario_trigger_actor == None):
+            self.scenario_trigger_actor=pedestrian_actors[0]
+
+    
     def start_recording_scenario(self):
         
         if os.name == 'nt':
@@ -209,9 +220,6 @@ class ScenarioPedestrianCrossing:
 
     #When the metamorphic test is finished.
     def set_test_finished(self, world):
-
-
-
         #Set metamorphic test as done. 
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
         self.metamorphic_test_running = False
@@ -222,22 +230,18 @@ class ScenarioPedestrianCrossing:
             # self.ego_vehicle.destroy()
             #Close the Carla Autoware docker that is setup.
             rclose.ROSClose()
-
         # self.ego_vehicle.destroy()
         rclose.ROSClose()
         # #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
         # self.ego_vehicle.destroy()
         # #Close the Carla Autoware docker that is setup.
         # rclose.ROSClose()
-        destroy_all_vehicle_actors(world)
-         
+        # destroy_all_vehicle_actors(world)
           
 
-
-    def handle_results_output(self, world):
-  
+    def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
-        stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
+        stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

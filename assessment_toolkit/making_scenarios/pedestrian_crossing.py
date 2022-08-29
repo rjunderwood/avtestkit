@@ -17,7 +17,7 @@ from weather import get_weather_parameters
 
 class ScenarioFollowVehicle:
     #Extra Vehicle Spawning Functions
-    from extra_scenario_vehicles import handle_spawn_extra_scenario_vehicles, spawn_vehicle_carla
+    from extra_scenario_vehicles import handle_spawn_extra_scenario_vehicles, spawn_vehicle_carla, start_extra_vehicle_velocities
     #Spectator camera
     from spectator_camera import setup_spectator_camera
     
@@ -71,7 +71,11 @@ class ScenarioFollowVehicle:
                     "PITCH":0,
                     "YAW":-90, 
                     "ROLL":0,
-                    "velocity":0 
+                   "velocity":{
+                        "X":0,
+                        "Y":-4,
+                        "Z":0
+                    }
                 }
             },
             {
@@ -83,7 +87,11 @@ class ScenarioFollowVehicle:
                     "PITCH":0,
                     "YAW":-90, 
                     "ROLL":0,
-                    "velocity":0 
+                   "velocity":{
+                        "X":0,
+                        "Y":-6,
+                        "Z":0
+                    }
                 }
             }
         ],
@@ -98,7 +106,11 @@ class ScenarioFollowVehicle:
                     "PITCH":0,
                     "YAW":90, 
                     "ROLL":0,
-                    "velocity":0 
+                    "velocity":{
+                        "X":0,
+                        "Y":4,
+                        "Z":0
+                    }
                 }
             },
               {
@@ -110,13 +122,19 @@ class ScenarioFollowVehicle:
                     "PITCH":0,
                     "YAW":90, 
                     "ROLL":0,
-                    "velocity":0 
+                    "velocity":{
+                        "X":0,
+                        "Y":6,
+                        "Z":0
+                    }
                 }
             }
         ],
-    }
+    } 
 
-
+    #Extra scenario vehicles 
+    spawned_scenario_vehicles = []
+    
     ###Spawned Vehicle Traffic Controller. 
     #Holds the spawned vehicles and sets their 
    
@@ -162,6 +180,8 @@ class ScenarioFollowVehicle:
 
             #Spawn extra vehicles 
             self.handle_spawn_extra_scenario_vehicles()
+            #Start velocities of extra vehicles
+            self.start_extra_vehicle_velocities()
             return 0
 
             #EGO Vehicle
@@ -172,6 +192,10 @@ class ScenarioFollowVehicle:
             ego_transform = carla.Transform(ego_spawn_loc, ego_rotation)
             ego_vehicle = world.spawn_actor(lead_vehicle_bp, ego_transform)
             ego_vehicle.set_target_velocity(carla.Vector3D(6.8,0,0))
+        
+        
+        
+        
             # wait for the ego vehicle to spawn 
             # while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
             #     try:
@@ -237,11 +261,7 @@ class ScenarioFollowVehicle:
             # while current_velocity < 10:
             #     current_velocity+=0.01
             #     lead_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
-
-
-
-
+            
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
@@ -250,14 +270,11 @@ class ScenarioFollowVehicle:
 
 
     def destroy_all_vehicle_actors(self,world): 
-
         actors = world.get_actors()
         actors = actors.filter('vehicle.*') #filter out only vehicle actors
-
         if(actors):
             for actor in actors:
                 actor.destroy()
-
         else:
             print('There are currently no vehicle actors in the Carla world. ')    
 
