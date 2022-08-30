@@ -18,7 +18,7 @@ from backend.interface import ros_close as rclose
 from backend.interface import patch_ros as patchros
 ## Backend
 #Import the scenario maker
-from backend.scenario.scenario import Scenario
+from backend.scenario.scenario_manager import ScenarioManager
 #Import the process data
 from backend.util.results.process_results import ProcessResult
 
@@ -76,18 +76,18 @@ class AssessmentToolkit:
 
         try:
             if data['scenario_check_follow_vehicle'] == True:
-                self.scenario_queue.append(Scenario("follow_vehicle", data))
+                self.scenario_queue.append(ScenarioManager("follow_vehicle", data))
             if data['scenario_check_follow_vehicle0'] == True:
-                self.scenario_queue.append(Scenario("follow_vehicle", data))    
+                self.scenario_queue.append(ScenarioManager("follow_vehicle", data))    
             try:
 
                 if data['scenario_check_pedestrian_crossing'] == True:
-                    self.scenario_queue.append(Scenario("pedestrian_crossing", data))
+                    self.scenario_queue.append(ScenarioManager("pedestrian_crossing", data))
             except: 
                 pass
             try:
                 if data['scenario_check_pedestrian_crossing0'] == True:
-                    self.scenario_queue.append(Scenario("pedestrian_crossing", data))    
+                    self.scenario_queue.append(ScenarioManager("pedestrian_crossing", data))    
             except: 
                 pass
 
@@ -108,9 +108,16 @@ class AssessmentToolkit:
 
             try:
                 if data['scenario_check_red_light'] == True:
-                    self.scenario_queue.append(Scenario("red_light", data))
+                    self.scenario_queue.append(ScenarioManager("red_light", data))
                 if data['scenario_check_red_light0'] == True:
-                    self.scenario_queue.append(Scenario("red_light", data))
+                    self.scenario_queue.append(ScenarioManager("red_light", data))
+            except:
+                pass
+            try:
+                if data['scenario_check_intersection_left_turn'] == True:
+                    self.scenario_queue.append(ScenarioManager("intersection_left_turn", data))
+                if data['scenario_check_intersection_left_turn0'] == True:
+                    self.scenario_queue.append(ScenarioManager("intersection_left_turn", data))
             except:
                 pass
             # if data['scenario_check_pedestrian_crossing_road'] == True:
