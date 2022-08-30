@@ -36,9 +36,10 @@ from ..util.util import *
 
 class ScenarioFollowVehicleTown3:
 
+
+    
+
     scenario_finished = False
-    # X = -2.1
-    # Y = 120
 
     X = 70
     Y = 196.7

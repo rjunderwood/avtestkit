@@ -118,8 +118,6 @@ class Scenario(ABC):
 
     def set_test_finished(self, world):
 
-
-
         #Set metamorphic test as done.
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
         self.metamorphic_test_running = False

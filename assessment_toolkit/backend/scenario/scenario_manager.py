@@ -4,6 +4,7 @@
 #Can only be imported on the system with carla. 
 from .intersection_left_turn import IntersectionLeftTurn
 from .follow_vehicle import ScenarioFollowVehicle
+from .follow_vehicle_town3 import ScenarioFollowVehicleTown3
 from .pedestrian_crossing import ScenarioPedestrianCrossing
 from .red_light import ScenarioRedLight
 #Import a mock scenario 
@@ -16,13 +17,15 @@ class ScenarioManager:
     scenario_runner = None
     scenario_name = None
     scenario_data = None
-
+ 
 
     def __init__(self, scenario_name, scenario_params):
         self.scenario_name = scenario_name
         #Set the Scenario 
         if(scenario_name == 'follow_vehicle'):
             self.scenario_runner = ScenarioFollowVehicle()
+        if(scenario_name == 'follow_vehicle_town3'):
+            self.scenario_runner = ScenarioFollowVehicleTown3()
         if(scenario_name == 'pedestrian_crossing'):
             self.scenario_runner = ScenarioPedestrianCrossing()
         if(scenario_name == 'red_light'):

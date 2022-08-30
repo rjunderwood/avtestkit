@@ -2,8 +2,7 @@
     {
         "parameters": {
             "weather": "Cloudy Noon",
-            "passing_vehicles": 0
-            "passing_vehicles":3,
+            "passing_vehicles": 3,
             "car_types": ["vehicle.toyota.prius", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"]
         },
         "done": false
@@ -11,8 +10,7 @@
     {
         "parameters": {
             "weather": "Hard Rain Sunset",
-            "passing_vehicles": 0
-            "passing_vehicles":3,
+            "passing_vehicles": 3,
             "car_types": ["vehicle.toyota.prius", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"]
         },
         "done": false

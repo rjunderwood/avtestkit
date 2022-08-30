@@ -96,13 +96,13 @@ class AssessmentToolkit:
 
                 if data['scenario_check_follow_vehicle_town3'] == True:
                     
-                    self.scenario_queue.append(Scenario("follow_vehicle_town3", data))
+                    self.scenario_queue.append(ScenarioManager("follow_vehicle_town3", data))
             except: 
                 pass
 
             try:
                 if data['scenario_check_follow_vehicle_town30'] == True:
-                    self.scenario_queue.append(Scenario("follow_vehicle_town3", data))    
+                    self.scenario_queue.append(ScenarioManager("follow_vehicle_town3", data))    
             except: 
                 pass
 
