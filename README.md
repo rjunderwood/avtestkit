@@ -5,7 +5,7 @@ Autonomous Vehicle Assessment Toolkit
 ## Recommended system
 
 * Intel i7 gen 9th - 11th / Intel i9 gen 9th - 11th / AMD ryzen 7 / AMD ryzen 9
-* +16 GB RAM memory 
+* +16 GB RAM memory
 * NVIDIA RTX 2070 / NVIDIA RTX 2080 / NVIDIA RTX 3070, NVIDIA RTX 3080
 * Ubuntu 18.04
 
@@ -29,7 +29,7 @@ pip3 install -U setuptools
 
 ### 1.2 Install GIT LFS
 
-```sh 
+```sh
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 sudo apt-get install git-lfs
 git lfs install
@@ -72,7 +72,7 @@ cd /opt/carla-simulator # Open the folder where CARLA is installed
 
 ### 1.5 Install Carla-Autoware (and fix a few things)
 
-```sh 
+```sh
 cd & git clone --recurse-submodules https://github.com/av-toolkit/carla-autoware.git
 cd & git clone https://github.com/ThiagoFelipeSandeiro/carla-autoware-mods.git
 cd ~/carla-autoware
@@ -101,24 +101,24 @@ echo "export CARLA_SIM=/opt/carla-simulator" >> ~/.bashrc
 pip3 install PySimpleGUI
 ```
 
-## 2. Edit assessment_toolkit/config.json 
+## 2. Edit assessment_toolkit/config.json
 
 ```json
 {
-    "CARLA_SIMULATOR_PATH":"/opt/carla-simulator", 
+    "CARLA_SIMULATOR_PATH":"/opt/carla-simulator",
     "CARLA_AUTOWARE_PATH":"/home/$USER/carla-autoware/"
 }
 ```
 
 ## Usage
-1. Start Toolkit 
+1. Start Toolkit
 ```sh
 cd assessment_toolkit/
 python3 assessment_toolkit.py
 ```
 
 
-## Creating New Scenarios 
+## Creating New Scenarios
 
 ### 1. Create Files
 - assessment_toolkit/backend/scenario/SCENARIO_NAME.py
@@ -127,7 +127,7 @@ python3 assessment_toolkit.py
 
 ### 2. Edit Files
 assessment_toolkit/assessment_toolkit.py
-- setup_scenarios() 
+- setup_scenarios()
 
 assessment_toolkit/frontend/views.py
 - view_container()
@@ -139,10 +139,11 @@ assessment_toolkit/frontend/front_end_main.py
 - start()
 - change_view()
 
+assessment_toolkit/backend/scenario/scenario.py
+- __init__
 
 results_toolkit/frontend/front_end_main.py
 - change_view()
 
-results_toolkit/frontend/views.py 
+results_toolkit/frontend/views.py
 - view_container()
-

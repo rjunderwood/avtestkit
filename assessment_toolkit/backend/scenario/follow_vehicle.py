@@ -165,10 +165,16 @@ class ScenarioFollowVehicle:
 
             #Set the other vehicles on the other direction 
             number_of_other_vehicles = metamorphic_parameters['passing_vehicles']
+            vehicle_types = metamorphic_parameters['car_types']
             #Other vehicles moving the opposite direction 
             npm_y_value = 150
             for vehicle in range(number_of_other_vehicles):
                 npc_vehicle_blueprint = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
+            for vehicle in range(0,number_of_other_vehicles):
+                for bp in blueprint_library:
+                    if bp.id == vehicle_types[vehicle]:
+                        npc_vehicle_blueprint = bp
+                        break
                 spawn_loc = carla.Location(335, npm_y_value,self.Z)
                 rotation = carla.Rotation(self.PITCH,90,self.ROLL)
                 transform = carla.Transform(spawn_loc, rotation)

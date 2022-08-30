@@ -84,7 +84,11 @@ class ScenarioFollowVehicle:
 
 
             #Metamophic Parameters Specific for this test
-            # metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            metamorphic_parameters = {
+            "weather": "Cloudy Noon",
+            "passing_vehicles":3,
+            "car_types": ["vehicle.toyota.prius", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"]
+        }
             
             world.set_weather(self.get_weather_parameters('Cloudy Sunset'))
 
