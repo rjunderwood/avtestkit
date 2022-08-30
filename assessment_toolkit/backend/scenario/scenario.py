@@ -38,7 +38,7 @@ from abc import ABC, abstractclassmethod, abstractmethod
 
 class Scenario(ABC):
 
-    def __init__(self, name, NPC_X, NPC_Y, NPC_Z, PITCH, YAW, ROLL, 
+    def __init__(self, name, X, Y, Z, PITCH, YAW, ROLL, 
     SPEC_CAM_X, SPEC_CAM_Y, SPEC_CAM_Z, 
     RUNNING_TIME) -> None:
 
@@ -46,9 +46,9 @@ class Scenario(ABC):
 
         # scenario vehicle spawn coordinates
         self.name = name
-        self.NPC_X = NPC_X
-        self.NPC_Y = NPC_Y
-        self.NPC_Z = NPC_Z
+        self.X = X
+        self.Y = Y
+        self.Z = Z
         self.PITCH = PITCH
         self.YAW = YAW
         self.ROLL = ROLL
@@ -63,8 +63,8 @@ class Scenario(ABC):
         self.EGO_VEHICLE_NAME = "ego_vehicle"
         self.TRIGGER_DIST = 30
         self.VEHICLE_MODEL = 'vehicle.toyota.prius'
-        self.NPC_VEHICLE_ROLENAME = 'npc_vehicle'
-        self.NPC_VEHICLE_VELOCITY = 3
+        self.SPAWNED_VEHICLE_ROLENAME = 'spawned_vehicle'
+        self.SPAWNED_VEHICLE_VELOCITY = 5
 
         self.RUNNING_TIME = RUNNING_TIME
 
@@ -143,7 +143,7 @@ class Scenario(ABC):
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
+        results_file_name = self.name + "_" + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
