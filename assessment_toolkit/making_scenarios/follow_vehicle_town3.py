@@ -15,7 +15,7 @@ except IndexError:
 
 import carla
 
-class ScenarioFollowVehicleTown3:
+class ScenarioFollowVehicleTown3: 
 
     scenario_finished = False
 
