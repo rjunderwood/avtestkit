@@ -91,6 +91,18 @@ class AssessmentToolkit:
             except: 
                 pass
 
+            try:
+
+                if data['scenario_check_pedestrian_crossing_prior_vehicle_manouver'] == True:
+                    self.scenario_queue.append(ScenarioManager("pedestrian_crossing_prior_vehicle_manouver", data))
+            except: 
+                pass
+            try:
+                if data['scenario_check_pedestrian_crossing_prior_vehicle_manouver0'] == True:
+                    self.scenario_queue.append(ScenarioManager("pedestrian_crossing_prior_vehicle_manouver", data))    
+            except: 
+                pass
+
 
             try:
 

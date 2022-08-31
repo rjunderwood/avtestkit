@@ -6,6 +6,7 @@ from .intersection_left_turn import IntersectionLeftTurn
 from .follow_vehicle import ScenarioFollowVehicle
 from .follow_vehicle_town3 import ScenarioFollowVehicleTown3
 from .pedestrian_crossing import ScenarioPedestrianCrossing
+from .pedestrian_crossing_prior_vehicle_manouver import ScenarioPedestrianCrossingPriorVehicleManouver
 from .red_light import ScenarioRedLight
 #Import a mock scenario 
 #from .mock_follow_vehicle import ScenarioFollowVehicle
@@ -28,6 +29,8 @@ class ScenarioManager:
             self.scenario_runner = ScenarioFollowVehicleTown3()
         if(scenario_name == 'pedestrian_crossing'):
             self.scenario_runner = ScenarioPedestrianCrossing()
+        if(scenario_name == 'pedestrian_crossing_prior_vehicle_manouver'):
+            self.scenario_runner = ScenarioPedestrianCrossingPriorVehicleManouver()
         if(scenario_name == 'red_light'):
             self.scenario_runner = ScenarioRedLight()
         if(scenario_name == 'intersection_left_turn'):

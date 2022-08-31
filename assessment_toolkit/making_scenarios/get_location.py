@@ -23,11 +23,11 @@ world = client.load_world('Town03')
 spectator = world.get_spectator()
 
 
-SPEC_CAM_X = 2
-SPEC_CAM_Y = 133
-SPEC_CAM_Z = 80
+SPEC_CAM_X = 123
+SPEC_CAM_Y = -14
+SPEC_CAM_Z = 112
 SPEC_CAM_PITCH = -90
-SPEC_CAM_YAW = 0
+SPEC_CAM_YAW = 90
 SPEC_CAM_ROLL = 0 
 
 spectator.set_transform(carla.Transform(carla.Location(SPEC_CAM_X, SPEC_CAM_Y,SPEC_CAM_Z),carla.Rotation(SPEC_CAM_PITCH,SPEC_CAM_YAW,SPEC_CAM_ROLL)))

@@ -9,10 +9,9 @@ import time
 
 #Import ROSClose
 from backend.interface import ros_close as rclose
-from backend.scenario.stats_recorder import StatsRecorder
+from backend.util.stats_recorder import StatsRecorder
 from backend.util.results.process_results import ProcessResult
 
-from .weather import get_weather_parameters
 
 CWD = os.getcwd()
 

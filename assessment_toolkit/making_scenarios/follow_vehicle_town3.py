@@ -19,8 +19,10 @@ class ScenarioFollowVehicleTown3:
 
     scenario_finished = False
 
-    X = 70
-    Y = 196.7
+    # X = 70
+    # Y = 196.7
+    X = 207 
+    Y = -1.73
     Z = 1
     PITCH = 0
     YAW = 180
@@ -33,9 +35,10 @@ class ScenarioFollowVehicleTown3:
 
     #Setup the spectator camera
 
-    SPEC_CAM_X = 88
-    SPEC_CAM_Y = 195
-    SPEC_CAM_Z = 100
+
+    SPEC_CAM_X = 123
+    SPEC_CAM_Y = -14
+    SPEC_CAM_Z = 112
     SPEC_CAM_PITCH = -90
     SPEC_CAM_YAW = 90
     SPEC_CAM_ROLL = 0 

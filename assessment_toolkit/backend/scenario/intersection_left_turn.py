@@ -7,7 +7,7 @@ from .scenario import Scenario
 
 import carla
 from ..util.util import *
-from .weather import get_weather_parameters
+from backend.util.weather import get_weather_parameters
 
 CWD = os.getcwd() 
 

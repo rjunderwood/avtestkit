@@ -23,6 +23,7 @@ def view_container(gui):
         sg.Column(view_scenario_starter_follow_vehicle(gui), key='view_scenario_starter_follow_vehicle',visible=False),
          sg.Column(view_scenario_starter_follow_vehicle_town3(gui), key='view_scenario_starter_follow_vehicle_town3',visible=False),
         sg.Column(view_scenario_starter_pedestrian_crossing(gui), key='view_scenario_starter_pedestrian_crossing',visible=False),
+                sg.Column(view_scenario_starter_pedestrian_crossing_prior_vehicle_manouver(gui), key='view_scenario_starter_pedestrian_crossing_prior_vehicle_manouver',visible=False),
         sg.Column(view_scenario_starter_red_light(gui), key='view_scenario_starter_red_light',visible=False),
         sg.Column(view_scenario_starter_intersection_left_turn(gui), key='view_scenario_starter_intersection_left_turn',visible=False),
         sg.Column(view_start_autoware(gui), key='view_start_autoware',visible=False),
@@ -30,6 +31,7 @@ def view_container(gui):
         sg.Column(view_patch_autoware_finished(gui), key='view_patch_autoware_finished',visible=False),
         sg.Column(view_metamorphic_test_state_page(gui, 'pedestrian_crossing'), key='view_metamorphic_test_state_page_follow_vehicle_town3',visible=False),
         sg.Column(view_metamorphic_test_state_page(gui, 'pedestrian_crossing'), key='view_metamorphic_test_state_page_pedestrian_crossing',visible=False),
+        sg.Column(view_metamorphic_test_state_page(gui, 'pedestrian_crossing'), key='view_metamorphic_test_state_page_pedestrian_crossing_prior_vehicle_manouver',visible=False),
         sg.Column(view_metamorphic_test_state_page(gui, 'follow_vehicle'), key='view_metamorphic_test_state_page_follow_vehicle',visible=False),
         sg.Column(view_metamorphic_test_state_page(gui, 'red_light'), key='view_metamorphic_test_state_page_red_light',visible=False),
         sg.Column(view_metamorphic_test_state_page(gui, 'intersection_left_turn'), key='view_metamorphic_test_state_page_intersection_left_turn',visible=False),
@@ -74,6 +76,7 @@ def view_setup_scenarios(gui):
         [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
              [sg.Checkbox('Follow Vehicle Town3', default=False, key='scenario_check_follow_vehicle_town3')],
         [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
+         [sg.Checkbox('Pedestrian Crossing Prior Vehicle Manouver', default=False, key='scenario_check_pedestrian_crossing_prior_vehicle_manouver')],
         [sg.Checkbox('Vehicle Running Red Light', default=False, key='scenario_check_red_light')],
         [sg.Checkbox('Vehicle Making Left Turn at Intersection', default=False, key='scenario_check_intersection_left_turn')],
         [sg.Text('\n')],
@@ -143,6 +146,15 @@ def view_scenario_starter_pedestrian_crossing(gui):
     layout = [
         [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text("\nPedestrian Crossing\n")],
+        [sg.Button('Continue', size=(100, 2))],
+    ]
+    return layout   
+
+def view_scenario_starter_pedestrian_crossing_prior_vehicle_manouver(gui):
+    scenario_name = gui.get_current_scenario_name()
+    layout = [
+        [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
+        [sg.Text("\nPedestrian Crossing Prior Vehicle Manouver\n")],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout   
