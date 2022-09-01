@@ -23,10 +23,10 @@ world = client.load_world('Town03')
 spectator = world.get_spectator()
 
 
-SPEC_CAM_X = 123
-SPEC_CAM_Y = -14
-SPEC_CAM_Z = 112
-SPEC_CAM_PITCH = -90
+SPEC_CAM_X = -10
+SPEC_CAM_Y = 117
+SPEC_CAM_Z = 52
+SPEC_CAM_PITCH = -70
 SPEC_CAM_YAW = 90
 SPEC_CAM_ROLL = 0 
 

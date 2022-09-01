@@ -175,10 +175,23 @@ class ScenarioPedestrianCrossing:
             pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
             pedestrian_actors.append(pedestrian_actor)
             self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
-
+      
+      
         #One of the pedestrian actor is the trigger
-        if(self.scenario_trigger_actor == None):
-            self.scenario_trigger_actor=pedestrian_actors[0]
+        try:
+
+            if(self.scenario_trigger_actor == None):
+                self.scenario_trigger_actor=pedestrian_actors[0]
+        except: 
+            #No pedestrian. Spawn a single pedestrian that does not move on road. 
+            pedestrian_x = -10
+            #Spawn Children 
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+            self.scenario_trigger_actor = pedestrian_actor 
 
     
     def start_recording_scenario(self):

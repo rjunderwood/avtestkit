@@ -60,20 +60,20 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
-    SPEC_CAM_X = 2
-    SPEC_CAM_Y = 133
-    SPEC_CAM_Z = 18
-    SPEC_CAM_PITCH = -33
-    SPEC_CAM_YAW = 179
+    SPEC_CAM_X = -10
+    SPEC_CAM_Y = 117
+    SPEC_CAM_Z = 52
+    SPEC_CAM_PITCH = -70
+    SPEC_CAM_YAW = 90
     SPEC_CAM_ROLL = 0 
 
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    RUNNING_TIME = 90
 
     ego_vehicle = None
 
     #Metamorphic Tests
-    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json")
+    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing_prior_vehicle_manouver.json")
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
     metamorphic_parameters = None
@@ -177,10 +177,21 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
             self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
 
         #One of the pedestrian actor is the trigger
-        if(self.scenario_trigger_actor == None):
-            self.scenario_trigger_actor=pedestrian_actors[0]
+        try:
 
-    
+            if(self.scenario_trigger_actor == None):
+                self.scenario_trigger_actor=pedestrian_actors[0]
+        except: 
+            #No pedestrian. Spawn a single pedestrian that does not move on road. 
+            pedestrian_x = -10
+            #Spawn Children 
+            spawn_loc = carla.Location(pedestrian_x,142,0.4)
+            pedestrian_x+=0.5
+            rotation = carla.Rotation(7,1,self.ROLL)
+            transform = carla.Transform(spawn_loc, rotation)
+            pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+            self.scenario_trigger_actor = pedestrian_actor 
+
     def start_recording_scenario(self):
         
         if os.name == 'nt':

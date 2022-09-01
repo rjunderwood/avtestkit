@@ -22,7 +22,7 @@ class ScenarioFollowVehiclePriorVehicleManouver:
     from spectator_camera import setup_spectator_camera
     
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    RUNNING_TIME = 60
     scenario_finished = False
     world=None
     blueprint_library=None
@@ -53,6 +53,8 @@ class ScenarioFollowVehiclePriorVehicleManouver:
     # LEAD_VEHICLE_VELOCITY = 3
     LEAD_VEHICLE_VELOCITY = 6
 
+
+    #NAVGOAL -42.3, 129, 1, 0, 180. 0 
     
     #Metamophic Parameters Specific for this test
     metamorphic_parameters = {
@@ -66,7 +68,7 @@ class ScenarioFollowVehiclePriorVehicleManouver:
                 "model":"sedan",
                 "location":{
                     "X":2,
-                    "Y":160, 
+                    "Y":180, 
                     "Z":0.2, 
                     "PITCH":0,
                     "YAW":-90, 
@@ -316,5 +318,5 @@ class ScenarioFollowVehiclePriorVehicleManouver:
 
     #Start te
 
-scenario_follow_vehicle = ScenarioFollowVehicle()
+scenario_follow_vehicle = ScenarioFollowVehiclePriorVehicleManouver()
 scenario_follow_vehicle.run()
