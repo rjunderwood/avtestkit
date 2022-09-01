@@ -252,7 +252,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
 
     def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
+        results_file_name = 'pedestrian_crossing_prior_vehicle_manouver_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
