@@ -57,7 +57,7 @@ class ScenarioRedLight:
 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
-    TRIGGER_DIST = 30
+    TRIGGER_DIST = 41
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -68,11 +68,8 @@ class ScenarioRedLight:
     SPEC_CAM_PITCH = -90
     SPEC_CAM_YAW = 0
     SPEC_CAM_ROLL = 0 
-
-
     SPAWNED_VEHICLE_ROLENAME = 'running_vehicle'
-
-    RUNNING_VEHICLE_VELOCITY = 3
+    RUNNING_VEHICLE_VELOCITY = 4
 
     
     #How long the scenario actually should run once recording is triggered. 
@@ -103,9 +100,12 @@ class ScenarioRedLight:
       
             blueprint_library = world.get_blueprint_library()
 
+            #Metamophic Parameters Specific for this test
+            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            
 
             # Running Red Light Vehicle
-            running_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
+            running_vehicle_bp = next(bp for bp in blueprint_library if bp.id == metamorphic_parameters['running_vehicle'])
             running_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
             spawn_loc = carla.Location(self.X,self.Y,self.Z)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
@@ -115,12 +115,8 @@ class ScenarioRedLight:
 
             # TODO: Probably set the red light traffic signals here?
 
-
-            #Metamophic Parameters Specific for this test
-            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
-            
             world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
-
+            self.RUNNING_VEHICLE_VELOCITY = metamorphic_parameters['running_vehicle_velocity']
 
             # wait for the ego vehicle to spawn 
             while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
@@ -144,16 +140,16 @@ class ScenarioRedLight:
             
 
             # TODO: trigger dist for sending running red light vehicle?
-            # while(calc_dist(running_vehicle, ego_vehicle) > self.TRIGGER_DIST):
-            #     try:
-            #         #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
-            #         pass
-            #     except KeyboardInterrupt:
-            #         #lead_vehicle.destroy()
-            #         pass
+            while(calc_dist(running_vehicle, ego_vehicle) > self.TRIGGER_DIST):
+                try:
+                    print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(running_vehicle, ego_vehicle))
+                    pass
+                except KeyboardInterrupt:
+                    #lead_vehicle.destroy()
+                    pass
             
             running_vehicle.set_target_velocity(carla.Vector3D(self.RUNNING_VEHICLE_VELOCITY,0,0))
-
+            # self.ego_vehicle.set_target_velocity(carla.Vector3D(0,-self.RUNNING_VEHICLE_VELOCITY,0))
             #Set the other vehicles on the other direction 
             number_of_other_vehicles = metamorphic_parameters['passing_vehicles']
             vehicle_types = metamorphic_parameters['car_types']

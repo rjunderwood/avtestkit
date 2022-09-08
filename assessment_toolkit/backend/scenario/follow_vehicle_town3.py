@@ -291,7 +291,7 @@ class ScenarioFollowVehicleTown3:
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
+        results_file_name = 'follow_vehicle_town3_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

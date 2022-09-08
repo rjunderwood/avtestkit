@@ -34,7 +34,7 @@ class ScenarioManager:
         if(scenario_name == 'red_light'):
             self.scenario_runner = ScenarioRedLight()
         if(scenario_name == 'intersection_left_turn'):
-            self.scenario_runner = IntersectionLeftTurn("intersection_left_turn", 335, 150, 0.2, 0, 90, 0, 340, 200, 60, 40)
+            self.scenario_runner = IntersectionLeftTurn("intersection_left_turn", 335, 180, 0.2, 0, 90, 0, 340, 200, 60, 40)
 
 
     def run(self):

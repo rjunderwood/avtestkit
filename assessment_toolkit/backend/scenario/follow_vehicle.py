@@ -124,7 +124,8 @@ class ScenarioFollowVehicle:
 
             #Metamophic Parameters Specific for this test
             metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
-            
+            self.LEAD_VEHICLE_VELOCITY = metamorphic_parameters['lead_vehicle_velocity']
+
             world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
 
 
@@ -140,7 +141,7 @@ class ScenarioFollowVehicle:
             ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
             self.ego_vehicle = ego_vehicle
-
+            self.ego_vehicle.set_target_velocity(carla.Vector3D(0,-metamorphic_parameters['ego_vehicle_velocity'],0))
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
             

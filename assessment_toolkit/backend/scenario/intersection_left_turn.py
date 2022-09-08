@@ -23,6 +23,8 @@ except IndexError:
 
 class IntersectionLeftTurn(Scenario):
 
+    TRIGGER_DIST = 80
+
     def __init__(self, name, X, Y, Z, PITCH, YAW, ROLL, SPEC_CAM_X, SPEC_CAM_Y, SPEC_CAM_Z, RUNNING_TIME) -> None:
         super().__init__(name, X, Y, Z, PITCH, YAW, ROLL, SPEC_CAM_X, SPEC_CAM_Y, SPEC_CAM_Z, RUNNING_TIME)
 
@@ -40,7 +42,11 @@ class IntersectionLeftTurn(Scenario):
             carla.Rotation(self.SPEC_CAM_PITCH, self.SPEC_CAM_YAW, self.SPEC_CAM_ROLL)))
     
             blueprint_library = world.get_blueprint_library()
-
+   # Metamophic parameters for this test
+            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            self.VEHICLE_MODEL = metamorphic_parameters['oncoming_vehicle_model']
+            self.SPAWNED_VEHICLE_VELOCITY = metamorphic_parameters['oncoming_vehicle_velocity']
+            
             # Oncoming Traffic
             spawned_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
             spawned_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
@@ -50,8 +56,7 @@ class IntersectionLeftTurn(Scenario):
             spawned_vehicle = world.spawn_actor(spawned_vehicle_bp, transform)
             spawned_vehicle.set_light_state(carla.VehicleLightState.All)
 
-            # Metamophic parameters for this test
-            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+         
             world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
 
             # wait for the ego vehicle to spawn 
@@ -68,6 +73,15 @@ class IntersectionLeftTurn(Scenario):
 
             # Start the metamorphic test 
             self.metamorphic_test_running = True 
+
+
+            while(calc_dist(spawned_vehicle, ego_vehicle) > 60):
+                    try:
+                        print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(spawned_vehicle, ego_vehicle))
+                        pass
+                    except KeyboardInterrupt:
+                        #lead_vehicle.destroy()
+                        pass
             
             spawned_vehicle.set_target_velocity(carla.Vector3D(0,self.SPAWNED_VEHICLE_VELOCITY,0))
 

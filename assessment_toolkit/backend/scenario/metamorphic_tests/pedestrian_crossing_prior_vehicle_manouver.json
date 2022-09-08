@@ -4,8 +4,9 @@
             "weather": "Cloudy Noon",
             "pedestrian_number":5,
             "pedestrian_type":"adult",
-            "pedestrian_adult":0,
+            "pedestrian_adult":2,
             "pedestrian_child":0,
+            "ego_vehicle_velocity":-10,
             "spawn_vehicle_location_1": [
             
             ],
@@ -58,6 +59,7 @@
             "pedestrian_type":"adult",
             "pedestrian_adult":1,
             "pedestrian_child":1,
+            "ego_vehicle_velocity":-10,
             "spawn_vehicle_location_1": [
                
             ],

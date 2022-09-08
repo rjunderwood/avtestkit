@@ -68,7 +68,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     SPEC_CAM_ROLL = 0 
 
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 90
+    RUNNING_TIME = 70
 
     ego_vehicle = None
 
@@ -111,6 +111,8 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
             self.handle_spawn_extra_scenario_vehicles()
             #Wait for ego to spawn 
             self.await_ego_spawn()
+            #Set Target velocity of ego 
+            
             #At this point start the metamorphic test running.
             self.metamorphic_test_running = True 
             # Await scenario trigger after this line the function 

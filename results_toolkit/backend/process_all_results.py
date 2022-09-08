@@ -128,16 +128,19 @@ class ProcessAllResults():
             for parameter in parameters:
                 value = parameters[parameter]
                 
+                try:
+                    # #Value is not a key already for the parameter
+                    if value not in failed_data[parameter]:
+                        #Add the value
+                        failed_data[parameter][value] = {'total':0, 'percentage':0}
 
-                # #Value is not a key already for the parameter
-                if value not in failed_data[parameter]:
-                    #Add the value
-                    failed_data[parameter][value] = {'total':0, 'percentage':0}
-
-                if scenario.failed():
-                    print("SCENARIO FAILED")
-                    failed_data[parameter][value]['total']+=1
-
+                    if scenario.failed():
+                        print("SCENARIO FAILED")
+                        failed_data[parameter][value]['total']+=1
+                    else:
+                        print("SCENARIO PASSED")
+                except:
+                    pass
 
         #Calculate percentages
         for parameter in failed_data:
