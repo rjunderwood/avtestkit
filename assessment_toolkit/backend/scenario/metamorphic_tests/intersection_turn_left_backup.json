@@ -1,0 +1,22 @@
+[
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 4,
+            "car_types": ["vehicle.toyota.prius", "vehicle.harley-davidson.low_rider", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"],
+            "oncoming_vehicle_velocity":7,
+            "oncoming_vehicle_model":"vehicle.harley-davidson.low_rider"
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Hard Rain Sunset",
+            "passing_vehicles": 4,
+            "car_types": ["vehicle.toyota.prius", "vehicle.harley-davidson.low_rider", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"],
+            "oncoming_vehicle_velocity":5,
+            "oncoming_vehicle_model":"vehicle.tesla.cybertruck"
+        },
+        "done": false
+    }
+]

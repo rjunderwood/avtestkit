@@ -70,7 +70,7 @@ class ScenarioFollowVehicle:
 
     
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    RUNNING_TIME = 15
 
 
 
@@ -88,23 +88,25 @@ class ScenarioFollowVehicle:
     def run(self):
         
         try:
-            if self.world == None:
-                client = carla.Client('localhost', 2000)
-                client.set_timeout(2.0)
-                world = client.get_world()
-                self.world = world
-            #Speed
-            # settings = world.get_settings()
-            # settings.fixed_delta_seconds = 0.05
-            # world.apply_settings(settings)
+            # if self.world == None:
+            client = carla.Client('localhost', 2000)
+            client.set_timeout(2.0)
+            world = client.get_world()
+            self.world = world
+     
             spectator = self.world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
             blueprint_library = self.world.get_blueprint_library()
 
 
+            #Metamophic Parameters Specific for this test
+            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            
+
+
             #Lead Vehicle
-            lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == self.VEHICLE_MODEL)
+            lead_vehicle_bp = next(bp for bp in blueprint_library if bp.id == metamorphic_parameters['lead_vehicle_model'])
             lead_vehicle_bp.set_attribute('role_name', self.SPAWNED_VEHICLE_ROLENAME)
             spawn_loc = carla.Location(self.X,self.Y,self.Z)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
@@ -114,8 +116,6 @@ class ScenarioFollowVehicle:
 
 
 
-            #Metamophic Parameters Specific for this test
-            metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
             self.LEAD_VEHICLE_VELOCITY = metamorphic_parameters['lead_vehicle_velocity']
 
             self.world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
@@ -313,3 +313,7 @@ class ScenarioFollowVehicle:
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
+
+        #Set number of collision and lane invastions to metamorphic test to save as json
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()

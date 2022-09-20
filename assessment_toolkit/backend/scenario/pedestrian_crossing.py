@@ -56,7 +56,7 @@ class ScenarioPedestrianCrossing:
     YAW = 0
     ROLL = 0 
     EGO_VEHICLE_NAME = 'ego_vehicle'
-    TRIGGER_DIST = 38
+    TRIGGER_DIST = 39
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -73,7 +73,8 @@ class ScenarioPedestrianCrossing:
     ego_vehicle = None
 
     #Metamorphic Tests
-    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json")
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json"
+    metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
     metamorphic_parameters = None
@@ -88,7 +89,7 @@ class ScenarioPedestrianCrossing:
     def scenario_setup(self):
         client = carla.Client('localhost', 2000)
         client.set_timeout(2.0)
-        world = client.load_world('Town03')
+        world = client.get_world()
         self.world = world 
         # self.destroy_all_vehicle_actors(world)
         blueprint_library = world.get_blueprint_library()
@@ -129,7 +130,7 @@ class ScenarioPedestrianCrossing:
 
             self.handle_results_output()
   
-
+            self.set_test_finished(self.world)
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
@@ -138,7 +139,7 @@ class ScenarioPedestrianCrossing:
         finally:
             print("Scenario Finished :: Pedestrian Crossing") 
             #Set the metamorphic test as finished
-            self.set_test_finished(self.world)
+
 
         
             #Start recording the scenario in a separate process
@@ -236,6 +237,8 @@ class ScenarioPedestrianCrossing:
         #Set metamorphic test as done. 
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
         self.metamorphic_test_running = False
+        with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
+            outfile.write(json.dumps(self.metamorphic_tests, indent=4, sort_keys=True))
 
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
@@ -259,6 +262,9 @@ class ScenarioPedestrianCrossing:
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
 
+        #Set number of collision and lane invastions to metamorphic test to save as json
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
 
 
 

@@ -1,22 +1,634 @@
 [
     {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
-            "weather": "Cloudy Noon",
-            "passing_vehicles": 4,
-            "car_types": ["vehicle.toyota.prius", "vehicle.harley-davidson.low_rider", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"],
-            "oncoming_vehicle_velocity":7,
-            "oncoming_vehicle_model":"vehicle.harley-davidson.low_rider"
-        },
-        "done": false
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
     },
     {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
-            "weather": "Hard Rain Sunset",
-            "passing_vehicles": 4,
-            "car_types": ["vehicle.toyota.prius", "vehicle.harley-davidson.low_rider", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"],
-            "oncoming_vehicle_velocity":5,
-            "oncoming_vehicle_model":"vehicle.tesla.cybertruck"
-        },
-        "done": false
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 5,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 3,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
     }
 ]

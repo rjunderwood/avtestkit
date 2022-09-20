@@ -24,10 +24,24 @@ class StatsRecorder():
 
     world = None
     running_time = None
+    number_of_collisions = 0
+    number_of_lane_invasions = 0
+
+
+
+    def get_number_of_collisions(self):
+        return self.number_of_collisions
+    
+    #Get number of lane invasions
+    def get_number_of_lane_invasions(self):
+        return self.number_of_lane_invasions
+
+
     def __init__(self, carla_world, running_time):
         self.running_time = running_time
         self.world = carla_world 
- 
+    
+    
   
     def record_stats(self, role_name_to_track, accessory_rolename, filename):
         #records various stats about an actor and optionally logs to file in the following format
@@ -79,6 +93,7 @@ class StatsRecorder():
                     collision_flag = [] # reset collision flag 
                     print("COLLISION !!!!!")
                     collision = 1
+                    self.number_of_collisions += 1
               
                 
                 #retrieve lane invasion data 
@@ -87,6 +102,8 @@ class StatsRecorder():
                     lane_invasion = 1 #lane invasion has occurred 
                     lane_inv_flag = [] #reset collision flag
                     print("LANE INVASION !!!!!")
+                    self.number_of_lane_invasions += 1
+
 
                 
                 # #write data to file

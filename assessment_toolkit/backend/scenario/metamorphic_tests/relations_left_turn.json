@@ -1,0 +1,75 @@
+
+
+
+//Base
+{
+    "done": true,
+    "number_of_collisions": 0,
+    "number_of_lane_invasions": 0,
+    "parameters": {
+        "car_types": [],
+        "oncoming_vehicle_model": "vehicle.toyota.prius",
+        "oncoming_vehicle_velocity": 5,
+        "passing_vehicles": 0,
+        "weather": "Cloudy Noon"
+    }
+},
+
+
+//Vehicle Model Change  vehicle.carlamotors.carlacola
+{
+    "done": false,
+    "number_of_collisions": 0,
+    "number_of_lane_invasions": 0,
+    "parameters": {
+        "car_types": [],
+        "oncoming_vehicle_model": "vehicle.carlamotors.carlacola",
+        "oncoming_vehicle_velocity": 5,
+        "passing_vehicles": 0,
+        "weather": "Cloudy Noon"
+    }
+}
+//Vehicle Model Change  vehicle.carlamotors.carlacola
+{
+    "done": false,
+    "number_of_collisions": 0,
+    "number_of_lane_invasions": 0,
+    "parameters": {
+        "car_types": [],
+        "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+        "oncoming_vehicle_velocity": 5,
+        "passing_vehicles": 0,
+        "weather": "Cloudy Noon"
+    }
+}
+
+
+
+
+//Oncoming Vehicle Speed Change  
+
+{
+    "done": false,
+    "number_of_collisions": 0,
+    "number_of_lane_invasions": 0,
+    "parameters": {
+        "car_types": [],
+        "oncoming_vehicle_model": "vehicle.toyota.prius",
+        "oncoming_vehicle_velocity": 6,
+        "passing_vehicles": 0,
+        "weather": "Cloudy Noon"
+    }
+}
+
+
+//Oncoming extra vehicle
+{
+    "parameters": {
+        "weather": "Cloudy Noon",
+        "passing_vehicles": 1,
+        "car_types": ["vehicle.toyota.prius"],
+        "oncoming_vehicle_velocity":5,
+        "oncoming_vehicle_model":"vehicle.toyota.prius"
+    },
+    "done": false
+}
