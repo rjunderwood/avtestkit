@@ -1,0 +1,131 @@
+[
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.toyota.prius"], 
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.toyota.prius"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":7
+        },
+        "done": false
+    },
+    
+
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.kawasaki.ninja"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+
+
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.kawasaki.ninja"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":7
+        },
+        "done": false
+    },
+
+
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 3,
+            "car_types": ["vehicle.carlamotors.carlacola","vehicle.tesla.model", "vehicle.nissan.patrol"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+
+
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.carlamotors.carlacola"],
+            "ego_vehicle_velocity":15,
+            "lead_vehicle_velocity":15
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Soft Rain Noon",
+            "passing_vehicles": 2,
+            "car_types": ["vehicle.carlamotors.carlacola","vehicle.tesla.model3"],
+            "ego_vehicle_velocity":8,
+            "lead_vehicle_velocity":9
+        },
+        "done": false
+    },
+
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.carlamotors.carlacola"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.toyota.prius"],
+            "ego_vehicle_velocity":6,
+            "lead_vehicle_velocity":6
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Wet Cloudy Sunset",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.toyota.prius"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "passing_vehicles": 1,
+            "car_types": ["vehicle.toyota.prius"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Hard Rain Sunset",
+            "passing_vehicles": 3,
+            "car_types": ["vehicle.toyota.prius", "vehicle.tesla.cybertruck", "vehicle.mustang.mustang"],
+            "ego_vehicle_velocity":10,
+            "lead_vehicle_velocity":10
+        },
+        "done": false
+    }
+]

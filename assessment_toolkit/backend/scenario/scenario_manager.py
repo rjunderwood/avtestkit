@@ -37,14 +37,17 @@ class ScenarioManager:
             self.scenario_runner = IntersectionLeftTurn("intersection_left_turn", 335, 180, 0.2, 0, 90, 0, 340, 200, 60, 40)
 
 
+    #run the scenario. This gets called from the assessment_toolkit.py
     def run(self):
+
         
 
         #Run the scenario
         self.scenario_runner.run()
+        #self.scenario_runner.run_continuous()
 
 
-    
+    #get the scenario name. This gets called from the assessment_toolkit.py
     def get_scenario_name(self):
         return self.scenario_name
 

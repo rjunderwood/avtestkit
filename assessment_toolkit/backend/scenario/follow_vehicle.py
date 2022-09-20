@@ -36,6 +36,7 @@ from ..util.util import *
 
 class ScenarioFollowVehicle:
 
+    world = None 
     scenario_finished = False
     # X = -2.1
     # Y = 120
@@ -77,7 +78,8 @@ class ScenarioFollowVehicle:
     ego_vehicle = None
 
     #Metamorphic Tests
-    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json")
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json"
+    metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
 
@@ -86,29 +88,19 @@ class ScenarioFollowVehicle:
     def run(self):
         
         try:
-            client = carla.Client('localhost', 2000)
-            client.set_timeout(2.0)
-        
-            world = client.get_world()
-
-
+            if self.world == None:
+                client = carla.Client('localhost', 2000)
+                client.set_timeout(2.0)
+                world = client.get_world()
+                self.world = world
             #Speed
             # settings = world.get_settings()
             # settings.fixed_delta_seconds = 0.05
             # world.apply_settings(settings)
-
-
-
-
-            spectator = world.get_spectator()
+            spectator = self.world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH,self.SPEC_CAM_YAW,self.SPEC_CAM_ROLL)))
-
-
-
-
-      
-            blueprint_library = world.get_blueprint_library()
+            blueprint_library = self.world.get_blueprint_library()
 
 
             #Lead Vehicle
@@ -117,7 +109,7 @@ class ScenarioFollowVehicle:
             spawn_loc = carla.Location(self.X,self.Y,self.Z)
             rotation = carla.Rotation(self.PITCH,self.YAW,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
-            lead_vehicle = world.spawn_actor(lead_vehicle_bp, transform)
+            lead_vehicle = self.world.spawn_actor(lead_vehicle_bp, transform)
             lead_vehicle.set_light_state(carla.VehicleLightState.All)
 
 
@@ -126,19 +118,19 @@ class ScenarioFollowVehicle:
             metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
             self.LEAD_VEHICLE_VELOCITY = metamorphic_parameters['lead_vehicle_velocity']
 
-            world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
+            self.world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
 
 
 
             # wait for the ego vehicle to spawn 
-            while(find_actor_by_rolename(world,self.EGO_VEHICLE_NAME) == None):
+            while(find_actor_by_rolename(self.world,self.EGO_VEHICLE_NAME) == None):
                 try:
                     print("Waiting for ego vehicle to spawn... ")
                 except KeyboardInterrupt:
                     # lead_vehicle.destroy()
                     pass
             
-            ego_vehicle = find_actor_by_rolename(world, self.EGO_VEHICLE_NAME)
+            ego_vehicle = find_actor_by_rolename(self.world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
             self.ego_vehicle = ego_vehicle
             self.ego_vehicle.set_target_velocity(carla.Vector3D(0,-metamorphic_parameters['ego_vehicle_velocity'],0))
@@ -180,7 +172,7 @@ class ScenarioFollowVehicle:
                 rotation = carla.Rotation(self.PITCH,90,self.ROLL)
                 transform = carla.Transform(spawn_loc, rotation)
                 npm_y_value-=20; 
-                npc_vehicle = world.spawn_actor(npc_vehicle_blueprint, transform)
+                npc_vehicle = self.world.spawn_actor(npc_vehicle_blueprint, transform)
                 npc_vehicle.set_target_velocity(carla.Vector3D(0,7,0))
 
 
@@ -221,9 +213,11 @@ class ScenarioFollowVehicle:
 
 
 
-            self.handle_results_output(world)
+            self.handle_results_output(self.world)
   
-
+            #Set the metamorphic test as finished
+            self.set_test_finished(self.world)
+ 
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
@@ -233,9 +227,7 @@ class ScenarioFollowVehicle:
             print("Scenario Finished :: Follow Vehicle") 
 
             
-            #Set the metamorphic test as finished
-            self.set_test_finished(world)
- 
+            
         
             #Start recording the scenario in a separate process
     def start_recording_scenario(self):
@@ -283,6 +275,10 @@ class ScenarioFollowVehicle:
         #Set metamorphic test as done. 
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
         self.metamorphic_test_running = False
+        #Save metamorphic test json in file directory
+        with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
+            outfile.write(json.dumps(self.metamorphic_tests, indent=4, sort_keys=True))
+
 
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
@@ -297,8 +293,16 @@ class ScenarioFollowVehicle:
         # self.ego_vehicle.destroy()
         # #Close the Carla Autoware docker that is setup.
         # rclose.ROSClose()
-        destroy_all_vehicle_actors(world)
-         
+        self.clear_world_state()
+    
+    def clear_world_state(self):
+        #Clear the world actors
+        print("clear_world_state(self)")
+        for actor in self.world.get_actors().filter('vehicle.*'):
+            # if actor is a vehicle
+            actor.destroy()
+            print("destroyed actor")
+
           
 
 

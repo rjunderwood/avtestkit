@@ -258,3 +258,8 @@ class ScenarioPedestrianCrossing:
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
+
+
+
+
+#BIAS towards Color 

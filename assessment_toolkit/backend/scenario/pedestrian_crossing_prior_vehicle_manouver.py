@@ -4,13 +4,18 @@ import sys
 import random
 import time
 import argparse
-import math
+import math 
 import json
 from backend.util.stats_recorder import StatsRecorder
+from backend.interface.run_scenario_docker import RunScenarioDocker 
 from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from backend.util.weather import get_weather_parameters
+
+# RUN_SCENARIO_DOCKER= RunScenarioDocker() 
+# RUN_SCENARIO_DOCKER.run()
+
 CWD = os.getcwd() 
 
 CONFIG = json.load(open(CWD+'/config.json'));
@@ -32,7 +37,6 @@ import subprocess
 import pathlib
 
 from ..util.util import *
-
 
 CWD = os.getcwd() 
 
@@ -68,7 +72,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     SPEC_CAM_ROLL = 0 
 
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 70
+    RUNNING_TIME = 10
 
     ego_vehicle = None
 
@@ -84,19 +88,76 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     pedestrian_controllers=[] 
     scenario_trigger_actor=None #The carla actor that is used as trigger when distance from the ego 
 
+
+    first_run=True 
+
     #Connects to the carla world and setups necessary components
     def scenario_setup(self):
-        client = carla.Client('localhost', 2000)
-        client.set_timeout(2.0)
-        world = client.load_world('Town03')
-        self.world = world 
+
+        if self.world == None:
+            client = carla.Client('localhost', 2000)
+            client.set_timeout(2.0)
+            world = client.load_world('Town03')
+            self.world = world 
+
+
         # self.destroy_all_vehicle_actors(world)
-        blueprint_library = world.get_blueprint_library()
+        blueprint_library = self.world.get_blueprint_library()
         self.blueprint_library = blueprint_library
         #Setup the Specator Camera
         self.setup_spectator_camera(self.SPEC_CAM_X, self.SPEC_CAM_Y, self.SPEC_CAM_Z, self.SPEC_CAM_PITCH, self.SPEC_CAM_YAW, self.SPEC_CAM_ROLL)
         #Setup Weather 
-        world.set_weather(get_weather_parameters(self.metamorphic_parameters['weather']))
+        self.world.set_weather(get_weather_parameters(self.metamorphic_parameters['weather']))
+
+
+
+
+    def run_continuous(self):
+        try:
+              #Set current metamorphic parameters
+            self.metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
+            #Setup the basics of the scenario 
+            self.scenario_setup() 
+                    #Spawn pedestrians
+            self.spawn_pedestrians()
+            #Spawn extra vehicles 
+            self.handle_spawn_extra_scenario_vehicles()
+
+            #At this point start the metamorphic test running.
+            self.metamorphic_test_running = True 
+            self.await_ego_spawn()
+                        #SCENARIO Logic
+            #Pedestrian controllers
+            for pedestrian_controller in self.pedestrian_controllers:
+                pedestrian_controller.start()
+                pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
+            
+            #Start velocities of extra vehicles
+            self.start_extra_vehicle_velocities()
+           
+           
+
+           ###Loop to run for 5 seconds 
+            start_t = self.current_time()
+            end_time = start_t + 5
+          
+            while(self.current_time() < end_time):
+                pass
+
+        except Exception as e:
+            print("RUNNING SCENARIO EXCEPTION")
+            print(e)
+
+
+
+
+        finally:
+            print("Scenario Finished :: Pedestrian Crossing Crossing Prior Vehicle Manouver") 
+            #Set the metamorphic test as finished
+            self.set_test_finished_automation(self.world)
+
+    def current_time(self): 
+        return time.time()
 
 
     def run(self):
@@ -130,24 +191,27 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
 
 
             self.handle_results_output()
-  
+        
+        except Exception as e:
+            print("RUNNING SCENARIO EXCEPTION")
+            print(e)
+        
+        finally: 
+
 
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
-
+        
             
-        finally:
             print("Scenario Finished :: Pedestrian Crossing") 
             #Set the metamorphic test as finished
-            self.set_test_finished(self.world)
+            self.set_test_finished_automation(self.world)
 
         
             #Start recording the scenario in a separate process
     
-    
-    
-    
+
         #Handles the spawning of pedestrians
     def spawn_pedestrians(self):
         childBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0013')[0]
@@ -230,6 +294,34 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
             if test['done'] == False:
                 result = False
         return result
+
+
+    #Auto restart the test. 
+    def set_test_finished_automation(self, world):
+        #Set metamorphic test as done. 
+        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        # self.metamorphic_test_running = False
+        try:
+            actors = self.world.get_actors()
+            walker_actors = actors.filter('walker.*') 
+            vehicle_actors = actors.filter('vehicle.*') #filter out only vehicle actors
+            
+            if(actors):
+                for walker in walker_actors:
+                    walker.destroy()
+                for vehicle in vehicle_actors:
+                    if(vehicle.attributes['role_name'] != self.EGO_VEHICLE_NAME):
+                        vehicle.destroy()
+              
+            else:
+                print('There are currently  actors in the Carla world. ')    
+            #
+            self.pedestrian_controllers = []
+            
+            #self.run()
+            self.run_continuous()
+        except:
+            pass
 
     #When the metamorphic test is finished.
     def set_test_finished(self, world):
