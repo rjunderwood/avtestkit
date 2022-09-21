@@ -264,7 +264,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -274,7 +276,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -284,7 +288,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -294,7 +300,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -304,7 +312,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -314,7 +324,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
