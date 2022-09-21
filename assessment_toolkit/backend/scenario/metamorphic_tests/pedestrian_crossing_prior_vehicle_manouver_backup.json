@@ -1,0 +1,100 @@
+[
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "pedestrian_number":5,
+            "pedestrian_type":"adult",
+            "pedestrian_adult":2,
+            "pedestrian_child":0,
+            "ego_vehicle_velocity":-10,
+            "spawn_vehicle_location_1": [
+            
+            ],
+            "spawn_vehicle_location_2": [
+                {
+                    "model":"sedan",
+                    "location":{
+                        "X":-6,
+                        "Y":110, 
+                        "Z":0.2, 
+                        "PITCH":0,
+                        "YAW":90, 
+                        "ROLL":0,
+                        "velocity":{
+                            "X":0,
+                            "Y":8,
+                            "Z":0
+                        }
+                    }
+                },
+                  {
+                    "model":"motorbike",
+                    "location":{
+                        "X":-6,
+                        "Y":102, 
+                        "Z":0.2, 
+                        "PITCH":0,
+                        "YAW":90, 
+                        "ROLL":0,
+                        "velocity":{
+                            "X":0,
+                            "Y":10,
+                            "Z":0
+                        }
+                    }
+                }
+            ]
+        },
+        "done": false
+    },
+    {
+        "parameters": {
+            "weather": "Cloudy Noon",
+            "pedestrian_number":5,
+            "pedestrian_type":"adult",
+            "pedestrian_adult":1,
+            "pedestrian_child":1,
+            "ego_vehicle_velocity":-10,
+            "spawn_vehicle_location_1": [
+               
+            ],
+            
+            "spawn_vehicle_location_2": [
+                {
+                    "model":"sedan",
+                    "location":{
+                        "X":-6,
+                        "Y":110, 
+                        "Z":0.2, 
+                        "PITCH":0,
+                        "YAW":90, 
+                        "ROLL":0,
+                        "velocity":{
+                            "X":0,
+                            "Y":4,
+                            "Z":0
+                        }
+                    }
+                },
+                  {
+                    "model":"motorbike",
+                    "location":{
+                        "X":-6,
+                        "Y":102, 
+                        "Z":0.2, 
+                        "PITCH":0,
+                        "YAW":90, 
+                        "ROLL":0,
+                        "velocity":{
+                            "X":0,
+                            "Y":6,
+                            "Z":0
+                        }
+                    }
+                }
+            ]
+        },
+        "done": false
+    }
+]
+

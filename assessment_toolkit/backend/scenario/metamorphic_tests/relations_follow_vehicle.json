@@ -1,7 +1,6 @@
 
 //Scenario Follow Vehicle 
 
-
 //BASE 
 {
     "done": true,
@@ -101,7 +100,7 @@
         "weather": "Cloudy Noon"
     }
 },
-//Passing Vehicle Model "vehicle.kawasaki.ninja" Change && Lead Vehcicle Velocity  10
+//Passing Vehicle Model "vehicle.kawasaki.ninja" Change && Lead Vehicle Velocity  10
 {
     "done": false,
     "number_of_collisions": 0,
