@@ -150,6 +150,8 @@ class StatsRecorder():
         
         actors = world.get_actors()
         actors = actors.filter('vehicle.*') #filter out only vehicle actors
+        #append actor type pedestrian to the list of actors
+        # actors = actors.append(actors.filter('walker.pedestrian.*')
 
         if(actors):
             for actor in actors:

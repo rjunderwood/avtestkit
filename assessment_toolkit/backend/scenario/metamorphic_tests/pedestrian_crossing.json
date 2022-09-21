@@ -1,6 +1,18 @@
 [
     {
-        "done": true,
+        "done": false,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": false,
         "number_of_collisions": 0,
         "number_of_lane_invasions": 0,
         "parameters": {
@@ -12,12 +24,12 @@
         }
     },
     {
-        "done": true,
+        "done": false,
         "number_of_collisions": 0,
         "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
-            "pedestrian_child": 0,
+            "pedestrian_child": 1,
             "spawn_vehicle_location_1": [],
             "spawn_vehicle_location_2": [],
             "weather": "Cloudy Noon"

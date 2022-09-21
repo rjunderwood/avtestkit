@@ -1,0 +1,141 @@
+[
+    {
+        "done": false,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 5,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 5,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 5,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 4,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 4,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius",
+                "vehicle.harley-davidson.low_rider",
+                "vehicle.tesla.cybertruck",
+                "vehicle.mustang.mustang"
+            ],
+            "passing_vehicles": 4,
+            "running_vehicle": "vehicle.harley-davidson.low_rider",
+            "running_vehicle_velocity": 6,
+            "weather": "Clear Sunset"
+        }
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius",
+                "vehicle.harley-davidson.low_rider",
+                "vehicle.tesla.cybertruck",
+                "vehicle.mustang.mustang"
+            ],
+            "passing_vehicles": 4,
+            "running_vehicle": "vehicle.harley-davidson.low_rider",
+            "running_vehicle_velocity": 5,
+            "weather": "Clear Sunset"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius",
+                "vehicle.tesla.cybertruck",
+                "vehicle.mustang.mustang"
+            ],
+            "passing_vehicles": 3,
+            "running_vehicle": "vehicle.tesla.cybertruck",
+            "running_vehicle_velocity": 4,
+            "weather": "Hard Rain Sunset"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius",
+                "vehicle.harley-davidson.low_rider",
+                "vehicle.tesla.cybertruck",
+                "vehicle.mustang.mustang"
+            ],
+            "passing_vehicles": 4,
+            "running_vehicle": "vehicle.tesla.cybertruck",
+            "running_vehicle_velocity": 4,
+            "weather": "Hard Rain Sunset"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius",
+                "vehicle.tesla.cybertruck"
+            ],
+            "passing_vehicles": 2,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 5,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [
+                "vehicle.harley-davidson.low_rider",
+                "vehicle.tesla.cybertruck"
+            ],
+            "passing_vehicles": 1,
+            "running_vehicle": "vehicle.toyota.prius",
+            "running_vehicle_velocity": 5,
+            "weather": "Cloudy Noon"
+        }
+    }
+]

@@ -1,0 +1,40 @@
+
+
+//BASE
+{
+    "done": false,
+    "parameters": {
+        "car_types": [],
+        "passing_vehicles": 0,
+        "running_vehicle": "vehicle.toyota.prius",
+        "running_vehicle_velocity": 5,
+        "weather": "Cloudy Noon"
+    }
+},
+
+
+
+// Vehicle Model Change "vehicle.carlamotors.carlacola"
+{
+    "done": false,
+    "parameters": {
+        "car_types": [],
+        "passing_vehicles": 0,
+        "running_vehicle": "vehicle.carlamotors.carlacola",
+        "running_vehicle_velocity": 5,
+        "weather": "Cloudy Noon"
+    }
+},
+
+
+// Vehicle Model Change                 "vehicle.kawasaki.ninja"
+{
+    "done": false,
+    "parameters": {
+        "car_types": [],
+        "passing_vehicles": 0,
+        "running_vehicle":  "vehicle.kawasaki.ninja",
+        "running_vehicle_velocity": 5,
+        "weather": "Cloudy Noon"
+    }
+},

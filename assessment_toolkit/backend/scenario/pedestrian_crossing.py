@@ -56,7 +56,7 @@ class ScenarioPedestrianCrossing:
     YAW = 0
     ROLL = 0 
     EGO_VEHICLE_NAME = 'ego_vehicle'
-    TRIGGER_DIST = 39
+    TRIGGER_DIST = 43
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -84,6 +84,10 @@ class ScenarioPedestrianCrossing:
     #Scenario Specific 
     pedestrian_controllers=[] 
     scenario_trigger_actor=None #The carla actor that is used as trigger when distance from the ego 
+
+
+    #Pedestrian Actor to track
+    pedestrian_actor_to_track = None
 
     #Connects to the carla world and setups necessary components
     def scenario_setup(self):
@@ -152,6 +156,8 @@ class ScenarioPedestrianCrossing:
         childBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0013')[0]
         adultBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0021')[0]
         walker_controller_bp = self.world.get_blueprint_library().find('controller.ai.walker')
+        # childBlueprintWalkers.set_attribute('role_name', 'pedestrian_to_track')
+        # adultBlueprintWalkers.set_attribute('role_name', 'pedestrian_to_track')
 
         #Pedestrians. 
         pedestrian_actors = []
@@ -164,7 +170,11 @@ class ScenarioPedestrianCrossing:
             pedestrian_x+=0.5
             rotation = carla.Rotation(7,1,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
+    
             pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+            if self.pedestrian_actor_to_track == None:
+                self.pedestrian_actor_to_track = pedestrian_actor
+                
             pedestrian_actors.append(pedestrian_actor)
             self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
         #Spawn Adults
@@ -174,6 +184,9 @@ class ScenarioPedestrianCrossing:
             rotation = carla.Rotation(7,1,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
             pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
+            if self.pedestrian_actor_to_track == None:
+                self.pedestrian_actor_to_track = pedestrian_actor
+               
             pedestrian_actors.append(pedestrian_actor)
             self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
       
@@ -248,19 +261,19 @@ class ScenarioPedestrianCrossing:
             rclose.ROSClose()
         # self.ego_vehicle.destroy()
         rclose.ROSClose()
-        # #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
-        # self.ego_vehicle.destroy()
-        # #Close the Carla Autoware docker that is setup.
-        # rclose.ROSClose()
-        # destroy_all_vehicle_actors(world)
-          
 
+
+        #Clear the pedestrian_actor_to_track
+        self.pedestrian_actor_to_track = None
+  
+
+  
     def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = 'pedestrian_crossing_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
-        stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
+        stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path)
 
         #Set number of collision and lane invastions to metamorphic test to save as json
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()

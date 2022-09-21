@@ -297,13 +297,17 @@ def await_ego_spawn(self):
 
 #Distance trigger from carla actor to ego vehicle that activates the scenario
 def await_scenario_trigger(self):
+    print("await_scenario_trigger")
     while(calc_dist(self.scenario_trigger_actor, self.ego_vehicle) > self.TRIGGER_DIST):
+
         try:
-            #print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(lead_vehicle, ego_vehicle))
+            print("Waiting for ego vehicle to enter within trigger distance. Current distance: %im " % calc_dist(self.scenario_trigger_actor, self.ego_vehicle))
             pass
         except KeyboardInterrupt:
             #lead_vehicle.destroy()
             pass
+
+    
 
 
 

@@ -108,15 +108,7 @@ class IntersectionLeftTurn(Scenario):
                 spawned_vehicle = world.spawn_actor(spawned_vehicle_bp, transform)
                 spawned_vehicle.set_target_velocity(carla.Vector3D(0,5,0))
 
-            # current_velocity = self.LEAD_VEHICLE_VELOCITY 
-            # #Speed up the vehicle at y 200 
-            # lead_vehicle_target_stop_y = 220
-            # while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
-            #     print(running_vehicle.get_location().y)
-            # while current_velocity < 6:
-            #     current_velocity+=0.01
-            #     running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
+       
 
             self.handle_results_output(world)
 

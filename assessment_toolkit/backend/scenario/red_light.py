@@ -54,7 +54,7 @@ class ScenarioRedLight:
     PITCH = 0
     YAW = 0
     ROLL = 0 
-
+ 
     EGO_VEHICLE_NAME = 'ego_vehicle'
 
     TRIGGER_DIST = 41
@@ -73,7 +73,7 @@ class ScenarioRedLight:
 
     
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    RUNNING_TIME = 20
 
 
 
@@ -81,9 +81,11 @@ class ScenarioRedLight:
     ego_vehicle = None
 
     #Metamorphic Tests
-    metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/red_light.json")
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/red_light.json"
+    metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
- 
+    metamorphic_test_running = False
+
 
 
     def run(self):
@@ -168,15 +170,7 @@ class ScenarioRedLight:
                 npc_vehicle = world.spawn_actor(npc_vehicle_blueprint, transform)
                 npc_vehicle.set_target_velocity(carla.Vector3D(0,7,0))
 
-            # current_velocity = self.LEAD_VEHICLE_VELOCITY 
-            # #Speed up the vehicle at y 200 
-            # lead_vehicle_target_stop_y = 220
-            # while(running_vehicle.get_location().y > lead_vehicle_target_stop_y):
-            #     print(running_vehicle.get_location().y)
-            # while current_velocity < 6:
-            #     current_velocity+=0.01
-            #     running_vehicle.set_target_velocity(carla.Vector3D(0,-current_velocity,0))
-
+          
 
             self.handle_results_output(world)
   
@@ -184,14 +178,14 @@ class ScenarioRedLight:
             # lead_vehicle.destroy()
             
             #After the record stats has completed in the RUNNING_TIME the scenario will finish
-
+            #Set the metamorphic test as finished
+            self.set_test_finished(world)
             
         finally:
             print("Scenario Finished :: Follow Vehicle") 
 
             
-            #Set the metamorphic test as finished
-            self.set_test_finished(world)
+         
  
         
             #Start recording the scenario in a separate process
@@ -240,6 +234,10 @@ class ScenarioRedLight:
         #Set metamorphic test as done. 
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
         self.metamorphic_test_running = False
+        #Save metamorphic test json in file directory
+        with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
+            outfile.write(json.dumps(self.metamorphic_tests, indent=4, sort_keys=True))
+
 
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
@@ -258,11 +256,15 @@ class ScenarioRedLight:
          
           
 
-
+ 
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = 'red_light_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
-        stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
+        stats_recorder.record_stats('ego_vehicle', self.SPAWNED_VEHICLE_ROLENAME, results_file_path)
+
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
+
