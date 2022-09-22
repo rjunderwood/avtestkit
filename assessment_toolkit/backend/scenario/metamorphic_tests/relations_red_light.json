@@ -73,3 +73,17 @@
         "weather": "Cloudy Noon"
     }
 },
+
+
+//Running vehicle velocity 6
+    
+    {
+        "done": false,
+        "parameters": {
+            "car_types": [],
+            "passing_vehicles": 0,
+            "running_vehicle":  "vehicle.toyota.prius",
+            "running_vehicle_velocity": 6,
+            "weather": "Cloudy Noon"
+        }
+    },
