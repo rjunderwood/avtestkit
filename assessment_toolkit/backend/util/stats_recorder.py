@@ -43,7 +43,7 @@ class StatsRecorder():
     
     
   
-    def record_stats(self, role_name_to_track, accessory_rolename, filename):
+    def record_stats(self, role_name_to_track, accessory_rolename, filename, pedestrian_trackers=None):
         #records various stats about an actor and optionally logs to file in the following format
         # simulation time, location x, location y, location z, velocity mag, acceleration mag, collision sensor, distance between this actor and another actor(optional)
 
@@ -55,9 +55,32 @@ class StatsRecorder():
 
         #setup collision sensor
         collision_flag = []
+        # collision_bp = None
+        # #If accessory_rolename is pedestrian then use the blueprint sensor.other.obstacle. else use sensor.other.collision
+        # if(accessory_rolename == "pedestrian_to_track"):
+        #     collision_bp = self.world.get_blueprint_library().find('sensor.other.obstacle')
+        # else:
+        #     collision_bp = self.world.get_blueprint_library().find('sensor.other.collision')
+        # collision_bp = self.world.get_blueprint_library().find('sensor.other.collision')
         collision_bp = self.world.get_blueprint_library().find('sensor.other.collision')
-        collision_sensor = self.world.spawn_actor(collision_bp, carla.Transform(), attach_to=actor_to_track)
-        collision_sensor.listen(lambda event: self.on_collision(collision_flag, event))
+        
+        #Collision Sensor list
+        collision_sensor_list = []
+
+
+        if pedestrian_trackers==None:
+            collision_sensor = self.world.spawn_actor(collision_bp, carla.Transform(), attach_to=actor_to_track)
+            collision_sensor.listen(lambda event: self.on_collision(collision_flag, event))
+        else:
+            #Setup pedestrian collision sensor
+            for pedestrian_actor in pedestrian_trackers: 
+                collision_sensor = self.world.spawn_actor(collision_bp, carla.Transform(), attach_to=pedestrian_actor)
+                collision_sensor.listen(lambda event: self.on_collision(collision_flag, event))
+                collision_sensor_list.append(collision_sensor)
+        
+                
+
+        
 
         lane_inv_flag = []
         lane_inv_bp = self.world.get_blueprint_library().find('sensor.other.lane_invasion')
@@ -106,21 +129,8 @@ class StatsRecorder():
 
 
                 
-                # #write data to file
-                # if(filename):
-                
-            
-                #print("Time: %0.2f | Loc: %0.2f,%0.2f,%0.2f | Vel: %0.2f | Acc: %0.2f | Collision: %s | Lane Invasion: %s | Dist to Other Actor: %0.2f" %(t,loc.x,loc.y,loc.z,self.mag(vel),self.mag(acc),collision,lane_invasion,dist_to_actor))
-                # print("Acceleration:: " + str(self.mag(acc)))
-                # print("Velocity:: " + str(self.mag(vel)))
-                # print("Acceleration::++++ %0.2f" %(self.mag(acc)))
-                # print("Velocity::++++ %0.2f" %(self.mag(vel)))
-                # print("Acceleration::++++ %0.2f" %(acc))
-                # print("Velocity::++++ %0.2f" %(vel))
+                #write to file
                 f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,self.mag(vel),self.mag(acc),collision,lane_invasion,dist_to_actor))
-                #f.write("%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f,%0.2f\r" % (t,loc.x,loc.y,loc.z,str(self.mag(vel)),str(self.mag(acc)),collision,lane_invasion,dist_to_actor))
-
-
 
                 #Check the actor we are tracking still exists
                 actor_to_track = self.find_actor_by_rolename(self.world, role_name_to_track) #check actor still exists

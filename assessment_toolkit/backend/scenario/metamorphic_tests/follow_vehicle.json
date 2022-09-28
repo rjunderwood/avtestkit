@@ -8,6 +8,172 @@
                 "vehicle.toyota.prius"
             ],
             "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.kawasaki.ninja"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "car_types": [
+                "vehicle.kawasaki.ninja"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
             "lead_vehicle_velocity": 10,
             "passing_vehicles": 1,
             "weather": "Cloudy Noon"
@@ -19,121 +185,10 @@
         "number_of_lane_invasions": 0,
         "parameters": {
             "car_types": [
-                "vehicle.toyota.prius"
+                "vehicle.kawasaki.ninja"
             ],
             "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.toyota.prius"
-            ],
-            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
             "lead_vehicle_velocity": 10,
             "passing_vehicles": 1,
             "weather": "Cloudy Noon"
@@ -148,6 +203,7 @@
                 "vehicle.kawasaki.ninja"
             ],
             "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
             "lead_vehicle_velocity": 10,
             "passing_vehicles": 1,
             "weather": "Cloudy Noon"
@@ -162,48 +218,7 @@
                 "vehicle.kawasaki.ninja"
             ],
             "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.kawasaki.ninja"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.kawasaki.ninja"
-            ],
-            "ego_vehicle_velocity": 10,
-            "lead_vehicle_velocity": 10,
-            "passing_vehicles": 1,
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "car_types": [
-                "vehicle.kawasaki.ninja"
-            ],
-            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
             "lead_vehicle_velocity": 10,
             "passing_vehicles": 1,
             "weather": "Cloudy Noon"

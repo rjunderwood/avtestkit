@@ -31,16 +31,16 @@ sleep 0s  # Waits 5 seconds.
 # RUN THE PATCH FILE
 docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% patch carla-autoware/carla-autoware-agent/agent/launch/my_mission_planning.launch ./Documents/update_my_mission_planning.patch
 sleep 0s  # Waits 5 seconds.
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/merge/AV-Tester/assessment_toolkit/ros_patch/scenarios/red_light.sh %%:/home/autoware/Documents
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/merge/AV-Tester/assessment_toolkit/ros_patch/scenarios/pedestrian_crossing.sh %%:/home/autoware/Documents
 
 # COPY EGOCAR SCRIPT TO RUNNING DOCKER
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% bash /home/autoware/Documents/red_light.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% bash /home/autoware/Documents/pedestrian_crossing.sh
 sleep 0s  # Waits 5 seconds.
 # RUN THE EGOCAR SCRIPT
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec %% chmod +x /home/autoware/Documents/red_light.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec %% chmod +x /home/autoware/Documents/pedestrian_crossing.sh
 
 # MAKE SCRIPT EXECUTABLE
-docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% /home/autoware/Documents/red_light.sh
+docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% /home/autoware/Documents/pedestrian_crossing.sh
 sleep 0s  # Waits 5 seconds.
 # RUN SCRIPT
 docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp /home/riley/Desktop/merge/AV-Tester/assessment_toolkit/ros_patch/run-simulation.bash %%:/home/autoware/Documents

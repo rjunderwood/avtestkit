@@ -56,7 +56,7 @@ class ScenarioPedestrianCrossing:
     YAW = 0
     ROLL = 0 
     EGO_VEHICLE_NAME = 'ego_vehicle'
-    TRIGGER_DIST = 43
+    TRIGGER_DIST = 40
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
@@ -68,7 +68,11 @@ class ScenarioPedestrianCrossing:
     SPEC_CAM_ROLL = 0 
 
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 30
+    RUNNING_TIME = 40
+
+    #
+    #pedestrian_trackers for the stats recorder
+    pedestrian_trackers = []
 
     ego_vehicle = None
 
@@ -126,7 +130,7 @@ class ScenarioPedestrianCrossing:
             #Pedestrian controllers
             for pedestrian_controller in self.pedestrian_controllers:
                 pedestrian_controller.start()
-                pedestrian_controller.go_to_location(carla.Location(13,139,0.2))
+                pedestrian_controller.go_to_location(carla.Location(13,134,0.2))
             
             #Start velocities of extra vehicles
             self.start_extra_vehicle_velocities()
@@ -153,6 +157,8 @@ class ScenarioPedestrianCrossing:
     
         #Handles the spawning of pedestrians
     def spawn_pedestrians(self):
+
+        self.pedestrian_trackers = []
         childBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0013')[0]
         adultBlueprintWalkers = self.blueprint_library.filter('walker.pedestrian.0021')[0]
         walker_controller_bp = self.world.get_blueprint_library().find('controller.ai.walker')
@@ -162,12 +168,13 @@ class ScenarioPedestrianCrossing:
         #Pedestrians. 
         pedestrian_actors = []
        
+
         
-        pedestrian_x = -10
+        pedestrian_y = 134
         #Spawn Children 
         for i in range(0, self.metamorphic_parameters['pedestrian_adult']):
-            spawn_loc = carla.Location(pedestrian_x,142,0.4)
-            pedestrian_x+=0.5
+            spawn_loc = carla.Location(-13,pedestrian_y,0.4)
+            pedestrian_y-=0.5
             rotation = carla.Rotation(7,1,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
     
@@ -176,11 +183,12 @@ class ScenarioPedestrianCrossing:
                 self.pedestrian_actor_to_track = pedestrian_actor
                 
             pedestrian_actors.append(pedestrian_actor)
-            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+
+            #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
         #Spawn Adults
         for i in range(0, self.metamorphic_parameters['pedestrian_child']):
-            spawn_loc = carla.Location(pedestrian_x,142,0.4)
-            pedestrian_x+=0.5
+            spawn_loc = carla.Location(-13,pedestrian_y,0.4)
+            pedestrian_y-=0.5
             rotation = carla.Rotation(7,1,self.ROLL)
             transform = carla.Transform(spawn_loc, rotation)
             pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
@@ -188,9 +196,34 @@ class ScenarioPedestrianCrossing:
                 self.pedestrian_actor_to_track = pedestrian_actor
                
             pedestrian_actors.append(pedestrian_actor)
-            self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
-      
-      
+            #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+        # for i in range(0, self.metamorphic_parameters['pedestrian_adult']):
+        #     spawn_loc = carla.Location(pedestrian_x,133,0.4)
+        #     pedestrian_x+=0.5
+        #     rotation = carla.Rotation(7,1,self.ROLL)
+        #     transform = carla.Transform(spawn_loc, rotation)
+    
+        #     pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
+        #     if self.pedestrian_actor_to_track == None:
+        #         self.pedestrian_actor_to_track = pedestrian_actor
+                
+        #     pedestrian_actors.append(pedestrian_actor)
+        #     #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+        # #Spawn Adults
+        # for i in range(0, self.metamorphic_parameters['pedestrian_child']):
+        #     spawn_loc = carla.Location(pedestrian_x,133,0.4)
+        #     pedestrian_x+=0.5
+        #     rotation = carla.Rotation(7,1,self.ROLL)
+        #     transform = carla.Transform(spawn_loc, rotation)
+        #     pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
+        #     if self.pedestrian_actor_to_track == None:
+        #         self.pedestrian_actor_to_track = pedestrian_actor
+               
+        #     pedestrian_actors.append(pedestrian_actor)
+        #     #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
+
+        self.pedestrian_trackers =pedestrian_actors
+
         #One of the pedestrian actor is the trigger
         try:
 
@@ -273,7 +306,7 @@ class ScenarioPedestrianCrossing:
         results_file_name = 'pedestrian_crossing_' + str(self.get_current_metamorphic_test_index())    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
-        stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path)
+        stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path, self.pedestrian_trackers)
 
         #Set number of collision and lane invastions to metamorphic test to save as json
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
