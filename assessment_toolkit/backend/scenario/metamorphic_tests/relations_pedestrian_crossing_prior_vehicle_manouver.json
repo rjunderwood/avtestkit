@@ -21,8 +21,8 @@
 {
     "parameters": {
         "weather": "Cloudy Noon",
-        "pedestrian_adult":1,
-        "pedestrian_child":0,
+        "pedestrian_adult":0,
+        "pedestrian_child":1,
         "spawn_vehicle_location_1": [
            
         ],
