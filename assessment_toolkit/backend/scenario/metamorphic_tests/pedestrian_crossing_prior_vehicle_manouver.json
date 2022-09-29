@@ -312,7 +312,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -322,7 +324,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -332,7 +336,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -342,7 +348,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -352,7 +360,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -368,7 +378,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -379,7 +389,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -395,7 +407,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -406,7 +418,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -422,7 +436,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -433,7 +447,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -449,7 +465,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -460,7 +476,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -476,7 +494,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -487,7 +505,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -503,7 +523,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -514,7 +534,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -530,7 +552,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -541,7 +563,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -557,7 +581,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -568,7 +592,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -584,7 +610,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -595,7 +621,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -611,7 +639,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -622,7 +650,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -638,7 +668,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -649,12 +679,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -665,7 +695,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -681,7 +713,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -692,12 +724,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -708,7 +740,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -724,7 +758,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -735,12 +769,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -751,7 +785,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -767,7 +803,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -778,12 +814,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -794,7 +830,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -810,7 +848,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -821,12 +859,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -837,7 +875,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -853,7 +893,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -864,12 +904,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -880,7 +920,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -896,7 +938,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -907,12 +949,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -923,7 +965,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -939,7 +983,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -950,12 +994,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -966,7 +1010,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -982,7 +1028,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -993,12 +1039,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -1009,7 +1055,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1025,7 +1073,7 @@
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
@@ -1036,12 +1084,12 @@
                         "PITCH": 0,
                         "ROLL": 0,
                         "X": -6,
-                        "Y": 110,
+                        "Y": 120,
                         "YAW": 90,
                         "Z": 0.2,
                         "velocity": {
                             "X": 0,
-                            "Y": 4,
+                            "Y": 8,
                             "Z": 0
                         }
                     },
