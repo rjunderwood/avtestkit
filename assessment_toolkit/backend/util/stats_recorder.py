@@ -106,6 +106,10 @@ class StatsRecorder():
                 #retrieve distance to other actor data 
                 dist_to_actor = -10
                 accessory_actor = self.find_actor_by_rolename(self.world, accessory_rolename)
+                if(pedestrian_trackers!=None):
+                    accessory_actor = pedestrian_trackers[0]
+
+                    
                 if(accessory_actor != None):#lane_invasion
                     dist_to_actor = self.calc_dist(actor_to_track, accessory_actor)
                 

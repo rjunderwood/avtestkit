@@ -1,55 +1,7 @@
 [
     {
         "done": true,
-        "number_of_collisions": 4,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 1,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 0,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 1,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
         "number_of_collisions": 2,
-        "number_of_lane_invasions": 6,
-        "parameters": {
-            "pedestrian_adult": 1,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 0,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 1,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 4,
         "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
@@ -121,11 +73,11 @@
     },
     {
         "done": true,
-        "number_of_collisions": 1,
+        "number_of_collisions": 0,
         "number_of_lane_invasions": 0,
         "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
+            "pedestrian_adult": 1,
+            "pedestrian_child": 0,
             "spawn_vehicle_location_1": [],
             "spawn_vehicle_location_2": [],
             "weather": "Cloudy Noon"
@@ -136,44 +88,8 @@
         "number_of_collisions": 2,
         "number_of_lane_invasions": 0,
         "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 1,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": true,
-        "number_of_collisions": 4,
-        "number_of_lane_invasions": 0,
-        "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
+            "pedestrian_adult": 1,
+            "pedestrian_child": 0,
             "spawn_vehicle_location_1": [],
             "spawn_vehicle_location_2": [],
             "weather": "Cloudy Noon"
@@ -184,8 +100,20 @@
         "number_of_collisions": 2,
         "number_of_lane_invasions": 0,
         "parameters": {
-            "pedestrian_adult": 0,
-            "pedestrian_child": 1,
+            "pedestrian_adult": 1,
+            "pedestrian_child": 0,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 1,
+            "pedestrian_child": 0,
             "spawn_vehicle_location_1": [],
             "spawn_vehicle_location_2": [],
             "weather": "Cloudy Noon"
@@ -241,6 +169,114 @@
     },
     {
         "done": true,
+        "number_of_collisions": 5,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 3,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 2,
+            "pedestrian_child": 0,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 2,
+            "pedestrian_child": 0,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
+        "parameters": {
+            "pedestrian_adult": 2,
+            "pedestrian_child": 0,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        }
+    },
+    {
+        "done": true,
         "number_of_collisions": 0,
         "number_of_lane_invasions": 0,
         "parameters": {
@@ -300,7 +336,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -310,7 +348,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 2,
             "pedestrian_child": 0,
@@ -320,37 +360,9 @@
         }
     },
     {
-        "done": false,
-        "parameters": {
-            "pedestrian_adult": 2,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": false,
-        "parameters": {
-            "pedestrian_adult": 2,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": false,
-        "parameters": {
-            "pedestrian_adult": 2,
-            "pedestrian_child": 0,
-            "spawn_vehicle_location_1": [],
-            "spawn_vehicle_location_2": [],
-            "weather": "Cloudy Noon"
-        }
-    },
-    {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -377,7 +389,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -404,7 +418,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -431,7 +447,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -458,7 +476,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -485,7 +505,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -512,7 +534,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -539,7 +563,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -566,7 +592,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -593,7 +621,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -620,7 +650,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -647,7 +679,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -674,7 +708,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -701,7 +737,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -728,7 +766,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -755,7 +795,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -782,7 +824,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -809,7 +853,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 1,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -836,7 +882,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -863,7 +911,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -890,7 +940,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -934,7 +986,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -978,7 +1032,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1022,7 +1078,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1066,7 +1124,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1110,7 +1170,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1154,7 +1216,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 2,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1198,7 +1262,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1242,7 +1308,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
@@ -1286,7 +1354,9 @@
         }
     },
     {
-        "done": false,
+        "done": true,
+        "number_of_collisions": 0,
+        "number_of_lane_invasions": 0,
         "parameters": {
             "pedestrian_adult": 1,
             "pedestrian_child": 0,
