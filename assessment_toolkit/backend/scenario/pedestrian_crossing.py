@@ -77,7 +77,7 @@ class ScenarioPedestrianCrossing:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/pedestrian_crossing.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/pedestrian_crossing.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -281,7 +281,13 @@ class ScenarioPedestrianCrossing:
     #When the metamorphic test is finished.
     def set_test_finished(self, world):
         #Set metamorphic test as done. 
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        #Number of passes for current test 
+        number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].count(0)
+        target_number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['target_pass']
+       
+        if(number_of_passes == target_number_of_passes):
+            self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+            
         self.metamorphic_test_running = False
         with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
             outfile.write(json.dumps(self.metamorphic_tests, indent=4, sort_keys=True))
@@ -303,14 +309,15 @@ class ScenarioPedestrianCrossing:
   
     def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'pedestrian_crossing_' + str(self.get_current_metamorphic_test_index())    
+        results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_pedestrian_crossing_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path, self.pedestrian_trackers)
 
         #Set number of collision and lane invastions to metamorphic test to save as json
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
+        print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
+        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
 
 
 

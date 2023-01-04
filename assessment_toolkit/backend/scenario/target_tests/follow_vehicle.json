@@ -1,0 +1,116 @@
+[
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.carlamotors.carlacola",
+            "lead_vehicle_velocity": 7,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0
+        ],
+        "target_pass": 2,
+        "test_name": "F1"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.kawasaki.ninja",
+            "lead_vehicle_velocity": 10,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 10,
+        "test_name": "F2"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.kawasaki.ninja",
+            "lead_vehicle_velocity": 7,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0,
+            0
+        ],
+        "target_pass": 3,
+        "test_name": "F3"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 7,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            2,
+            0,
+            1,
+            0
+        ],
+        "target_pass": 2,
+        "test_name": "F5"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.kawasaki.ninja"
+            ],
+            "ego_vehicle_velocity": 10,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 7,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3,
+            1,
+            0
+        ],
+        "target_pass": 5,
+        "test_name": "F6"
+    }
+]

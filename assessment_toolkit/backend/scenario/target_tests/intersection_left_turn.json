@@ -1,0 +1,41 @@
+[
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.kawasaki.ninja",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            2,
+            2,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 3,
+        "test_name": "F2"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 5,
+            "passing_vehicles": 1,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            3,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 3,
+        "test_name": "F4"
+    }
+]

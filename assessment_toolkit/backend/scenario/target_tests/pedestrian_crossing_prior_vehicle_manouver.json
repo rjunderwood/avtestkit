@@ -1,0 +1,21 @@
+[
+    {
+        "done": true,
+        "parameters": {
+            "pedestrian_adult": 0,
+            "pedestrian_child": 1,
+            "spawn_vehicle_location_1": [],
+            "spawn_vehicle_location_2": [],
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 5,
+        "test_name": "F1"
+    }
+]

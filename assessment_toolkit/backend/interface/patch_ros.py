@@ -55,6 +55,7 @@ class PatchRos:
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% /home/autoware/Documents/" + scenario + ".sh\n"
             if line_number == 46:
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp "+ self.directory +"/ros_patch/run-simulation.bash %%:/home/autoware/Documents\n"
+                print("COPY SIMULATION BASH FROM"+ self.directory+ "/ros_patch/run-simulation.bash")
             ros_patch_new.write(line)
             line_number+=1
         
@@ -74,6 +75,7 @@ class PatchRos:
                 run_simulation_new.write(line)
             
             elif line_number == 2:
+                print("CHOSEN SCENARIOOOOOOOOOO", self.ROSLAUNCH_CONFIG[scenario])
                 line = self.ROSLAUNCH_CONFIG[scenario]
                 run_simulation_new.write(line)
                 run_simulation_new.write('\n')

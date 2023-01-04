@@ -26,15 +26,18 @@ except IndexError:
 class IntersectionLeftTurn(Scenario):
 
     TRIGGER_DIST = 80
+    world = None 
 
     def __init__(self, name, X, Y, Z, PITCH, YAW, ROLL, SPEC_CAM_X, SPEC_CAM_Y, SPEC_CAM_Z, RUNNING_TIME) -> None:
         super().__init__(name, X, Y, Z, PITCH, YAW, ROLL, SPEC_CAM_X, SPEC_CAM_Y, SPEC_CAM_Z, RUNNING_TIME)
 
         #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/intersection_left_turn.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/intersection_left_turn.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
+
+    print("METAMORPHIC TESTS::: intersection_left_turn ", metamorphic_tests)
 
 
     def run(self):
@@ -43,7 +46,7 @@ class IntersectionLeftTurn(Scenario):
             client.set_timeout(2.0)
 
             world = client.get_world()
-
+            self.world = world
             spectator = world.get_spectator()
             spectator.set_transform(carla.Transform(carla.Location(self.SPEC_CAM_X, self.SPEC_CAM_Y,self.SPEC_CAM_Z),
             carla.Rotation(self.SPEC_CAM_PITCH, self.SPEC_CAM_YAW, self.SPEC_CAM_ROLL)))
@@ -137,9 +140,13 @@ class IntersectionLeftTurn(Scenario):
     def set_test_finished(self, world):
 
 
-
-        #Set metamorphic test as done. 
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        #Number of passes for current test 
+        number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].count(0)
+        target_number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['target_pass']
+       
+        if(number_of_passes == target_number_of_passes):
+            self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        
         self.metamorphic_test_running = False
         #Save metamorphic test json in file directory
         with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
@@ -154,6 +161,18 @@ class IntersectionLeftTurn(Scenario):
             rclose.ROSClose()
 
         rclose.ROSClose()
+        self.clear_world_state()
+
+
+         
+    def clear_world_state(self):
+        #Clear the world actors
+        print("clear_world_state(self)")
+        for actor in self.world.get_actors().filter('vehicle.*'):
+            # if actor is a vehicle
+            actor.destroy()
+            print("destroyed actor")
+      
 
 
     
@@ -161,11 +180,17 @@ class IntersectionLeftTurn(Scenario):
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'intersection_left_turn_' + str(self.get_current_metamorphic_test_index())    
+        print("self.metamorphic_tests['test_name']", self.metamorphic_tests[self.get_current_metamorphic_test_index()])
+        print("1",self.metamorphic_tests)
+        print("2",self.get_current_metamorphic_test_index())
+        print("3",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name'])
+
+        results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_intersection_left_turn_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', self.SPAWNED_VEHICLE_ROLENAME, results_file_path)
 
         #Set number of collision and lane invastions to metamorphic test to save as json
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
+        print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
+        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()

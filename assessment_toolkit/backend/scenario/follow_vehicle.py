@@ -70,7 +70,7 @@ class ScenarioFollowVehicle:
 
     
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 15
+    RUNNING_TIME = 35
 
 
 
@@ -78,12 +78,15 @@ class ScenarioFollowVehicle:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json"
+    # METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json"
+    # metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
+    # metamorphic_tests = json.loads(metamorphic_test_target_file.read())
+    # metamorphic_test_running = False
+    #TARGET TESTSetamorphic
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/follow_vehicle.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
-
-
 
     def run(self):
         
@@ -102,7 +105,8 @@ class ScenarioFollowVehicle:
 
             #Metamophic Parameters Specific for this test
             metamorphic_parameters = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['parameters']
-            
+
+            print("RUNNING :: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()])
 
 
             #Lead Vehicle
@@ -115,8 +119,6 @@ class ScenarioFollowVehicle:
             lead_vehicle.set_light_state(carla.VehicleLightState.All)
 
 
-
-            self.LEAD_VEHICLE_VELOCITY = metamorphic_parameters['lead_vehicle_velocity']
 
             self.world.set_weather(get_weather_parameters(metamorphic_parameters['weather']))
 
@@ -132,15 +134,7 @@ class ScenarioFollowVehicle:
             
             ego_vehicle = find_actor_by_rolename(self.world, self.EGO_VEHICLE_NAME)
             print('Ego vehicle found')
-            self.ego_vehicle = ego_vehicle
-            self.ego_vehicle.set_target_velocity(carla.Vector3D(0,-metamorphic_parameters['ego_vehicle_velocity'],0))
-            #At this point start the metamorphic test running.
-            self.metamorphic_test_running = True 
-            
-
-
-
-            # #Start Recording Scenario before the scenario loop begins
+    
             # self.start_recording_scenario()
             
 
@@ -271,9 +265,13 @@ class ScenarioFollowVehicle:
     def set_test_finished(self, world):
 
 
-
-        #Set metamorphic test as done. 
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        #Number of passes for current test 
+        number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].count(0)
+        target_number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['target_pass']
+       
+        if(number_of_passes == target_number_of_passes):
+            self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        
         self.metamorphic_test_running = False
         #Save metamorphic test json in file directory
         with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
@@ -303,17 +301,19 @@ class ScenarioFollowVehicle:
             actor.destroy()
             print("destroyed actor")
 
-          
-
+           
+ 
 
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'follow_vehicle_' + str(self.get_current_metamorphic_test_index())    
+      
+        results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_follow_vehicle_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
 
         #Set number of collision and lane invastions to metamorphic test to save as json
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
+        print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
+        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()

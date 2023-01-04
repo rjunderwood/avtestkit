@@ -70,7 +70,7 @@ class Scenario(ABC):
         self.ego_vehicle = None
 
         try:
-            self.metamorphic_test_target_file = open(CWD + "/backend/scenario/metamorphic_tests/" + self.name + ".json")
+            self.metamorphic_test_target_file = open(CWD + "/backend/scenario/target_tests/" + self.name + ".json")
             print(self.metamorphic_test_target_file)
             self.metamorphic_tests = json.loads(self.metamorphic_test_target_file.read())
         except Exception as e: print(e)
@@ -137,10 +137,10 @@ class Scenario(ABC):
         destroy_all_vehicle_actors(world)
 
 
-    def handle_results_output(self, world):
+    # def handle_results_output(self, world):
 
-        #This is where the Real scenario begins. Time to start recording stats.
-        results_file_name = self.name + "_" + str(self.get_current_metamorphic_test_index())
-        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
-        stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
-        stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
+    #     #This is where the Real scenario begins. Time to start recording stats.
+    #     results_file_name = self.name + "_" + str(self.get_current_metamorphic_test_index())
+    #     results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
+    #     stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
+    #     stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

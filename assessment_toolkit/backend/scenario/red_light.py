@@ -81,7 +81,7 @@ class ScenarioRedLight:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/red_light.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/red_light.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -231,8 +231,13 @@ class ScenarioRedLight:
 
 
 
-        #Set metamorphic test as done. 
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+        #Number of passes for current test 
+        number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].count(0)
+        target_number_of_passes = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['target_pass']
+       
+        if(number_of_passes == target_number_of_passes):
+            self.metamorphic_tests[self.get_current_metamorphic_test_index()]['done'] = True
+            
         self.metamorphic_test_running = False
         #Save metamorphic test json in file directory
         with open(self.METAMORPHIC_TEST_FILE_LOCATION, 'w') as outfile:
@@ -260,11 +265,12 @@ class ScenarioRedLight:
     def handle_results_output(self, world):
   
         #This is where the Real scenario begins. Time to start recording stats. 
-        results_file_name = 'red_light_' + str(self.get_current_metamorphic_test_index())    
+        results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_red_light_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
         results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', self.SPAWNED_VEHICLE_ROLENAME, results_file_path)
 
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_collisions'] = stats_recorder.get_number_of_collisions()
-        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
-
+        #Set number of collision and lane invastions to metamorphic test to save as json
+        self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
+        print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
+        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
