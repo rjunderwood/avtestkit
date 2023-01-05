@@ -40,9 +40,11 @@
             0,
             0,
             0,
+            0,
+            0,
             0
         ],
-        "target_pass": 10,
+        "target_pass": 12,
         "test_name": "F2"
     },
     {
