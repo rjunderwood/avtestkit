@@ -13,9 +13,12 @@
             2,
             0,
             0,
+            0,
+            0,
+            1,
             0
         ],
-        "target_pass": 3,
+        "target_pass": 5,
         "test_name": "F2"
     },
     {
@@ -37,5 +40,26 @@
         ],
         "target_pass": 3,
         "test_name": "F4"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [],
+            "oncoming_vehicle_model": "vehicle.toyota.prius",
+            "oncoming_vehicle_velocity": 6,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 7,
+        "test_name": "F3"
     }
 ]
