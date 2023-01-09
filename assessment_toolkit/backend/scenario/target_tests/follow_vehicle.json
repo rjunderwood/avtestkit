@@ -42,9 +42,11 @@
             0,
             0,
             0,
+            0,
+            0,
             0
         ],
-        "target_pass": 12,
+        "target_pass": 14,
         "test_name": "F2"
     },
     {
@@ -62,9 +64,10 @@
         "runs": [
             0,
             0,
+            0,
             0
         ],
-        "target_pass": 3,
+        "target_pass": 4,
         "test_name": "F3"
     },
     {
@@ -105,6 +108,27 @@
         ],
         "target_pass": 12,
         "test_name": "F5"
+    },
+    {
+        "done": true,
+        "parameters": {
+            "car_types": [
+                "vehicle.toyota.prius"
+            ],
+            "ego_vehicle_velocity": 15,
+            "lead_vehicle_model": "vehicle.toyota.prius",
+            "lead_vehicle_velocity": 7,
+            "passing_vehicles": 0,
+            "weather": "Cloudy Noon"
+        },
+        "runs": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "target_pass": 4,
+        "test_name": "F4"
     },
     {
         "done": true,
