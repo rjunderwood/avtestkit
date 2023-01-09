@@ -18,9 +18,10 @@
             0,
             0,
             0,
+            0,
             0
         ],
-        "target_pass": 10,
+        "target_pass": 11,
         "test_name": "S"
     },
     {
@@ -56,9 +57,12 @@
             0,
             0,
             0,
+            0,
+            0,
+            2,
             0
         ],
-        "target_pass": 5,
+        "target_pass": 7,
         "test_name": "F3"
     },
     {
@@ -75,9 +79,10 @@
             0,
             0,
             0,
+            0,
             0
         ],
-        "target_pass": 5,
+        "target_pass": 6,
         "test_name": "F4"
     },
     {
