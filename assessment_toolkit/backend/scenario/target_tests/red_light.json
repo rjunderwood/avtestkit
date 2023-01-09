@@ -38,7 +38,7 @@
         "test_name": "F1"
     },
     {
-        "done": false,
+        "done": true,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -61,7 +61,7 @@
         "test_name": "F2"
     },
     {
-        "done": false,
+        "done": true,
         "parameters": {
             "car_types": [
                 "vehicle.toyota.prius"
@@ -73,13 +73,20 @@
         },
         "runs": [
             0,
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            0,
             0
         ],
         "target_pass": 6,
         "test_name": "F3"
     },
     {
-        "done": false,
+        "done": true,
         "parameters": {
             "car_types": [
                 "vehicle.carlamotors.carlacola"
@@ -91,13 +98,16 @@
         },
         "runs": [
             2,
+            0,
+            0,
+            0,
             0
         ],
         "target_pass": 4,
         "test_name": "F4"
     },
     {
-        "done": false,
+        "done": true,
         "parameters": {
             "car_types": [
                 "vehicle.kawasaki.ninja"
@@ -108,6 +118,8 @@
             "weather": "Cloudy Noon"
         },
         "runs": [
+            0,
+            0,
             0,
             0
         ],
