@@ -1,6 +1,6 @@
 [
     {
-        "done": true,
+        "done": false,
         "parameters": {
             "car_types": [],
             "passing_vehicles": 0,
@@ -12,9 +12,11 @@
             1,
             1,
             2,
+            0,
+            0,
             0
         ],
-        "target_pass": 1,
+        "target_pass": 5,
         "test_name": "S"
     },
     {

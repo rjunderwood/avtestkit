@@ -73,7 +73,7 @@ class ScenarioRedLight:
 
     
     #How long the scenario actually should run once recording is triggered. 
-    RUNNING_TIME = 24
+    RUNNING_TIME = 25
 
 
 
