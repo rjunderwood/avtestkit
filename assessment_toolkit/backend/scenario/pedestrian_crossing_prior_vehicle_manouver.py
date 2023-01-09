@@ -49,8 +49,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     from backend.util.spectator_camera import setup_spectator_camera
     
     #How long the scenario actually should run once recording is triggered. 
-    # RUNNING_TIME = 70
-    RUNNING_TIME = 40
+    RUNNING_TIME = 70
     scenario_finished = False
     world=None
     blueprint_library=None
