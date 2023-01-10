@@ -1,7 +1,5 @@
 
-Metamorphic Testing Framework of Automated
-Driving Systems: CARLA Autoware
-
+Metamorphic Testing Framework of Automated Driving Systems: CARLA Autoware
 =====================================
 
 A new framework for metamorphic testing (MT) as a means of assuring the safety of autonomous vehicles (AVs) in future intelligent transportation systems. MT is a well-established technique for safety assurance, but it is unclear whether the existing approach can be applied to the more complex real-world scenarios encountered in automated driving systems. The new framework is designed to enable the creation of a wide variety of scenarios, and is demonstrated by the construction of five realistic, high-risk driving scenarios that focus on non-crash collisions. The framework is applied to test Autoware, a state-of-the-art real-world AV system, using a simulated environment based on the Carla simulator. Results from the tests indicate a large number of potential consistency and reliability issues with Autoware. The study emphasizes the flexibility and effectiveness of MT-based frameworks for validating AVs in complex scenarios, without the need for ground truth data.
