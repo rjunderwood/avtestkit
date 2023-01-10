@@ -7,9 +7,13 @@ A new framework for metamorphic testing (MT) as a means of assuring the safety o
 
 # Architecture 
 
-![alt text](https://github.com/rjunderwood/AV-Tester/blob/refactor23/achitecture.png?raw=true)
+Assessment Toolkit
+
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/assessment-toolkit-architecture.png?raw=true)
 
 
+Results Toolkit
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/results-toolkit-architecture.png?raw=true)
 
 Assessment Toolkit
 =====================================
