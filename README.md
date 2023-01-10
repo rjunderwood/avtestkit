@@ -139,14 +139,14 @@ Processing the results from the raw data.
 
 ## 1. Choose Scenario
 
-In the /results_toolkit Edit the results_toolkit.py line 17
+In the /results_toolkit, edit the results_toolkit.py line 17
 
 ```sh
 target_scenarios = ["A"]
 ```
 Where A is the target scenario to process results for.
 
-Currently process one scenario at a time. 
+It is best to process one scenario at a time. 
 
 
 ## 2. Run 
@@ -156,8 +156,8 @@ python ./results_toolkit/results_toolkit.py
 ```
 
 
-## 2. View Results
-View the processed data plots in /data/processed. 
+## 3. View Results
+View the processed data plots in /data/processed/
 
 
 
