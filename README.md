@@ -135,9 +135,7 @@ python3 assessment_toolkit.py
 Results Toolkit
 =====================================
 
-
-# Process Scenario 
-
+Processing the results from the raw data.
 
 ## 1. Choose Scenario
 
