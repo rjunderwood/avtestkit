@@ -1,0 +1,7 @@
+{
+    "follow_vehicle":"roslaunch carla_autoware_agent carla_autoware_agent.launch town:=Town01 spawn_point:='338.761,-320.678,0.2,0,0,90'",
+    "pedestrian_crossing":"roslaunch carla_autoware_agent carla_autoware_agent.launch town:=Town03 spawn_point:='-60.761,-135.1,0.2,0.2,0,0'",
+    "pedestrian_crossing_prior_vehicle_manouver":"roslaunch carla_autoware_agent carla_autoware_agent.launch town:=Town03 spawn_point:='2,-180,0.2,0.2,0,90'",
+    "red_light":"roslaunch carla_autoware_agent carla_autoware_agent.launch town:=Town01 spawn_point:='338.761,-230,0.2,0,0,90'",
+    "intersection_left_turn":"roslaunch carla_autoware_agent carla_autoware_agent.launch town:=Town01 spawn_point:='338.761, -230, 0.2,0,0,90'"
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "done": false,
+    "parameters": {
+      "car_types": [],
+      "passing_vehicles": 0,
+      "running_vehicle": "vehicle.toyota.prius",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "S"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": [],
+      "passing_vehicles": 0,
+      "running_vehicle": "vehicle.carlamotors.carlacola",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F1"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": [],
+      "passing_vehicles": 0,
+      "running_vehicle": "vehicle.kawasaki.ninja",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F2"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": ["vehicle.toyota.prius"],
+      "passing_vehicles": 1,
+      "running_vehicle": "vehicle.toyota.prius",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F3"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": ["vehicle.carlamotors.carlacola"],
+      "passing_vehicles": 1,
+      "running_vehicle": "vehicle.toyota.prius",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F4"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": ["vehicle.kawasaki.ninja"],
+      "passing_vehicles": 1,
+      "running_vehicle": "vehicle.toyota.prius",
+      "running_vehicle_velocity": 5,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F5"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "car_types": [],
+      "passing_vehicles": 0,
+      "running_vehicle": "vehicle.toyota.prius",
+      "running_vehicle_velocity": 6,
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F6"
+  }
+]

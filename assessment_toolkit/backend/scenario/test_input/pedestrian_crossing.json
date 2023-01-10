@@ -1,0 +1,123 @@
+[
+  {
+    "done": false,
+    "parameters": {
+      "pedestrian_adult": 1,
+      "pedestrian_child": 0,
+      "spawn_vehicle_location_1": [],
+      "spawn_vehicle_location_2": [],
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "S"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "pedestrian_adult": 2,
+      "pedestrian_child": 0,
+      "spawn_vehicle_location_1": [],
+      "spawn_vehicle_location_2": [],
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F1"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "pedestrian_adult": 1,
+      "pedestrian_child": 0,
+      "spawn_vehicle_location_1": [
+        {
+          "location": {
+            "PITCH": 0,
+            "ROLL": 0,
+            "X": 2,
+            "Y": 160,
+            "YAW": -90,
+            "Z": 0.2,
+            "velocity": { "X": 0, "Y": -4, "Z": 0 }
+          },
+          "model": "sedan"
+        }
+      ],
+      "spawn_vehicle_location_2": [],
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F2"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "pedestrian_adult": 1,
+      "pedestrian_child": 0,
+      "spawn_vehicle_location_1": [],
+      "spawn_vehicle_location_2": [
+        {
+          "location": {
+            "PITCH": 0,
+            "ROLL": 0,
+            "X": -6,
+            "Y": 110,
+            "YAW": 90,
+            "Z": 0.2,
+            "velocity": {
+              "X": 0,
+              "Y": 4,
+              "Z": 0
+            }
+          },
+          "model": "sedan"
+        }
+      ],
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F3"
+  },
+  {
+    "done": false,
+    "parameters": {
+      "pedestrian_adult": 1,
+      "pedestrian_child": 0,
+      "spawn_vehicle_location_1": [
+        {
+          "location": {
+            "PITCH": 0,
+            "ROLL": 0,
+            "X": 2,
+            "Y": 160,
+            "YAW": -90,
+            "Z": 0.2,
+            "velocity": { "X": 0, "Y": -4, "Z": 0 }
+          },
+          "model": "sedan"
+        }
+      ],
+      "spawn_vehicle_location_2": [
+        {
+          "location": {
+            "PITCH": 0,
+            "ROLL": 0,
+            "X": -6,
+            "Y": 110,
+            "YAW": 90,
+            "Z": 0.2,
+            "velocity": { "X": 0, "Y": 4, "Z": 0 }
+          },
+          "model": "sedan"
+        }
+      ],
+      "weather": "Cloudy Noon"
+    },
+    "runs": [],
+    "target_pass": 10,
+    "test_name": "F4"
+  }
+]
