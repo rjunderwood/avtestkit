@@ -142,7 +142,7 @@ Processing the results from the raw data.
 In the /results_toolkit Edit the results_toolkit.py line 17
 
 ```sh
-    target_scenarios = ["A"]
+target_scenarios = ["A"]
 ```
 Where A is the target scenario to process results for.
 
@@ -152,7 +152,7 @@ Currently process one scenario at a time.
 ## 2. Run 
 
 ```sh
-    python ./results_toolkit/results_toolkit.py
+python ./results_toolkit/results_toolkit.py
 ```
 
 
