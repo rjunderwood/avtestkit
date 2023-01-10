@@ -1,5 +1,19 @@
 
-Autonomous Vehicle Assessment Toolkit
+Metamorphic Testing Framework of Automated
+Driving Systems: CARLA Autoware
+
+=====================================
+
+A new framework for metamorphic testing (MT) as a means of assuring the safety of autonomous vehicles (AVs) in future intelligent transportation systems. MT is a well-established technique for safety assurance, but it is unclear whether the existing approach can be applied to the more complex real-world scenarios encountered in automated driving systems. The new framework is designed to enable the creation of a wide variety of scenarios, and is demonstrated by the construction of five realistic, high-risk driving scenarios that focus on non-crash collisions. The framework is applied to test Autoware, a state-of-the-art real-world AV system, using a simulated environment based on the Carla simulator. Results from the tests indicate a large number of potential consistency and reliability issues with Autoware. The study emphasizes the flexibility and effectiveness of MT-based frameworks for validating AVs in complex scenarios, without the need for ground truth data.
+
+
+# Architecture 
+
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/refactor23/achitecture.png?raw=true)
+
+
+
+Assessment Toolkit
 =====================================
 
 ## Recommended system
@@ -118,32 +132,36 @@ python3 assessment_toolkit.py
 ```
 
 
-## Creating New Scenarios
 
-### 1. Create Files
-- assessment_toolkit/backend/scenario/SCENARIO_NAME.py
-- assessment_toolkit/backend/scenario/metamorphic_tests/SCENARIO_NAME.json
-- assessment_toolkit/ros_patch/scenarios/SCENARIO_NAME.json
 
-### 2. Edit Files
-assessment_toolkit/assessment_toolkit.py
-- setup_scenarios()
+Results Toolkit
+=====================================
 
-assessment_toolkit/frontend/views.py
-- view_container()
-- view_setup_scenarios()
-- view_setup_scenarios_none()
-- view_scenario_starter_SCENARIO_NAME()
 
-assessment_toolkit/frontend/front_end_main.py
-- start()
-- change_view()
+# Process Scenario 
 
-assessment_toolkit/backend/scenario/scenario.py
-- __init__
 
-results_toolkit/frontend/front_end_main.py
-- change_view()
+## 1. Choose Scenario
 
-results_toolkit/frontend/views.py
-- view_container()
+In the /results_toolkit Edit the results_toolkit.py line 17
+
+```sh
+    target_scenarios = ["A"]
+```
+Where A is the target scenario to process results for.
+
+Currently process one scenario at a time. 
+
+
+## 2. Run 
+
+```sh
+    python ./results_toolkit/results_toolkit.py
+```
+
+
+## 2. View Results
+View the processed data plots in /data/processed. 
+
+
+
