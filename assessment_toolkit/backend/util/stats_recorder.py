@@ -1,4 +1,3 @@
-
 import time
 import os
 import sys
@@ -6,7 +5,6 @@ import glob
 import math
 import json 
 CWD = os.getcwd() 
-
 CONFIG = json.load(open(CWD+'/config.json'));
 
 

@@ -1,13 +1,8 @@
 import glob 
 import os
 import sys
-import random
-import time
-import argparse
-import math
 import json
 from backend.util.stats_recorder import StatsRecorder
-from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from backend.util.weather import get_weather_parameters
@@ -77,7 +72,7 @@ class ScenarioPedestrianCrossing:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/pedestrian_crossing.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/test_input/pedestrian_crossing.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -196,31 +191,6 @@ class ScenarioPedestrianCrossing:
                 self.pedestrian_actor_to_track = pedestrian_actor
                
             pedestrian_actors.append(pedestrian_actor)
-            #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
-        # for i in range(0, self.metamorphic_parameters['pedestrian_adult']):
-        #     spawn_loc = carla.Location(pedestrian_x,133,0.4)
-        #     pedestrian_x+=0.5
-        #     rotation = carla.Rotation(7,1,self.ROLL)
-        #     transform = carla.Transform(spawn_loc, rotation)
-    
-        #     pedestrian_actor=self.world.spawn_actor(adultBlueprintWalkers, transform)
-        #     if self.pedestrian_actor_to_track == None:
-        #         self.pedestrian_actor_to_track = pedestrian_actor
-                
-        #     pedestrian_actors.append(pedestrian_actor)
-        #     #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
-        # #Spawn Adults
-        # for i in range(0, self.metamorphic_parameters['pedestrian_child']):
-        #     spawn_loc = carla.Location(pedestrian_x,133,0.4)
-        #     pedestrian_x+=0.5
-        #     rotation = carla.Rotation(7,1,self.ROLL)
-        #     transform = carla.Transform(spawn_loc, rotation)
-        #     pedestrian_actor=self.world.spawn_actor(childBlueprintWalkers, transform)
-        #     if self.pedestrian_actor_to_track == None:
-        #         self.pedestrian_actor_to_track = pedestrian_actor
-               
-        #     pedestrian_actors.append(pedestrian_actor)
-        #     #self.pedestrian_controllers.append(self.world.spawn_actor(walker_controller_bp,transform, pedestrian_actor))
 
         self.pedestrian_trackers =pedestrian_actors
 
@@ -310,15 +280,12 @@ class ScenarioPedestrianCrossing:
     def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_pedestrian_crossing_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
-        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
+        results_file_path = os.path.split(CWD)[0] + "/data/raw/C/"+self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+"/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path, self.pedestrian_trackers)
 
-        #Set number of collision and lane invastions to metamorphic test to save as json
+        #Set number of collision to metamorphic test to save as json
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
         print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
-        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()
 
 
-
-#BIAS towards Color 

@@ -1,0 +1,8 @@
+{
+  "car_types": ["vehicle.toyota.prius"],
+  "ego_vehicle_velocity": 10,
+  "lead_vehicle_model": "vehicle.toyota.prius",
+  "lead_vehicle_velocity": 7,
+  "passing_vehicles": 0,
+  "weather": "Cloudy Noon", "plot_label":"Car"
+}

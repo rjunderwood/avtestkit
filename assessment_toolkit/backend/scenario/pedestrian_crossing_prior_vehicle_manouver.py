@@ -1,14 +1,9 @@
 import glob 
 import os
 import sys
-import random
 import time
-import argparse
-import math 
 import json
 from backend.util.stats_recorder import StatsRecorder
-from backend.interface.run_scenario_docker import RunScenarioDocker 
-from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from backend.util.weather import get_weather_parameters
@@ -77,7 +72,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/pedestrian_crossing_prior_vehicle_manouver.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/test_input/pedestrian_crossing_prior_vehicle_manouver.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -290,7 +285,7 @@ class ScenarioPedestrianCrossingPriorVehicleManouver:
     def handle_results_output(self):
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_pedestrian_crossing_prior_vehicle_manouver_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
-        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
+        results_file_path = os.path.split(CWD)[0] + "/data/raw/D/"+self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+"/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(self.world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'pedestrian_to_track', results_file_path, self.pedestrian_trackers)
 

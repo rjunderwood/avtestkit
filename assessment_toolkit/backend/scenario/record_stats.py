@@ -1,19 +1,13 @@
-from http import client
-from logging import exception
+
 import glob
 import os
 import sys
-import random 
 import time
-import argparse
 import math
-import matplotlib.pyplot as plt
-import numpy as np
 import json
 CWD = os.getcwd() 
 
 CONFIG = json.load(open(CWD+'/config.json'));
-
 
 try:
     sys.path.append(glob.glob(CONFIG['CARLA_SIMULATOR_PATH']+'PythonAPI/carla/dist/carla-*%d.%d-%s.egg' % (

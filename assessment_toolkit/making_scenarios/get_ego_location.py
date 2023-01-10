@@ -21,7 +21,7 @@ import carla
 
 
 def find_actor_by_rolename(world, role_name_tofind):
-    print("25555")
+
     actors = world.get_actors()
     actors = actors.filter('vehicle.*') #filter out only vehicle actors
     print("ACTORS find_actor_by_rolename " + str(actors))

@@ -4,7 +4,6 @@
 import glob 
 import os
 import sys
-import random
 import json
 CWD = os.getcwd() 
 

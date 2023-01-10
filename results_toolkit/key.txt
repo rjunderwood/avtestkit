@@ -1,0 +1,5 @@
+(A) Follow Vehicle
+(B) Intersection Turn Left
+(C) Pedestrian Crossing
+(D) Pedestrian Crossing Prior Vehicle Manouver
+(E) Red Light

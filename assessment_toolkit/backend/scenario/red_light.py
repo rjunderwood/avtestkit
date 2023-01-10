@@ -1,17 +1,19 @@
-import argparse
+# red light scenario takes place during daylight in an urban environment, 
+# using a straight intersection with posted speed limit of 35mph, 
+# crossing intersection and colliding with another vehicle crossing from a 
+# lateral direction.
+
+
 import glob
 import json
-import math
 import os
-import random
 import sys
-import time
+
 
 #Import ROSClose 
 from backend.interface import ros_close as rclose
-from backend.util.stats_recorder import StatsRecorder
-from backend.util.results.process_results import ProcessResult
 
+from backend.util.stats_recorder import StatsRecorder
 from backend.util.weather import get_weather_parameters
 
 CWD = os.getcwd() 
@@ -34,10 +36,6 @@ import carla
 
 from ..util.util import *
 
-# red light scenario takes place during daylight in an urban environment, 
-# using a straight intersection with posted speed limit of 35mph, 
-# crossing intersection and colliding with another vehicle crossing from a 
-# lateral direction.
 
 
 class ScenarioRedLight:
@@ -81,7 +79,7 @@ class ScenarioRedLight:
     ego_vehicle = None
 
     #Metamorphic Tests
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/red_light.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/test_input/red_light.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -247,16 +245,10 @@ class ScenarioRedLight:
         #Completed all tests, hence scenario complete
         if self.all_metamorphic_tests_complete():
             self.scenario_finished = True 
-            # self.ego_vehicle.destroy()
             #Close the Carla Autoware docker that is setup.
             rclose.ROSClose()
 
-        # self.ego_vehicle.destroy()
         rclose.ROSClose()
-        # #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
-        # self.ego_vehicle.destroy()
-        # #Close the Carla Autoware docker that is setup.
-        # rclose.ROSClose()
         destroy_all_vehicle_actors(world)
          
           
@@ -266,11 +258,9 @@ class ScenarioRedLight:
   
         #This is where the Real scenario begins. Time to start recording stats. 
         results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_red_light_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
-        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
+        results_file_path = os.path.split(CWD)[0] + "/data/raw/E/"+self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+"/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', self.SPAWNED_VEHICLE_ROLENAME, results_file_path)
 
-        #Set number of collision and lane invastions to metamorphic test to save as json
+        #Set number of collision to test json
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
-        print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
-        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()

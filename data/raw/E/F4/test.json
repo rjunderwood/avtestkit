@@ -1,0 +1,7 @@
+{
+  "car_types": ["vehicle.kawasaki.ninja"],
+  "passing_vehicles": 1,
+  "running_vehicle": "vehicle.toyota.prius",
+  "running_vehicle_velocity": 5,
+  "weather": "Cloudy Noon", "plot_label":"Oncoming Motorbike"
+}

@@ -22,7 +22,7 @@ class ProcessResult():
     def __init__(self, file_name, scenario_name, scenario_metamorphic_test_number):
         
         print(file_name)
-        file_path = CWD + "/backend/scenario/results/" + file_name
+        file_path = os.path.split(CWD)[0] + "/data/raw/" + file_name
         try:
             with open(file_path) as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')          

@@ -1,16 +1,11 @@
-import argparse
 import glob
 import json
-import math
 import os
-import random
 import sys
-import time
 
 #Import ROSClose
 from backend.interface import ros_close as rclose
-from backend.util.stats_recorder import StatsRecorder
-from backend.util.results.process_results import ProcessResult
+
 
 
 CWD = os.getcwd()
@@ -33,7 +28,7 @@ import carla
 
 from ..util.util import *
 
-from abc import ABC, abstractclassmethod, abstractmethod
+from abc import ABC, abstractmethod
 
 class Scenario(ABC):
 
@@ -70,7 +65,7 @@ class Scenario(ABC):
         self.ego_vehicle = None
 
         try:
-            self.metamorphic_test_target_file = open(CWD + "/backend/scenario/target_tests/" + self.name + ".json")
+            self.metamorphic_test_target_file = open(CWD + "/backend/scenario/test_input/" + self.name + ".json")
             print(self.metamorphic_test_target_file)
             self.metamorphic_tests = json.loads(self.metamorphic_test_target_file.read())
         except Exception as e: print(e)
@@ -130,17 +125,6 @@ class Scenario(ABC):
 
         # self.ego_vehicle.destroy()
         rclose.ROSClose()
-        # #Destroy the ego vehicle to get ready for the next scenario / metamorphic test change.
-        # self.ego_vehicle.destroy()
-        # #Close the Carla Autoware docker that is setup.
-        # rclose.ROSClose()
+
         destroy_all_vehicle_actors(world)
 
-
-    # def handle_results_output(self, world):
-
-    #     #This is where the Real scenario begins. Time to start recording stats.
-    #     results_file_name = self.name + "_" + str(self.get_current_metamorphic_test_index())
-    #     results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
-    #     stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
-    #     stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)

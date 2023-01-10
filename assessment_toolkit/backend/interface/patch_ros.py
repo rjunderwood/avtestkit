@@ -15,7 +15,6 @@ class PatchRos:
         if(len(scenario) > 1):
             self.setup_patch_files(scenario)
             script_path = self.directory +"/ros_patch/setup_carla_autoware_docker_container.sh"
-        # self.__rospatch__ = os.system("gnome-terminal -e 'bash -c \"" + script_path +" -s; exec bash\"'")
 
         self.__rospatch__ = os.system("gnome-terminal -e 'bash -c \"" + script_path +" -s;\"'")
     
@@ -43,9 +42,6 @@ class PatchRos:
             if line_number == 26:
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp "+ self.directory +"/ros_patch/patch_files/update_my_mission_planning.patch %%:/home/autoware/Documents\n"
             if line_number == 34:
-                # OLD General 2dnav 2dpose patch file that is setup for the first scenario 
-                #line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp "+ self.directory +"/ros_patch/create_ego_car_csv.sh %%:/home/autoware/Documents\n"
-                # NEW 2dnav, 2dpose that is setup for the given scenario.
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker cp "+ self.directory +"/ros_patch/scenarios/" + scenario + ".sh %%:/home/autoware/Documents\n"
             if line_number == 37:
                 line = "docker ps | grep -Eo '([0-9]|[a-z]){12}' | xargs -I %% docker exec --user autoware -i %% bash /home/autoware/Documents/"+scenario+".sh\n"

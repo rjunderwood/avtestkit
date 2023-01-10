@@ -104,20 +104,6 @@ class AssessmentToolkit:
 
 
             try:
-
-                if data['scenario_check_follow_vehicle_town3'] == True:
-                    
-                    self.scenario_queue.append(ScenarioManager("follow_vehicle_town3", data))
-            except: 
-                pass
-
-            try:
-                if data['scenario_check_follow_vehicle_town30'] == True:
-                    self.scenario_queue.append(ScenarioManager("follow_vehicle_town3", data))    
-            except: 
-                pass
-
-            try:
                 if data['scenario_check_red_light'] == True:
                     self.scenario_queue.append(ScenarioManager("red_light", data))
                 if data['scenario_check_red_light0'] == True:
@@ -198,16 +184,6 @@ class AssessmentToolkit:
             
             self.gui.change_view("view_next_metamorphic")
             
-
-
-
-
-
-
-
-    
-
-
 
     
     def get_current_scenario_name(self):

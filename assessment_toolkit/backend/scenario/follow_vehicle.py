@@ -1,13 +1,8 @@
 import glob 
 import os
 import sys
-import random
-import time
-import argparse
-import math
 import json
 from backend.util.stats_recorder import StatsRecorder
-from backend.util.results.process_results import ProcessResult
 #Import ROSClose 
 from backend.interface import ros_close as rclose
 from backend.util.weather import get_weather_parameters
@@ -43,47 +38,28 @@ class ScenarioFollowVehicle:
     X = 339
     Y = 240
     Z = 0.2
-
     PITCH = 0
     YAW = 270
     ROLL = 0 
-
     EGO_VEHICLE_NAME = 'ego_vehicle'
-
     TRIGGER_DIST = 30
     VEHICLE_MODEL = 'vehicle.toyota.prius'
 
     #Setup the spectator camera
-
     SPEC_CAM_X = 340
     SPEC_CAM_Y = 240
     SPEC_CAM_Z = 120
     SPEC_CAM_PITCH = -90
     SPEC_CAM_YAW = 0
     SPEC_CAM_ROLL = 0 
-
-
     SPAWNED_VEHICLE_ROLENAME = 'stationary_vehicle'
 
-    # LEAD_VEHICLE_VELOCITY = 3
     LEAD_VEHICLE_VELOCITY = 5
 
-    
     #How long the scenario actually should run once recording is triggered. 
     RUNNING_TIME = 35
-
-
-
-
     ego_vehicle = None
-
-    #Metamorphic Tests
-    # METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/metamorphic_tests/follow_vehicle.json"
-    # metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
-    # metamorphic_tests = json.loads(metamorphic_test_target_file.read())
-    # metamorphic_test_running = False
-    #TARGET TESTSetamorphic
-    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/target_tests/follow_vehicle.json"
+    METAMORPHIC_TEST_FILE_LOCATION= CWD + "/backend/scenario/test_input/follow_vehicle.json"
     metamorphic_test_target_file = open(METAMORPHIC_TEST_FILE_LOCATION)
     metamorphic_tests = json.loads(metamorphic_test_target_file.read())
     metamorphic_test_running = False
@@ -205,16 +181,11 @@ class ScenarioFollowVehicle:
             #Slow Down To stol
             lead_vehicle.set_target_velocity(carla.Vector3D(0,0,0))
 
-
-
             self.handle_results_output(self.world)
   
             #Set the metamorphic test as finished
             self.set_test_finished(self.world)
  
-            # lead_vehicle.destroy()
-            
-            #After the record stats has completed in the RUNNING_TIME the scenario will finish
 
             
         finally:
@@ -309,11 +280,10 @@ class ScenarioFollowVehicle:
         #This is where the Real scenario begins. Time to start recording stats. 
       
         results_file_name = self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+ '_follow_vehicle_' + str(len(self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs']))    
-        results_file_path = CWD + "/backend/scenario/results/"+results_file_name+".txt"
+        results_file_path = os.path.split(CWD)[0] + "/data/raw/A/"+self.metamorphic_tests[self.get_current_metamorphic_test_index()]['test_name']+"/"+results_file_name+".txt"
         stats_recorder = StatsRecorder(world, self.RUNNING_TIME)
         stats_recorder.record_stats('ego_vehicle', 'stationary_vehicle', results_file_path)
 
-        #Set number of collision and lane invastions to metamorphic test to save as json
+        #Set number of collision  to metamorphic test to save as json
         self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'].append(stats_recorder.get_number_of_collisions())
         print("Check the runs ::: ",self.metamorphic_tests[self.get_current_metamorphic_test_index()]['runs'])
-        # self.metamorphic_tests[self.get_current_metamorphic_test_index()]['number_of_lane_invasions'] = stats_recorder.get_number_of_lane_invasions()

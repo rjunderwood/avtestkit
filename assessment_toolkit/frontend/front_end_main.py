@@ -1,5 +1,5 @@
 
-from cgitb import handler
+
 import PySimpleGUI as sg
 import base64
 import subprocess
@@ -28,28 +28,25 @@ class FrontEndMain():
 
     def make_window(self,theme):
         sg.theme(theme)
-  
-        layout = view_container(self)
 
+        #ICONs
+        layout = view_container(self)
         directory = os.getcwd() 
-        print("directory cwd :: " + directory)
         icon=base64.b64encode(open(directory+"/frontend/img/app-icon.png", 'rb').read())
         window = sg.Window(
             'Assessment Toolkit For Safe Self Driving Cars', 
             layout, 
-            # grab_anywhere=True, 
+
             resizable=True, 
             margins=(0,0), 
-            # use_custom_titlebar=True, 
-            # min_size=(200,300),
+
             finalize=True, 
             keep_on_top=False,
             icon=icon
             )
        
         window.TKroot.minsize(400,900)
-        # window.set_min_size(window.size)
-        
+
         return window
 
     def get_current_scenario_name(self):
@@ -106,9 +103,7 @@ class FrontEndMain():
               
                 if self.current_view == "view_scenario_starter_follow_vehicle":
                     self.change_view("view_start_autoware")    
-
-                if self.current_view == "view_scenario_starter_follow_vehicle_town3":
-                    self.change_view("view_start_autoware")             
+     
                 
                 if self.current_view == "view_scenario_starter_pedestrian_crossing":
                     self.change_view("view_start_autoware")
@@ -225,7 +220,6 @@ class FrontEndMain():
             "view_result",
             "view_scenario_starter",
             "view_scenario_starter_follow_vehicle",
-             "view_scenario_starter_follow_vehicle_town3",
             "view_scenario_starter_pedestrian_crossing",
             "view_scenario_starter_pedestrian_crossing_prior_vehicle_manouver",
             "view_scenario_starter_red_light",
@@ -234,7 +228,6 @@ class FrontEndMain():
             "view_patch_autoware",
             "view_patch_autoware_finished",
             "view_metamorphic_test_state_page_follow_vehicle",
-            "view_metamorphic_test_state_page_follow_vehicle_town3",
             "view_metamorphic_test_state_page_pedestrian_crossing",
              "view_metamorphic_test_state_page_pedestrian_crossing_prior_vehicle_manouver",
             "view_metamorphic_test_state_page_red_light",
