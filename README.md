@@ -16,6 +16,17 @@ A new framework for metamorphic testing (MT) as a means of assuring the safety o
 
 ![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/results-toolkit-architecture.png?raw=true)
 
+
+# Scenarios
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/table.png?raw=true)
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/A/A.png?raw=true)
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/B/B.png?raw=true)
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/C/C.png?raw=true)
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/D/D.png?raw=true)
+![alt text](https://github.com/rjunderwood/AV-Tester/blob/main/scenario_figures/E/E.png?raw=true)
+
+
+
 Assessment Toolkit
 =====================================
 
