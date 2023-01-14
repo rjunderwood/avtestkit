@@ -49,7 +49,6 @@ def view_result(gui):
     ]
     return layout
 
-
 def view_setup_toolkit(gui):
     layout = [
         [sg.Text('Assessment Toolkit Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
@@ -66,11 +65,11 @@ def view_setup_scenarios(gui):
     layout = [
         [sg.Text('Scenarios Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text('Select Scenarios')],
-        [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],   
-        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
-        [sg.Checkbox('Pedestrian Crossing Prior Vehicle Manouver', default=False, key='scenario_check_pedestrian_crossing_prior_vehicle_manouver')],
-        [sg.Checkbox('Vehicle Running Red Light', default=False, key='scenario_check_red_light')],
-        [sg.Checkbox('Vehicle Making Left Turn at Intersection', default=False, key='scenario_check_intersection_left_turn')],
+        [sg.Checkbox('A. Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],   
+        [sg.Checkbox('B. Left Turn at Intersection', default=False, key='scenario_check_intersection_left_turn')],
+        [sg.Checkbox('C. Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
+        [sg.Checkbox('D. Pedestrian Crossing Prior Vehicle Maneuver', default=False, key='scenario_check_pedestrian_crossing_prior_vehicle_manouver')],
+        [sg.Checkbox('E. Red Light', default=False, key='scenario_check_red_light')],
         [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
     ]
@@ -80,10 +79,11 @@ def view_setup_scenarios_none(gui):
     layout = [
         [sg.Text('Scenarios Setup', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
         [sg.Text('Select Scenarios')],
-        [sg.Checkbox('Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],
-        [sg.Checkbox('Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
-        [sg.Checkbox('Vehicle Running Red Light', default=False, key='scenario_check_red_light')],
-        [sg.Checkbox('Vehicle Making Left Turn at Intersection', default=False, key='scenario_check_intersection_left_turn')],
+        [sg.Checkbox('A. Follow Vehicle', default=False, key='scenario_check_follow_vehicle')],   
+        [sg.Checkbox('B. Left Turn at Intersection', default=False, key='scenario_check_intersection_left_turn')],
+        [sg.Checkbox('C. Pedestrian Crossing Road', default=False, key='scenario_check_pedestrian_crossing')],
+        [sg.Checkbox('D. Pedestrian Crossing Prior Vehicle Maneuver', default=False, key='scenario_check_pedestrian_crossing_prior_vehicle_manouver')],
+        [sg.Checkbox('E. Red Light', default=False, key='scenario_check_red_light')],
         [sg.Text('** You need to select a minimum of 1 Scenario')],
         [sg.Text('\n')],
         [sg.Button('Continue', size=(100, 2))],
@@ -131,7 +131,7 @@ def view_scenario_starter_pedestrian_crossing(gui):
 def view_scenario_starter_pedestrian_crossing_prior_vehicle_manouver(gui):
     layout = [
         [sg.Text('Start Scenario', size=(100, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE)],
-        [sg.Text("\nPedestrian Crossing Prior Vehicle Manouver\n")],
+        [sg.Text("\nPedestrian Crossing Prior Vehicle Maneuver\n")],
         [sg.Button('Continue', size=(100, 2))],
     ]
     return layout   
