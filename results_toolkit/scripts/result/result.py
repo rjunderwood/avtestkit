@@ -8,7 +8,6 @@ from ..util import path_slash
 from ..plots.graph_label import GraphLabel
 from ..plots.box_plot import create_box_plot
 from ..plots.bar_plot import plot_stacked_bar, plot_bar
-from .turkeys_range import test_turkeys_range
 from .mann_whitney_u_test import test_mann_whitney
 import queue
 CWD = os.getcwd()
@@ -23,7 +22,6 @@ class Result():
     total_processed = 0
     total_to_process = 0
     progress_bar = None
-
 
     def __init__(self, scenario_name, raw_data_paths):
         self.scenario_name = scenario_name
@@ -132,6 +130,8 @@ class Result():
         for follow_up in self.follow_up_data:
             follow_up_frames.append(follow_up["result_frames"])
         
+
+        # Last Stopping Distance is for the Pedestrian turn left prior vehicle maneuver, scenario D. 
         def last_stopping_distance(frames):
             velocity = []
             distance = []
@@ -167,14 +167,16 @@ class Result():
         for test, frames in source_frames.items():
             recorded_test_frames=0
             if(not self.test_contains_crash(frames)):
-                #source_stopping_distance_list.append(last_stopping_distance(frames))
-                for frame in frames:
-                    velocity = float(frame.get_mag_vel())
-                    distance = float(frame.get_dist_to_actor())
-                    if(velocity == 0.0):
-                        if(recorded_test_frames < 1):
-                            recorded_test_frames += 1
-                            source_stopping_distance_list.append(distance)
+                if self.scenario_name == 'D':
+                    source_stopping_distance_list.append(last_stopping_distance(frames))
+                else:
+                    for frame in frames:
+                        velocity = float(frame.get_mag_vel())
+                        distance = float(frame.get_dist_to_actor())
+                        if(velocity == 0.0):
+                            if(recorded_test_frames < 1):
+                                recorded_test_frames += 1
+                                source_stopping_distance_list.append(distance)
         stopping_distances.append(source_stopping_distance_list)
         
 
@@ -185,14 +187,16 @@ class Result():
             for test, frames in follow_up.items():
                 recorded_test_frames =0
                 if(not self.test_contains_crash(frames)):
-                    #follow_up_stopping_distance_list.append(last_stopping_distance(frames))
-                    for frame in frames:
-                        velocity = float(frame.get_mag_vel())
-                        distance = float(frame.get_dist_to_actor())
-                        if(velocity == 0.0):
-                            if(recorded_test_frames < 1):
-                                recorded_test_frames += 1   
-                                follow_up_stopping_distance_list.append(distance)
+                    if self.scenario_name == 'D':
+                        follow_up_stopping_distance_list.append(last_stopping_distance(frames))
+                    else:
+                        for frame in frames:
+                            velocity = float(frame.get_mag_vel())
+                            distance = float(frame.get_dist_to_actor())
+                            if(velocity == 0.0):
+                                if(recorded_test_frames < 1):
+                                    recorded_test_frames += 1   
+                                    follow_up_stopping_distance_list.append(distance)
               
             stopping_distances.append(follow_up_stopping_distance_list)
             follow_up_num += 1
