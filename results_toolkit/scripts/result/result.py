@@ -9,7 +9,10 @@ from ..plots.graph_label import GraphLabel
 from ..plots.box_plot import create_box_plot
 from ..plots.bar_plot import plot_stacked_bar, plot_bar
 from .mann_whitney_u_test import test_mann_whitney
+from .calculate_means import calculate_means
+from .calculate_std_devs import calculate_std_devs
 import queue
+import csv
 CWD = os.getcwd()
 
 
@@ -207,12 +210,18 @@ class Result():
         source_distance = stopping_distances[0]
         follow_up_distances = stopping_distances[1:]
         mann_whitney_results = []
+        p_values = []
         for follow_up_distance in follow_up_distances:
-            mann_whitney_results.append(test_mann_whitney(source_distance,follow_up_distance))
+            mann_whitney = test_mann_whitney(source_distance,follow_up_distance)
+            p_values.append(mann_whitney['p_value'])
+            mann_whitney_results.append(mann_whitney['result'])
         
-        
+        #Means 
+        means = calculate_means(source_distance,follow_up_distances)
+        #Standard Deviations
+        std_devs = calculate_std_devs(source_distance,follow_up_distances)
 
-        return {"stopping_distances":stopping_distances, "mann_whitney_results":mann_whitney_results}
+        return {"stopping_distances":stopping_distances, "mann_whitney_results":mann_whitney_results, "p_values":p_values, "means":means, "std_devs":std_devs}
 
 
     def get_test_stopping_distances(self,result_frames):
@@ -285,6 +294,14 @@ class Result():
         
         return {"collisions": collisions, "passes": passes, "upper_limit": upper_limit}
 
+    def save_stopping_distance_statistics(self,save_path,means,std_devs,p_values):
+        with open(save_path, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["F#","Smean", "Ssd", "Fmean", "Fsd", "Pvalue"])
+            for i in range(len(means['follow_ups_mean'])):
+                writer.writerow(["F"+str(i+1),means['source_mean'], std_devs['source_std_dev'], means['follow_ups_mean'][i], std_devs['follow_ups_std_dev'][i], p_values[i]])
+            
+            
 
     def plot_stopping_distances(self):
 
@@ -293,6 +310,11 @@ class Result():
         # Plot the stopping distances of the source and follow up tests
         test_labels = self.get_scenario_test_labels()
         scenario_stopping_distance_data_and_statistics = self.get_scenario_stopping_distances()
+        #Save the means, std devs, and p values to a csv file
+        save_path = f"{os.path.split(CWD)[0]}{path_slash()}data{path_slash()}processed{path_slash()}stopping_distance{path_slash()}{self.scenario_name}{path_slash()}statistics.csv"
+        self.save_stopping_distance_statistics(save_path,scenario_stopping_distance_data_and_statistics["means"],scenario_stopping_distance_data_and_statistics["std_devs"],scenario_stopping_distance_data_and_statistics["p_values"])
+
+
         scenario_stopping_distance_data =  scenario_stopping_distance_data_and_statistics["stopping_distances"] 
         
 

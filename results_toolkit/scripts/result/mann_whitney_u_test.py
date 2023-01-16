@@ -16,7 +16,9 @@ def test_mann_whitney(source, follow_up, alpha=0.05):
     try: 
         statistic, p_value = mannwhitneyu(source, follow_up)
         
+        
+        
         # Check if the p-value is less than the significance level
-        return p_value < alpha
+        return {"result":p_value < alpha, "p_value":p_value}
     except:
         return False

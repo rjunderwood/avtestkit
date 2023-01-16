@@ -14,7 +14,7 @@ def process_raw_data(target_scenarios):
 
 
 if __name__ == "__main__":
-    target_scenarios = ["E"]
+    target_scenarios = ["D"]
     results = process_raw_data(target_scenarios)
     for result in results.results:
         #Plotting 
